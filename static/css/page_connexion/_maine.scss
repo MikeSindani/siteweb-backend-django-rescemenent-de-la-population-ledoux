@@ -1,0 +1,90 @@
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-1{
+    @include center;
+    
+    @media (min-width:1000px) {
+        .logo{
+            position: relative;
+            top:-10%;
+            left: 10%;
+        }   
+    }
+    @media (max-width:768px) {
+        .logo{
+        
+        svg{
+            width: 300px;;
+        }
+    }
+        
+    }
+}
+
+/* debut de col 2 */
+.col-2{
+    @include center;
+    .box-connexion{
+        background-color: var(--third-color);
+        width: 300px;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        grid-template-rows: 100px 30px 150px 20px 30px ;
+        grid-template-columns: 1fr;
+        grid-gap: 25px;
+        border-radius: 20px;
+        box-shadow: var( --primary-box-shadow);
+        @media (max-width:768px) {
+            margin-bottom: 50px;
+            
+        }
+    .box-connexion-item-3{
+            form{
+                label{
+                    font-size: 12px;
+                    margin: 10px 0;
+                    input{
+                        padding: 15px;
+                        border-radius: 10px;
+                        border: none;
+                        background-color: var(--second-color);
+                        @media (max-width:768px) {
+                            width: 250px;
+                            
+                        }
+                    }
+                    
+                }
+                button{
+                    padding: 10px 40px;
+                    margin: 20px 0;
+                    background-color: var(--primary-color);
+                    border: none;
+                    border-radius: 10px;
+                    color: var(--third-color);
+                    position: relative;
+                    left: 10%;
+                    @media (max-width:768px){
+                        left: 15%;
+                    }
+                    cursor: pointer;
+                    
+            }
+            
+        }
+    }  
+    .box-connexion-item-4{
+        .pass-forgot{
+            cursor: pointer;
+            font-size: 12px;
+        }
+    }
+
+  }
+}
+/* fin de col 2*/

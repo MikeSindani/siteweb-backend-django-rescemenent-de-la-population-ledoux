@@ -1,0 +1,146 @@
+.container-connexion {
+  /* debut container */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 5% minmax(530px, auto) 7%;
+  grid-template-areas: "header header header" "main main main " "footer footer footer";
+  background-image: url("img/background congo - connexion.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  /* fin container */
+  /* ########################################*/
+  /* ########################################*/
+  /* DEBUT MAIN*/
+  /* FIN MAIN */
+  /* ########################################*/
+  /* DEBUT FOOTER*/
+  /* FIN FOOTER */
+  /* ########################################*/
+}
+@media (max-width: 768px) {
+  .container-connexion {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 1% minmax(500px, auto) 7%;
+    background-position: 10% 10%;
+  }
+}
+.container-connexion header {
+  grid-area: header;
+  /* DEBUT HEADER*/
+  /* FIN Hearder */
+}
+.container-connexion header .drapeau_congo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 10px;
+}
+.container-connexion header .drapeau_congo .rouge {
+  background-color: var(--rouge);
+}
+.container-connexion header .drapeau_congo .bleu {
+  background-color: var(--bleu);
+}
+.container-connexion header .drapeau_congo .jaune {
+  background-color: var(--jaune);
+}
+.container-connexion main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  /* debut de col 2 */
+  /* fin de col 2*/
+}
+.container-connexion main .col-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 1000px) {
+  .container-connexion main .col-1 .logo {
+    position: relative;
+    top: -10%;
+    left: 10%;
+  }
+}
+@media (max-width: 768px) {
+  .container-connexion main .col-1 .logo svg {
+    width: 300px;
+  }
+}
+.container-connexion main .col-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container-connexion main .col-2 .box-connexion {
+  background-color: var(--third-color);
+  width: 300px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  grid-template-rows: 100px 30px 150px 20px 30px;
+  grid-template-columns: 1fr;
+  grid-gap: 25px;
+  border-radius: 20px;
+  box-shadow: var(--primary-box-shadow);
+}
+@media (max-width: 768px) {
+  .container-connexion main .col-2 .box-connexion {
+    margin-bottom: 50px;
+  }
+}
+.container-connexion main .col-2 .box-connexion .box-connexion-item-3 form label {
+  font-size: 12px;
+  margin: 10px 0;
+}
+.container-connexion main .col-2 .box-connexion .box-connexion-item-3 form label input {
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--second-color);
+}
+@media (max-width: 768px) {
+  .container-connexion main .col-2 .box-connexion .box-connexion-item-3 form label input {
+    width: 250px;
+  }
+}
+.container-connexion main .col-2 .box-connexion .box-connexion-item-3 form button {
+  padding: 10px 40px;
+  margin: 20px 0;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 10px;
+  color: var(--third-color);
+  position: relative;
+  left: 10%;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .container-connexion main .col-2 .box-connexion .box-connexion-item-3 form button {
+    left: 15%;
+  }
+}
+.container-connexion main .col-2 .box-connexion .box-connexion-item-4 .pass-forgot {
+  cursor: pointer;
+  font-size: 12px;
+}
+@media (max-width: 768px) {
+  .container-connexion main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr minmax(400px, auto);
+  }
+}
+.container-connexion footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--third-color);
+}
+@media (max-width: 768px) {
+  .container-connexion footer .copyright {
+    font-size: var(--secondary-font-size);
+  }
+}/*# sourceMappingURL=style-connexion.css.map */

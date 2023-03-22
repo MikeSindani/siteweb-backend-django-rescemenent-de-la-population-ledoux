@@ -1,0 +1,31 @@
+.adminbar{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+    .admin-panel{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: var(--third-color);
+        flex-grow: 0.7;
+        align-items: center;
+        border-radius: var(--border-raduis);
+        box-shadow: var(--primary-box-shadow);
+        .admin-name{
+            .name{
+                font-weight: bold;
+            }
+            .poste{
+                font-size: var(--secondary-font-size);
+                text-align: center;
+                color: var(--primary-color);
+            }
+        }
+    }
+    .deconnexion-settings{
+        margin: 5px;
+    }
+    
+}

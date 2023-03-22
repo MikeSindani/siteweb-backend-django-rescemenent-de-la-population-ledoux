@@ -1,0 +1,40 @@
+.drapeau_congo{
+    
+    position: fixed !important;
+    display: grid;
+    height: 10px;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 10px;
+    z-index: 99;
+    
+    .rouge{
+        background-color: var(--rouge);
+    }
+    .bleu{
+        background-color: var(--bleu);
+    }
+    .jaune{
+        background-color: var(--jaune);
+    }
+
+}
+.message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 10px;
+    z-index: 99;
+    >div{
+        color: white;
+    }
+    .close-msg{
+        font-weight: bold;
+    }
+    
+}

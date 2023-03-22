@@ -1,0 +1,62 @@
+.container-connexion{
+/* debut container */ 
+ display: grid;
+ grid-template-columns: repeat(3,1fr);
+ grid-template-rows: 5% minmax(530px,auto) 7%;
+ grid-template-areas: 
+ "header header header"
+ "main main main "
+ "footer footer footer"
+ ;
+ background-image: url("img/background congo - connexion.png");
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: cover;
+@media (max-width:768px) {
+    grid-template-columns: repeat(1,1fr);
+    grid-template-rows: 1% minmax(500px,auto) 7%;
+    background-position: 10% 10%;
+
+    
+}
+/* fin container */ 
+/* ########################################*/
+header{
+    grid-area: header;
+/* DEBUT HEADER*/ 
+@import "hearder";
+/* FIN Hearder */
+ }
+/* ########################################*/
+/* DEBUT MAIN*/ 
+main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+
+    @import "maine";
+
+    @media (max-width:768px) {
+        grid-template-columns:1fr;
+        grid-template-rows: 1fr minmax(400px,auto);
+        
+    }
+}
+
+/* FIN MAIN */
+/* ########################################*/
+/* DEBUT FOOTER*/ 
+footer{
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--third-color);
+    
+    @import "footer";
+}
+
+/* FIN FOOTER */
+/* ########################################*/
+}

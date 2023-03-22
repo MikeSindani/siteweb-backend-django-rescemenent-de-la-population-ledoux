@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap");
+:root {
+  --primary-color: #3098FF;
+  --second-color:#E4F1FF;
+  --third-color: #fff;
+  --rouge:#D42D3C;
+  --bleu:var(--primary-color);
+  --jaune:#F8DB34;
+  --primary-font-family: "Poppins", sans-serif;
+  --secondary-font-family: "Quicksand", sans-serif;
+  --primary-font-size: 16px;
+  --secondary-font-size: 12px;
+  --primary-box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 5px 0 rgba(0, 0, 0, 0.1);
+  --border-raduis:10px;
+  --margin:16px;
+  --padding:16px;
+}
+
+.body {
+  background-color: var(--second-color);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--primary-font-family);
+  font-size: var(--primary-font-size);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+h3 {
+  font-size: 38px;
+}
+
+h3, h4 {
+  margin: 0;
+  padding: 0;
+}/*# sourceMappingURL=main.css.map */
