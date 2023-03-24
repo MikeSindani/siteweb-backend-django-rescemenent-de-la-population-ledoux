@@ -8,5 +8,6 @@ from . import views
 urlpatterns = [
     path('',views.logIn,name="connexion"),
     path('post_login',views.post_logIn,name="post_login"),
-     path('h',views.hum,name="h")
+    path('dashbord',views.dashbord,name="dashbord"),
+    path('logout',views.logOut,name="logout")
 ] 
