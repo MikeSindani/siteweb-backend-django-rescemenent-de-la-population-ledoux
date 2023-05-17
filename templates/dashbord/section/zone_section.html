@@ -1,0 +1,37 @@
+{% load static %}
+<div id="section_gestion_zone" class="gestion_agent_element suivi-page box-page" style="display: none;" >
+
+    <!-- dubut home-box-1 -->
+    <div class="gestion_agent-box-1 box">
+        <div class="home-box-1-part-1">
+            <img src="{% static 'img/person-team-svgrepo-com.svg' %}" alt="" height="35" width="35"> 
+        </div>
+        <div class="home-box-1-part-2"><h2>Nombre des Zones :</h2></div>
+        <div class="home-box-1-part-3"><h2 id="nombres__total__des__zones" class="counter" data-target="50000" ></h2></div>
+    </div>
+    <div class="gestion_agent-box-2 ">
+        <div id="btn_modal_zone" class="box gestion_agent-box-2-part-1">
+            Ajouter Une Zone
+        </div>  
+    </div>
+    <div class="element-stats-box-2-part-4">
+        <table id="lists__zones">
+            <tr class="tr1">
+              <th>N Zone</th>
+              <th>Nom de la Zone</th>
+              <th>Agent Rescenseur</th>
+              <th>Agent Controlleur</th>
+              <th>Options</th>                       
+            </tr>
+            
+            
+            
+          </table>
+    </div>
+    <div class="gestion_agent-box-2 ">
+        <div id="btn__load__section__zones" class="box gestion_agent-box-2-part-1">
+            Charge Plus
+        </div>  
+    </div>
+   
+</div>

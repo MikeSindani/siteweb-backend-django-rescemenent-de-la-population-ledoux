@@ -15,9 +15,10 @@ urlpatterns = [
     #path('post_create/', views.api_home_create),
     #path('update/', views.api_home_update),
     #path('get_agent_controleur/<str:users>/<str:password>/', views.api_check_agent_controlleur)
-    path('get_agents_user_info/<str:categorie>/', views.agent_user_persennel_info.as_view()),
-    path('get_zones_info/<str:categorie>/', views.zones_details_view.as_view()),
+    path('get_agents_user_info/<str:pk>/', views.agent_user_persennel_info.as_view()),
+    path('get_zones_info/<str:pk>/', views.zones_details_view.as_view()),
     path('groups/', include(router.urls)),
-    path('auth/',obtain_auth_token)
+    path('auth/',obtain_auth_token),
+    path('update_zone/<str:pk>/', views.api_zone_update),
 
 ]

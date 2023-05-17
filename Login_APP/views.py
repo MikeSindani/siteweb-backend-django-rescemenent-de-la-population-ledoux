@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from .decorations import unauthentificated_user
 from django.contrib.auth import logout
+from BD_APP.models import *
 
 # Create your views here.
 @unauthentificated_user
@@ -21,7 +22,7 @@ def post_logIn(request):
         if user is not None:
                 login(request,user)
                 
-                return render(request,"dashbord/dashbord.html")
+                return redirect("dashbord")
         else:
                 return HttpResponse("password incorrect ou username")
     else:
@@ -29,8 +30,14 @@ def post_logIn(request):
     
 @login_required(login_url='connexion')
 def dashbord(request):
-      return render(request,"dashbord/dashbord.html")
+      nombre_population_total = Personnes.objects.all().count()
+      nombre_homme = Personnes.objects.filter(sexe='M').count()
+      nombre_femme = Personnes.objects.filter(sexe='F').count()
+      list_des_communes = Personnes.objects.all()
+
+      return render(request,"dashbord/dashbord.html",{'nombre_population_total':nombre_population_total, 'nombre_homme': nombre_homme,'nombre_femme': nombre_femme,"list_des_communes":list_des_communes})
 
 def logOut(request):
       logout(request)
       return redirect('connexion')
+

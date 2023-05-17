@@ -29,6 +29,7 @@ header .message {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  opacity: 0.9;
   height: 100px;
   width: 100%;
   position: fixed;
@@ -735,6 +736,13 @@ header .message .close-msg {
   border-radius: var(--border-raduis);
 }
 
+.modal-body-zone-btn {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 .modal-footer {
   display: flex;
   justify-content: center;
@@ -747,18 +755,34 @@ header .message .close-msg {
   color: var(--third-color);
   background-color: var(--primary-color);
   border-radius: var(--border-raduis);
+  cursor: pointer;
+  border: none;
 }
 
-.modal-body-agent {
+.modal-body-agent form {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
+.modal-body-agent form .part__modal__1, .modal-body-agent form .part__modal__2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.modal-body-agent form .part__modal__2 .message__creation__agent__box {
+  background-color: rgb(255, 255, 229);
+}
+.modal-body-agent form .part__modal__2 .message__code__pass__box {
+  background-color: rgb(252, 205, 205) !important;
+}
+.modal-body-agent form .zone {
+  padding: 50px 10em;
 }
 .modal-body-agent form label {
   font-size: 12px;
   margin: 10px 0;
 }
-.modal-body-agent form label input, .modal-body-agent form label select {
+.modal-body-agent form label input,
+.modal-body-agent form label select {
   padding: 15px;
   border-radius: 10px;
   border: none;
@@ -766,14 +790,15 @@ header .message .close-msg {
   width: 41vw;
 }
 @media (max-width: 768px) {
-  .modal-body-agent form label input, .modal-body-agent form label select {
+  .modal-body-agent form label input,
+  .modal-body-agent form label select {
     width: 250px;
   }
 }
 .modal-body-agent form div input {
-  width: 20vw;
+  width: 100%;
 }
-.modal-body-agent form button {
+.modal-body-agent form button, .modal-body-agent form #btn__nouvelle__agent__modal__agent {
   padding: 10px 40px;
   margin: 20px 0;
   background-color: var(--primary-color);
@@ -781,17 +806,23 @@ header .message .close-msg {
   border-radius: 10px;
   color: var(--third-color);
   position: relative;
-  left: 25%;
   cursor: pointer;
 }
-@media (max-width: 768px) {
-  .modal-body-agent form button {
-    left: 15%;
-  }
+.modal-body-agent form #btn__fermer__modal__agent {
+  padding: 10px 40px;
+  margin: 20px 0;
+  border: none;
+  border-radius: 10px;
+  color: var(--third-color);
+  position: relative;
+  cursor: pointer;
+  background-color: var(--rouge);
+  cursor: pointer;
 }
 
 /* Le bouton fermer (x) */
-.close, .close-agent {
+.close,
+.close-agent {
   color: #aaa;
   float: right;
   font-size: 28px;

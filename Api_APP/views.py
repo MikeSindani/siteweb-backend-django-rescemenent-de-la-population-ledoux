@@ -106,3 +106,14 @@ class zones_details_view(RetrieveAPIView):
     authentication_classes = [authentication.SessionAuthentication,authentication.TokenAuthentication]
     queryset = Zones.objects.all()
     serializer_class = table_zones_Serializer
+
+@api_view(["PUT"])
+def api_zone_update (request,pk,*args,**kwargs):
+    instance  = Zones.objects.get(id=pk)
+    print(instance.etat)
+    print(instance.statut)
+    serializer_class = table_zones_Serializer(data=request.data,instance=instance)
+    if serializer_class.is_valid():
+        serializer_class.save()
+
+    return Response(serializer_class.data)

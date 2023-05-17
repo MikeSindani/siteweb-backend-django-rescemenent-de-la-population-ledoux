@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'Api_APP',
     'Login_APP',
     'Zone_APP',
+    'AGENT_APP',
+    'Statistique_APP',
     'rest_framework',
     'rest_framework.authtoken',
 ]

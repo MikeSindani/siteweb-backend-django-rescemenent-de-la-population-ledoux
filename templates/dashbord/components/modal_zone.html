@@ -1,0 +1,53 @@
+<div id="modal-zone" class="modal">
+    <!-- Le contenu de la fenêtre modale -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Ajouter une Zone</h2>
+        </div>
+        <div class="modal-body-agent">
+            <form  id="zone__submit__from" methode="post">
+                {% csrf_token %}
+                <label style="display: none;">
+                     Agent Codedificateur <br>
+                    <select  name="option-1">
+                        <option value="" disabled selected>Population</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                 </label><br>
+                 <label style="display: none;">
+                    Agent Rescensseurs <br>
+                    <select  name="option-1">
+                        <option value="" disabled selected>Population</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                 </label><br>
+                 <label style="display: none;">
+                    Agent Controleurs <br>
+                    <select  name="option-1">
+                        <option value="" disabled selected>Population</option>
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                 </label>
+                 <br>
+                <!-- Ajouter votre formulaire ici -->
+                <label class="modal-body-zone zone">
+                    <h2 id="verifier__zones__modal">002</h2>
+                </label>
+               <div style="display: flex; align-items: centre;justify-content: center;">
+                   <input type="submit" class="btn-ajoute-zone" value="Ajouter la Zone" >
+               </div>
+                
+                
+            </form>
+        </div>
+        
+        
+    </div>
+</div>

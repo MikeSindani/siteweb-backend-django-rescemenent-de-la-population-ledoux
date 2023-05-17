@@ -1,0 +1,98 @@
+<div id="modal-agent" class="modal"   data-type-agent-click="">
+    <!-- Le contenu de la fenêtre modale -->
+    <div class="modal-content-agent">
+        <div class="modal-header">
+            <span class="close-agent">&times;</span>
+            <h2>Ajouter un Agent</h2>
+        </div>
+        <!-- Ajouter votre formulaire ici -->
+        <div class="modal-body-agent">
+            <div >
+                <img src="" alt="">
+            </div>
+            <form id="agent_zone_type_form" action="post" >
+                <div class="part__modal__1" id="part__modal__1">
+                    <label>
+                        Nom complet<br>
+                         <input id="nom_complet" autofocus placeholder='Nom complet' type='text' name="nom_complet">
+                       </label>
+                       
+                       <div style="display: none;gap:5px;" >
+                           <label>
+                               Date de Naissance <br>
+                               <input id="date__naissance" autofocus placeholder='Mot de passe' type='date' name="date__naissance">
+                             </label>
+                             <label>
+                                 Lieu de Naissance<br>
+                                 <input autofocus placeholder='Lieu de Naissance' type='text'>
+                             </label>
+                       </div>
+                       
+                       <div style="display: flex;gap:5px;flex-direction: column;" >
+                           <label>
+                                Matricule <br>
+                               <input id="matricule" autofocus placeholder=' Matricule' type='text' name="matricule">
+                             </label>
+                             <label>
+                                 N Telephone<br>
+                                 <input id="N_Telephone" autofocus placeholder='N Telephone' type='number' name="N_Telephone">
+                             </label>
+                             <label>
+                                Email<br>
+                                <input id="email" autofocus placeholder='Email' type='email' name="email">
+                            </label>
+                       </div>
+                       <label style="display: none;">
+                           Zone <br>
+                           <select  name="option-1">
+                               <option value="" disabled selected>Population</option>
+                               <option value="1">Option 1</option>
+                               <option value="2">Option 2</option>
+                               <option value="3">Option 3</option>
+                           </select>
+                        </label>
+                        <br>
+                        <div class="modal-body-zone-btn">
+                            <button id="btn__ajouter__modal__agent" type="submit">Ajouter l'agent</button> 
+                        </div>
+                        
+                </div>
+             
+                <br>
+                <div class="part__modal__2" style="display: none;" id="part__modal__2">
+                    <div  class="modal-body-zone message__creation__agent__box" >
+                        <label >
+                            message <br>
+                            <h2 id="message__creation__agent">------</h2>
+                        </label>
+                    </div>
+                    <br>
+                    <div class="modal-body-zone message__code__pass__box">
+                        <label >
+                            User Name <br>
+                            <h2 id="agent__user">------</h2>
+                        </label>
+                        <label >
+                            Mot de passe <br>
+                            <h2 id="agent__password">-----</h2>
+                        </label>
+                    </div>
+                    <br>
+                    <div class="modal-body-zone">
+                        <label >
+                            Zone <br>
+                            <h2 id="agent__zone">-----</h2>
+                        </label>
+                    </div>
+                    <div class="modal-body-zone-btn">
+                        <div id="btn__nouvelle__agent__modal__agent" >Ajouter un nouvelle Agent</div>
+                        <div id="btn__fermer__modal__agent" >Fermer</div>
+                    </div>      
+                </div>
+                      
+            </form>   
+        </div>
+        
+        
+    </div>
+</div>

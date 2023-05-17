@@ -3,7 +3,7 @@
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
-Function views
+Function views9
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  path('', views.home, name='home')
 Class-based views
@@ -19,5 +19,8 @@ from django.urls import path , include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('Api_APP.urls')),
-    path('',include('Login_APP.urls'))
+    path('',include('Login_APP.urls')),
+     path('ajax/',include('Statistique_APP.urls')),
+     path('ajax/',include('Zone_APP.urls')),
+     path('ajax/',include('AGENT_APP.urls'))
 ]
