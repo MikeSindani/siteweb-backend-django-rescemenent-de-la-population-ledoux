@@ -12,16 +12,25 @@ class table_personnes_Serializer(serializers.ModelSerializer):
         "sexe",
         "date_de_naissance",
         "province",
+        "lien_parente",
+        'activite',
         "commune",
         "quartier",
         "avenue",
+        "ville",
+        "zones",
         "nationalite",
         "niveau_d_etude",
         "profession",
         "etat_civil",
-        "numero_parcelle",
+        "classe",
+        "comprendreLire",
+        "situatioResidence,"
+        "numero",
+        "nombre_ocupant",
         "menage",
         "zones",
+        'indexDataOcupant',
 
         ]
 class table_user_agent_Serializer(serializers.ModelSerializer):

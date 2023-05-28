@@ -117,3 +117,14 @@ def api_zone_update (request,pk,*args,**kwargs):
         serializer_class.save()
 
     return Response(serializer_class.data)
+
+@api_view(["POST"])
+def api_get__person__zone (request,pk,*args,**kwargs):
+    instance  = Personne.objects.filter(zone=pk)
+    print(instance.etat)
+    print(instance.statut)
+    serializer_class = table_zones_Serializer(data=request.data,instance=instance)
+    if serializer_class.is_valid():
+        serializer_class.save()
+
+    return Response(serializer_class.data)

@@ -168,7 +168,7 @@ class class__ajax__zone {
           console.log(data);
 
           //const donnee = new Array(data);
-          lists__zones = document.getElementById("lists__zones");
+          var lists__zones = document.getElementById("lists__zones");
           data.forEach((el) => {
             lists__zones.innerHTML += `
                         <tr class="tr2">
@@ -301,7 +301,7 @@ class class__ajax__home {
       },
     });
   }
-  
+
   ajax_agents_home_section(type) {
     //var catid;
     //id = $(this).attr("data-id");
@@ -349,6 +349,69 @@ class class__ajax__agent {
         /* if(type="rescenseur"){
                         return response.nombres__agents
                     }*/
+      },
+    });
+  }
+
+  // reperation de la liste des agents 
+  get__lists__of__agents(type__agent) {
+    $.ajax({
+      type: "GET",
+      url: `ajax/get__lists__of__agents/${visible}/${type__agent}`,
+      success: function (response) {
+        console.log(response);
+        var data = response.listes__agents;
+        setTimeout(() => {
+          console.log(data);
+            var lists__agents
+          //const donnee = new Array(data);
+          if (type__agent == "Controleur"){
+            var lists__agents__controleur = document.getElementById("lists__agents__controleur");
+            lists__agents__controleur.style.display = "flex"
+            lists__agents__rescenseur.style.display = "none"
+            data.forEach((el) => {
+                lists__agents__controleur.innerHTML += `
+                            <tr class="tr2">
+                                  <td><strong>${el.code_agent}</strong></td>
+                                  <td>${el.username}</td>
+                                  <td>${el.Matricule}</td>     
+                                  <td>${el.password}</td>
+                                  <td>${el.password}</td>
+                                  <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+                            </tr>  
+                            `;
+              });
+          }else{
+            var lists__agents__rescenseur = document.getElementById("lists__agents__rescenseur");
+            lists__agents__controleur.style.display = "none"
+            lists__agents__rescenseur.style.display = "flex"
+            data.forEach((el) => {
+                lists__agents__rescenseur.innerHTML += `
+                            <tr class="tr2">
+                                  <td><strong>${el.code_agent}</strong></td>
+                                  <td>${el.username}</td>
+                                  <td>${el.Matricule}</td>     
+                                  <td>${el.password}</td>
+                                  <td>${el.password}</td>
+                                  <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+                            </tr>  
+                            `;
+              });
+          }
+          
+          
+        }, 1000);
+        /*chargementBox.textContent = "";
+            console.log(response.size);
+            if (response.size === 0) {
+              chargementBox.textContent = "Pas de commentaire";
+            } else if (response.size <= visible) {
+              loadBtn.classList.add("not-visible");
+              chargementBox.textContent = "Il y a plus de commantaire...";
+            }*/
+      },
+      error: function (error) {
+        console.log(error);
       },
     });
   }

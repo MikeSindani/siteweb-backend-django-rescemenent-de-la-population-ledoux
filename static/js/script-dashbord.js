@@ -415,6 +415,7 @@ function btn_gestion_agent_element(element) {
     nombres__agent__element = ajax_agents_home_section(element);
     //requette ajax */
     ajax__agent.ajax_nombres_agent_section_element(element);
+    ajax__agent.get__lists__of__agents(element)
 
     off(); // overlay off
   }, time_set_interval);
@@ -510,6 +511,8 @@ $(document).on("submit", "#zone__submit__from", function (e) {
     },
     success: function (data) {
       // ON AFFICHE LA BOITE DE DIALOGE MESSAGE
+      document.getElementById("popup-message_systeme").style.backgroundColor =
+          "var(--bleu)";
       document.getElementById("popup-message_systeme").style.display = "flex";
       document.getElementById("message_systeme").textContent =
         data.message_systeme;
@@ -557,6 +560,9 @@ $(document).on("submit", "#agent_zone_type_form", function (e) {
         document.getElementById("popup-message_systeme").style.display = "flex";
         document.getElementById("message_systeme").textContent =
           data.message_systeme;
+
+          ajax__agent.ajax_nombres_agent_section_element();
+
       } else {
         // ON AFFICHE LA BOITE DE DIALOGE MESSAGE
         document.getElementById("popup-message_systeme").style.backgroundColor =
@@ -567,12 +573,9 @@ $(document).on("submit", "#agent_zone_type_form", function (e) {
       }
       setInterval(function () {
         document.getElementById("popup-message_systeme").style.display = "none";
-      }, 5000);
+      }, 10000);
       //window.location.reload();
     },
   });
 
-  setInterval(function () {
-    get_commentaire();
-  }, 5000);
 });

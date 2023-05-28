@@ -6,6 +6,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 #router.register(r'users', views.UserViewSet)
 #router.register(r'groups', views.GroupViewSet)
 urlpatterns = [
+    
     #path('get', views.api_home_get),
     #path('post', views.api_home_post),
     path('get_list_personnes_res/', views.personnes_lists_view.as_view()),

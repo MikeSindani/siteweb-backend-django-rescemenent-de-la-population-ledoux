@@ -70,39 +70,42 @@ def creations__agents(request,type__d__agent):
         #user.type_agent.add(type__d__agent)
         #! for update modal and add agent controleur 5 
         #!-------------------------- IMPORTANT --------------------
-        n = 0
+        n = 0 
+        get__user__agent__in__modal = UserAgent.objects.get(code_agent=code_agent)
         if  type__d__agent == "Controleur":
-            if Zones.objects.filter(agent_controleur=None).first():
-                zone__id = Zones.objects.filter(agent_controleur=None).values_list('id', flat=True).first()
-                print("-"*100)
-                print(f"ZONE ID : {zone__id}")
-                print("-"*100)
-                get__user__agent__in__modal = UserAgent.objects.get(code_agent=code_agent)
-                for i in range(zone__id,zone__id+2):
-                        p = Zones.objects.get(id=i)
-                        print(p)
-                        p.agent_controleur = get__user__agent__in__modal
-                        p.save()
-                        print("sucess")
-                message__systeme = f"l'agent {name__agent} {username}  a été créé"
-            else:
-                message__systeme = f"l'agent {name__agent} {username} a été créé mais plus de zone disponible"
+            for i in range(1,3):
+                if Zones.objects.filter(agent_controleur=None).first():
+                    zone__id = Zones.objects.filter(agent_controleur=None).values_list('id', flat=True).first()
+                    print("-"*100)
+                    print(f"ZONE ID : {zone__id}")
+                    print("-"*100)
+                    p = Zones.objects.get(id=zone__id)
+                    print(p)
+                    p.agent_controleur = get__user__agent__in__modal
+                    p.save()
+                    print(f"sucess")
+                else:
+                   message__systeme = f"l'agent {name__agent} {username}  a été créé mais plus de zone." 
+                       
+            message__systeme = f"l'agent {name__agent} {username}  a été créé"    
+            
         else:
-            if Zones.objects.filter(agent_rescenseur=None).first():
-                zone__id = Zones.objects.filter(agent_rescenseur=None).values_list('id', flat=True).first()
-                print("-"*100)
-                print(f"ZONE ID : {zone__id}")
-                print("-"*100)
-                get__user__agent__in__modal = UserAgent.objects.get(code_agent=code_agent)
-                for i in range(zone__id,zone__id+2):
-                        p = Zones.objects.get(id=i)
-                        print(p)
-                        p.agent_rescenseur = get__user__agent__in__modal
-                        p.save()
-                        print("sucess")
-                message__systeme = f"l'agent {name__agent} {username}  a été créé"
-            else:
-                message__systeme = f"l'agent {name__agent} {username} a été créé mais plus de zone disponible"
+           
+            for i in range(1,3):
+                if Zones.objects.filter(agent_rescenseur=None).first():
+                    zone__id = Zones.objects.filter(agent_rescenseur=None).values_list('id', flat=True).first()
+                    print("-"*100)
+                    print(f"ZONE ID : {zone__id}")
+                    print("-"*100)
+                    p = Zones.objects.get(id=zone__id)
+                    print(p)
+                    p.agent_rescenseur = get__user__agent__in__modal
+                    p.save()
+                    print(f"sucess")
+                else:
+                   message__systeme = f"l'agent {name__agent} {username}  a été créé mais plus de zone." 
+                       
+            message__systeme = f"l'agent {name__agent} {username}  a été créé"
 
         
     context = {
@@ -110,8 +113,9 @@ def creations__agents(request,type__d__agent):
                         'agent__password': password,  
                         'agent__user':  code_agent,
                         "agent__zone": f"{zone__id} - {zone__id+2}",
-                        'etat': "sucessed"     
-                        }      
+                        'etat': "sucessed"    
+        }
+    print("👍")      
     return JsonResponse(context)
 
 def get__lists__of__agents(request,num_avis,type__d__agent):

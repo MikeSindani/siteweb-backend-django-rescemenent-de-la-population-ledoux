@@ -738,8 +738,8 @@ header .message .close-msg {
 
 .modal-body-zone-btn {
   display: flex;
-  gap: 5px;
-  justify-content: space-around;
+  gap: 10px;
+  justify-content: center;
   flex-wrap: wrap;
 }
 

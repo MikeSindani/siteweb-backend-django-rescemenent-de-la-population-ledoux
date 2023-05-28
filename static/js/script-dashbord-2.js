@@ -82,12 +82,20 @@ btn_modal_agent.onclick = function () {
 };
 // Lorsque l'utilisateur clique sur <span> (x), fermer la fenêtre modale
 span_close_agent.onclick = function () {
+  document.getElementById("nom_complet").value = "";
+  document.getElementById("matricule").value = "";
+  document.getElementById("N_Telephone").value = "";
+  document.getElementById("email").value = "";
   document.getElementById("part__modal__1").style.display = "block";
   document.getElementById("part__modal__2").style.display = "none";
   modal_agent.style.display = "none";
 };
 
 btn__fermer__modal__agent.onclick = function () {
+  document.getElementById("nom_complet").value = "";
+  document.getElementById("matricule").value = "";
+  document.getElementById("N_Telephone").value = "";
+  document.getElementById("email").value = "";
   document.getElementById("part__modal__1").style.display = "block";
   document.getElementById("part__modal__2").style.display = "none";
   modal_agent.style.display = "none";

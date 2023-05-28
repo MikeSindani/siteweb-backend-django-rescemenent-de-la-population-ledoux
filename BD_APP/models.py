@@ -65,20 +65,30 @@ class Personnes(models.Model):
     postnom = models.CharField(max_length=100,null=True)
     sexe = models.CharField(max_length=2,null=True,choices=SEXE_CHOICES)
     date_de_naissance = models.DateField(null=True)
+    lien_parente= models.CharField(max_length=100,null=True)
+    age = models.CharField(max_length=100,null=True)
+    activite = models.CharField(max_length=100,null=True)
     #----------------------------------------------------------------
     province = models.CharField(max_length=100,null=True)
     commune = models.CharField(max_length=100,null=True)
     quartier = models.CharField(max_length=100,null=True)
     avenue = models.CharField(max_length=100,null=True)
+    ville = models.CharField(max_length=100,null=True)
+    zones = models.ForeignKey("Zones",related_name='Zones',null=True,on_delete=models.SET_NULL)
     #----------------------------------------------------------------
     nationalite = models.CharField(max_length=100,null=True)
     niveau_d_etude = models.CharField(max_length=100,null=True)
     profession = models.CharField(max_length=100,null=True)
     etat_civil  = models.CharField(max_length=100,null=True)
+    classe = models.CharField(max_length=100,null=True)
+    comprendreLire = models.CharField(max_length=100,null=True)
     #----------------------------------------------------------------
-    numero_parcelle = models.CharField(max_length=100,null=True)
+    situatioResidence = models.CharField(max_length=100,null=True)
+    numero = models.CharField(max_length=100,null=True)
+    nombre_ocupant = models.CharField(max_length=100,null=True)
     menage = models.CharField(max_length=100,null=True)
-    zones = models.ForeignKey("Zones",related_name='Zones',null=True,on_delete=models.SET_NULL)
+    indexDataOcupant = models.CharField(max_length=100,null=True)
+    
     #verifie  = 
     
     def __str__(self):
@@ -94,7 +104,7 @@ class Zones(models.Model):
 
 
     def __str__(self):
-       return f" Zone {self.id} Agent-controlleur {self.agent_controleur}"
+       return f" Zone -- ({self.id}) Agent-controlleur ({self.agent_controleur}) -- Agent-rescenseur ({self.agent_rescenseur}) "
 
     def save(self, *args, **kwargs):
         # Ajoutez votre propre logique ici
