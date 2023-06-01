@@ -16,10 +16,13 @@ urlpatterns = [
     #path('post_create/', views.api_home_create),
     #path('update/', views.api_home_update),
     #path('get_agent_controleur/<str:users>/<str:password>/', views.api_check_agent_controlleur)
-    path('get_agents_user_info/<str:pk>/', views.agent_user_persennel_info.as_view()),
+    path('get_agents_user_info/<str:username>/', views.agent_user_persennel_info),
     path('get_zones_info/<str:pk>/', views.zones_details_view.as_view()),
     path('groups/', include(router.urls)),
     path('auth/',obtain_auth_token),
+    # ces liens en dessous ne demande pas d'authentification avec les token fait une demande 
     path('update_zone/<str:pk>/', views.api_zone_update),
+    path('get_info_agent_resc_by_agent_controleur/<str:pk>/', views.api_get__agent__res_by_agent_controleur),
+    path('get_info_person_by_agent_controleur/<str:pk>/', views.api_get_person_by_agent_controleur),
 
 ]

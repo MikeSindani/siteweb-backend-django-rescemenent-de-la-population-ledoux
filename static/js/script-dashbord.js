@@ -430,7 +430,9 @@ btn__load__section__zones.addEventListener("click", () => {
   //spinnerBox.classList.remove('not-visible')
   //chargementBox.textContent="CHARGEMENT DES COMMENTAIRES EN COURS ... "
   visible += 1;
+  on();
   ajax__zone.get__lists__of__zones();
+  off();
 });
 
 // bouton pour passe a la zone
@@ -456,6 +458,23 @@ btn_gestion_zone.addEventListener("click", () => {
 
     off(); // overlay off
   }, time_set_interval);
+});
+/* 
+bouton pour le chargement  de agents 
+*/ 
+
+const btn__load__section__agent__element = document.querySelector(
+  "#btn__load__section__agent__element"
+);
+btn__load__section__agent__element.addEventListener("click", () => {
+  on();
+  visible += 1;
+    var data_modal_agent = document.getElementById("modal-agent");
+    data_modal_agent.getAttribute("data-type-agent-click");
+    var element = data_modal_agent
+    ajax__agent.ajax_nombres_agent_section_element(element);
+    ajax__agent.get__lists__of__agents(element)
+  off();
 });
 /* fin de side bar menu hamberger */
 /* ####################################################################*/

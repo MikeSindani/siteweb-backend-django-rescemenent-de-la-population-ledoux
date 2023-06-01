@@ -169,6 +169,7 @@ class class__ajax__zone {
 
           //const donnee = new Array(data);
           var lists__zones = document.getElementById("lists__zones");
+          //lists__zones.innerHTML =""
           data.forEach((el) => {
             lists__zones.innerHTML += `
                         <tr class="tr2">
@@ -352,7 +353,7 @@ class class__ajax__agent {
       },
     });
   }
-
+//get__lists__of__zones__on__modal
   // reperation de la liste des agents 
   get__lists__of__agents(type__agent) {
     $.ajax({
@@ -364,11 +365,14 @@ class class__ajax__agent {
         setTimeout(() => {
           console.log(data);
             var lists__agents
+            var lists__agents__rescenseur = document.getElementById("lists__agents__rescenseur");
+            var lists__agents__controleur = document.getElementById("lists__agents__controleur");
           //const donnee = new Array(data);
           if (type__agent == "Controleur"){
-            var lists__agents__controleur = document.getElementById("lists__agents__controleur");
-            lists__agents__controleur.style.display = "flex"
+            
+            lists__agents__controleur.style.display = "table"
             lists__agents__rescenseur.style.display = "none"
+            //lists__agents__controleur.innerHTML =''
             data.forEach((el) => {
                 lists__agents__controleur.innerHTML += `
                             <tr class="tr2">
@@ -382,9 +386,10 @@ class class__ajax__agent {
                             `;
               });
           }else{
-            var lists__agents__rescenseur = document.getElementById("lists__agents__rescenseur");
+            
             lists__agents__controleur.style.display = "none"
-            lists__agents__rescenseur.style.display = "flex"
+            lists__agents__rescenseur.style.display = "table"
+            //lists__agents__rescenseur.innerHTML =''
             data.forEach((el) => {
                 lists__agents__rescenseur.innerHTML += `
                             <tr class="tr2">
@@ -395,6 +400,56 @@ class class__ajax__agent {
                                   <td>${el.password}</td>
                                   <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
                             </tr>  
+                            `;
+              });
+          }
+          
+          
+        }, 1000);
+        /*chargementBox.textContent = "";
+            console.log(response.size);
+            if (response.size === 0) {
+              chargementBox.textContent = "Pas de commentaire";
+            } else if (response.size <= visible) {
+              loadBtn.classList.add("not-visible");
+              chargementBox.textContent = "Il y a plus de commantaire...";
+            }*/
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  }
+
+//get__lists__of__zones__on__modal
+get__lists__of__zones__on__modal(type__agent) {
+    $.ajax({
+      type: "GET",
+      url: `ajax/get__lists__of__zones__on__modals/${type__agent}/`,
+      success: function (response) {
+        console.log(response);
+        var data = response.listes__agents;
+        setTimeout(() => {
+          console.log(data);
+            
+             var lists__agents = document.getElementById("list_zones_active");
+            
+          //const donnee = new Array(data);
+          if (type__agent == "Controleur"){
+            
+          
+            lists__agents.innerHTML =''
+            data.forEach((el) => {
+                lists__agents.innerHTML += `
+                              <option value="${el.id}">${el.nom}</option> 
+                            `;
+              });
+          }else{
+            
+            lists__agents.innerHTML =''
+            data.forEach((el) => {
+                lists__agents.innerHTML += `
+                             <option value="${el.id}">${el.nom}</option>
                             `;
               });
           }
@@ -428,4 +483,6 @@ setInterval(() => {
   ajax__home.ajax_stats_home_section();
   ajax__home.ajax_agents_home_section();
   ajax__zone.ajax_get__nombres__zones();
+  
+ 
 }, 3000);

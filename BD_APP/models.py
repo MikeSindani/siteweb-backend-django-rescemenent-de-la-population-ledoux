@@ -88,6 +88,7 @@ class Personnes(models.Model):
     nombre_ocupant = models.CharField(max_length=100,null=True)
     menage = models.CharField(max_length=100,null=True)
     indexDataOcupant = models.CharField(max_length=100,null=True)
+    etverifie = models.BooleanField(default=False)
     
     #verifie  = 
     

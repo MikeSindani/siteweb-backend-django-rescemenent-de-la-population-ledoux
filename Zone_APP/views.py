@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from BD_APP.models import *
 from django.db.models import Q
 def nom_de_la_zone():
-   return  "RDC-HKAT-LUSHI-"
+   return  "ZD-"
 # Create your views here.
 def verifier__nom__zones(request):
       variable__nombres__totals__des__zones  = Zones.objects.all().count()
@@ -55,8 +55,7 @@ def get__lists__of__zones(request,num_avis):
       lower = 0
     print(variable__listes__des__zones)
     print(variable__listes__des__zones[0])
-   
-    
+
     if variable__listes__des__zones == False:
         variable__listes__des__zones = []
         size = 0
@@ -67,3 +66,13 @@ def get__lists__of__zones(request,num_avis):
                'listes__zones':variable__listes__des__zones[lower:upper], 'size': size
             }      
     return JsonResponse(context)
+
+def get__list__of__zone__non__attribut(request,type__d__agent):
+  if type__d__agent == "Controleur":
+     variable__listes__des__zones__active = Zones.objects.filter(agent_controleur=None).value()
+  else :
+    variable__listes__des__zones__active = Zones.objects.filter(agent_rescenseur=None).value()
+  context = {
+               'listes__zones':variable__listes__des__zones
+            }      
+  return JsonResponse(context)

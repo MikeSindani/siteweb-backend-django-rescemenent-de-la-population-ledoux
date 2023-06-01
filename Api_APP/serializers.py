@@ -31,6 +31,7 @@ class table_personnes_Serializer(serializers.ModelSerializer):
         "menage",
         "zones",
         'indexDataOcupant',
+        "etverifie",
 
         ]
 class table_user_agent_Serializer(serializers.ModelSerializer):
@@ -49,7 +50,6 @@ class table_zones_Serializer(serializers.ModelSerializer):
     class Meta:
         model = Zones
         fields = [
-
         'id',
         "agent_codificateur",
         "agent_controleur",

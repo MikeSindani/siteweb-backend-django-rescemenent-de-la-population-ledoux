@@ -78,6 +78,10 @@ var btn__nouvelle__agent__modal__agent = document.getElementById(
 );
 // Lorsque l'utilisateur clique sur le bouton, ouvrir la fenêtre modale
 btn_modal_agent.onclick = function () {
+ 
+  var data_modal_agent = document.getElementById("modal-agent");
+    var attrib = data_modal_agent.getAttribute("data-type-agent-click");
+    ajax__zone.get__lists__of__zones__on__modal(attrib);
   modal_agent.style.display = "block";
 };
 // Lorsque l'utilisateur clique sur <span> (x), fermer la fenêtre modale
@@ -105,13 +109,22 @@ btn__nouvelle__agent__modal__agent.onclick = function () {
   document.getElementById("matricule").value = "";
   document.getElementById("N_Telephone").value = "";
   document.getElementById("email").value = "";
+  ajax__zone.get__lists__of__zones__on__modal();
   document.getElementById("part__modal__1").style.display = "block";
   document.getElementById("part__modal__2").style.display = "none";
+
 };
 
 // Lorsque l'utilisateur clique n'importe où en dehors de la fenêtre modale, fermer celle-ci
 window.onclick = function (event) {
   if (event.target == modal_agent) {
+    document.getElementById("nom_complet").value = "";
+    document.getElementById("matricule").value = "";
+    document.getElementById("N_Telephone").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("part__modal__1").style.display = "block";
+    document.getElementById("part__modal__2").style.display = "none";
+    modal_agent.style.display = "none";
     modal_agent.style.display = "none";
   }
 };

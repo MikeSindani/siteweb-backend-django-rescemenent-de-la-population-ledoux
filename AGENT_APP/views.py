@@ -73,7 +73,7 @@ def creations__agents(request,type__d__agent):
         n = 0 
         get__user__agent__in__modal = UserAgent.objects.get(code_agent=code_agent)
         if  type__d__agent == "Controleur":
-            for i in range(1,3):
+            for i in range(1,5):
                 if Zones.objects.filter(agent_controleur=None).first():
                     zone__id = Zones.objects.filter(agent_controleur=None).values_list('id', flat=True).first()
                     print("-"*100)
@@ -87,11 +87,12 @@ def creations__agents(request,type__d__agent):
                 else:
                    message__systeme = f"l'agent {name__agent} {username}  a été créé mais plus de zone." 
                        
-            message__systeme = f"l'agent {name__agent} {username}  a été créé"    
+            message__systeme = f"l'agent {name__agent} {username}  a été créé"   
+            zone__id = f"{zone__id-5} - {zone__id}" 
             
         else:
            
-            for i in range(1,3):
+            
                 if Zones.objects.filter(agent_rescenseur=None).first():
                     zone__id = Zones.objects.filter(agent_rescenseur=None).values_list('id', flat=True).first()
                     print("-"*100)
@@ -102,17 +103,18 @@ def creations__agents(request,type__d__agent):
                     p.agent_rescenseur = get__user__agent__in__modal
                     p.save()
                     print(f"sucess")
+                    zone__id = f"{zone__id}"
                 else:
                    message__systeme = f"l'agent {name__agent} {username}  a été créé mais plus de zone." 
                        
-            message__systeme = f"l'agent {name__agent} {username}  a été créé"
+                message__systeme = f"l'agent {name__agent} {username}  a été créé"
 
         
     context = {
                         'message_systeme':message__systeme, 
                         'agent__password': password,  
                         'agent__user':  code_agent,
-                        "agent__zone": f"{zone__id} - {zone__id+2}",
+                        "agent__zone": zone__id,
                         'etat': "sucessed"    
         }
     print("👍")      
