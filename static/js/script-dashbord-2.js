@@ -109,7 +109,7 @@ btn__nouvelle__agent__modal__agent.onclick = function () {
   document.getElementById("matricule").value = "";
   document.getElementById("N_Telephone").value = "";
   document.getElementById("email").value = "";
-  ajax__zone.get__lists__of__zones__on__modal();
+  ajax__agent.get__lists__of__zones__on__modal();
   document.getElementById("part__modal__1").style.display = "block";
   document.getElementById("part__modal__2").style.display = "none";
 

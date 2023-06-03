@@ -25,7 +25,7 @@ class table_personnes_Serializer(serializers.ModelSerializer):
         "etat_civil",
         "classe",
         "comprendreLire",
-        "situatioResidence,"
+        "situatioResidence",
         "numero",
         "nombre_ocupant",
         "menage",

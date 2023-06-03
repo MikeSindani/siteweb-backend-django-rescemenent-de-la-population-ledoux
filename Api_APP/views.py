@@ -112,7 +112,6 @@ class personnes_lists_view(generics.ListAPIView):
     serializer_class = table_personnes_Serializer
 
 class personnes_create_view(CreateAPIView):
-    permission_classes = [isAgentControleur]
     authentication_classes = [authentication.SessionAuthentication,authentication.TokenAuthentication]
     queryset = Personnes.objects.all()
     serializer_class = table_personnes_Serializer
@@ -120,8 +119,19 @@ class personnes_create_view(CreateAPIView):
 @api_view(["GET"])
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
-def zones_details_view(request,pk,*args,**kwargs):
+def zones_details_view_by_agent_resc(request,pk,*args,**kwargs):
     instance  = Zones.objects.filter(agent_rescenseur=pk)
+    serializer_class = table_zones_Serializer(instance=instance,many=True)
+    if instance :
+        print(serializer_class.data)
+        return Response(serializer_class.data,status=200)
+    else:
+        return Response({"error": "Aucune personne trouvée pour cette zone"}, status=404)
+@api_view(["GET"])
+@authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def zones_details_view_by_agent_contyroleur(request,pk,*args,**kwargs):
+    instance  = Zones.objects.filter(agent_controleur=pk)
     serializer_class = table_zones_Serializer(instance=instance,many=True)
     if instance :
         print(serializer_class.data)
@@ -171,7 +181,7 @@ def api_get_agent_controleur__by__agent__res  (request,pk,*args,**kwargs):
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def api_get_person_by_agent_controleur (request,pk,*args,**kwargs):
-    instance  = Personnes.objects.filter(zone=pk)
+    instance  = Personnes.objects.filter(zones=pk)
     serializer_class = table_personnes_Serializer(instance,many=True)
     if instance :
         print(serializer_class.data)
