@@ -15,9 +15,11 @@ if auth_response.status_code == 200:
     headers = {
         "Authorization":f"Token {token}"
     }
-    endpoint = "http://127.0.0.1:8000/api/get_agents_user_info/0258/"
+    endpoint = "http://127.0.0.1:8000/api/get_info_agent_resc_by_agent_controleur/32/"
     get_reponse = requests.get(endpoint,headers=headers)
     #get_reponse = requests.post(endpoint,headers=headers,json=data)
 
     print(get_reponse.status_code)
     print(get_reponse.json())
+else: 
+  print("mot de passe incorrect")

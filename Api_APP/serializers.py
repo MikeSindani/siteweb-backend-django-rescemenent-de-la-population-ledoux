@@ -40,6 +40,20 @@ class table_user_agent_Serializer(serializers.ModelSerializer):
         fields = [
         'id',
         "username" ,
+        "password",
+        'email' ,
+        'Matricule',
+        'code_agent', 
+        'phone_no' ,
+        'type_agent',
+        ]
+class table_user_agent_without_password_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserAgent 
+        fields = [
+        'id',
+        "username" ,
+        "password",
         'email' ,
         'Matricule',
         'code_agent', 

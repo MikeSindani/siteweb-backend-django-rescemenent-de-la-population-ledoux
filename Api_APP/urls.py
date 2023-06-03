@@ -9,20 +9,22 @@ urlpatterns = [
     
     #path('get', views.api_home_get),
     #path('post', views.api_home_post),
-    path('get_list_personnes_res/', views.personnes_lists_view.as_view()),
-    path('post_create_personnes_res/', views.personnes_create_view.as_view()),
+    
     #path('get_list/', views.api_home_list),
     #path('get_details/<str:pk>/', views.api_home_details),
     #path('post_create/', views.api_home_create),
     #path('update/', views.api_home_update),
-    #path('get_agent_controleur/<str:users>/<str:password>/', views.api_check_agent_controlleur)
-    path('get_agents_user_info/<str:username>/', views.agent_user_persennel_info),
-    path('get_zones_info/<str:pk>/', views.zones_details_view.as_view()),
-    path('groups/', include(router.urls)),
+    #path('get_agent_controleur/<str:users>/<str:password>/', views.api_check_agent_controlleur),
+    #path('groups/', include(router.urls)),
     path('auth/',obtain_auth_token),
+    path('get_list_personnes_res/', views.personnes_lists_view.as_view()),
+    path('post_create_personnes_res/', views.personnes_create_view.as_view()),
+    path('get_agents_user_info/<str:username>/', views.agent_user_persennel_info),
+    path('get_zones_info/<str:pk>/', views.zones_details_view),
     # ces liens en dessous ne demande pas d'authentification avec les token fait une demande 
-    path('update_zone/<str:pk>/', views.api_zone_update),
+    path('update_zone/<str:pk>/', views.api_zone_update),#chaque fois qu'on ajouter un manage a la zone 
     path('get_info_agent_resc_by_agent_controleur/<str:pk>/', views.api_get__agent__res_by_agent_controleur),
+    path('get_info_agent_controleur_by_agent_resc/<str:pk>/', views.api_get_agent_controleur__by__agent__res),
     path('get_info_person_by_agent_controleur/<str:pk>/', views.api_get_person_by_agent_controleur),
 
 ]

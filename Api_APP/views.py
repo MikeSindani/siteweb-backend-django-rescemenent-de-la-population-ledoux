@@ -117,10 +117,17 @@ class personnes_create_view(CreateAPIView):
     queryset = Personnes.objects.all()
     serializer_class = table_personnes_Serializer
 
-class zones_details_view(RetrieveAPIView):
-    authentication_classes = [authentication.SessionAuthentication,authentication.TokenAuthentication]
-    queryset = Zones.objects.all()
-    serializer_class = table_zones_Serializer
+@api_view(["GET"])
+@authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def zones_details_view(request,pk,*args,**kwargs):
+    instance  = Zones.objects.filter(agent_rescenseur=pk)
+    serializer_class = table_zones_Serializer(instance=instance,many=True)
+    if instance :
+        print(serializer_class.data)
+        return Response(serializer_class.data,status=200)
+    else:
+        return Response({"error": "Aucune personne trouvée pour cette zone"}, status=404)
 
 @api_view(["PUT"])
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
@@ -139,14 +146,26 @@ def api_zone_update (request,pk,*args,**kwargs):
 @api_view(["GET"])
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
-def api_get__agent__res_by_agent_controleur (request,pk,*args,**kwargs):
-    instance  = Zones.objects.filter(id=pk)
-    serializer_class = table_zones_Serializer(instance=instance,many=True)
+def api_get__agent__res_by_agent_controleur(request,pk,*args,**kwargs):
+    instance  = UserAgent.objects.filter(id=pk)
+    serializer_class = table_user_agent_without_password_Serializer(instance=instance,many=True)
     if instance :
         print(serializer_class.data)
         return Response(serializer_class.data,status=200)
     else:
-        return Response({"error": "Aucune personne trouvée pour cette zone"}, status=404) # Renvoyer un message d'erreur avec un code 404
+        return Response({"error": "Aucune personne trouvée pour cette zone"}, status=404)
+        
+@api_view(["GET"])
+@authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def api_get_agent_controleur__by__agent__res  (request,pk,*args,**kwargs):
+    instance  = UserAgent.objects.filter(id=pk)
+    serializer_class = table_user_agent_without_password_Serializer(instance=instance,many=True)
+    if instance :
+        print(serializer_class.data)
+        return Response(serializer_class.data,status=200)
+    else:
+        return Response({"error": "Aucune personne trouvée pour cette zone"}, status=404)
 
 @api_view(["GET"])
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
