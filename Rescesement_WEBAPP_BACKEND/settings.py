@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os 
+from dotenv import load_dotenv
 
+# Charger les variables d'environnement du fichier .env
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -96,6 +99,18 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('BD_NAME'),
+        'USER': os.getenv('BD_USERNAME'),
+        'PASSWORD': os.getenv('BD_PASSWORD'),
+        'HOST': os.getenv('BD_HOST') , # Ou une adresse IP où votre base de données est hébergée
+        'PORT': '3306',
+    }
+}'''
+
 
 
 # Password validation

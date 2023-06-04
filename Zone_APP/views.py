@@ -2,13 +2,18 @@ from django.shortcuts import render,HttpResponse
 from django.http import JsonResponse
 from BD_APP.models import *
 from django.db.models import Q
-def nom_de_la_zone():
-   return  "ZD-"
+def nom_de_la_zone(variable__nombres__totals__des__zones):
+  if variable__nombres__totals__des__zones < 10 :
+     return  "ZD-00"
+  if variable__nombres__totals__des__zones  >= 10 and  variable__nombres__totals__des__zones  < 100:
+     return  "ZD-0"
+  if variable__nombres__totals__des__zones  >= 100 :
+     return  "ZD-"
 # Create your views here.
 def verifier__nom__zones(request):
       variable__nombres__totals__des__zones  = Zones.objects.all().count()
       variable__nombres__totals__des__zones = variable__nombres__totals__des__zones + 1
-      variable__nom__de__la__zones = nom_de_la_zone()+str(variable__nombres__totals__des__zones)   
+      variable__nom__de__la__zones = nom_de_la_zone(variable__nombres__totals__des__zones)+str(variable__nombres__totals__des__zones)   
      
       context = {
                   
@@ -24,7 +29,7 @@ def creation__zones(request):
         print(nom__de__zone)
         variable__nombres__totals__des__zones  = Zones.objects.all().count()
         variable__nombres__totals__des__zones = variable__nombres__totals__des__zones + 1
-        variable__nom__de__la__zones = nom_de_la_zone()+str(variable__nombres__totals__des__zones ) 
+        variable__nom__de__la__zones = nom_de_la_zone(variable__nombres__totals__des__zones)+str(variable__nombres__totals__des__zones) 
         z = Zones(nom=variable__nom__de__la__zones,etat=0)
         z.save()
         context = {
@@ -69,10 +74,10 @@ def get__lists__of__zones(request,num_avis):
 
 def get__list__of__zone__non__attribut(request,type__d__agent):
   if type__d__agent == "Controleur":
-     variable__listes__des__zones__active = Zones.objects.filter(agent_controleur=None).value()
+     variable__listes__des__zones__active = list(Zones.objects.filter(agent_controleur=None).values())
   else :
-    variable__listes__des__zones__active = Zones.objects.filter(agent_rescenseur=None).value()
+      variable__listes__des__zones__active = list(Zones.objects.filter(agent_rescenseur=None).values())
   context = {
-               'listes__zones':variable__listes__des__zones
+               'listes__zones':variable__listes__des__zones__active
             }      
   return JsonResponse(context)

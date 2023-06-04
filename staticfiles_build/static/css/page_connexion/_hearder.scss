@@ -1,0 +1,15 @@
+.drapeau_congo{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 10px;
+    .rouge{
+        background-color: var(--rouge);
+    }
+    .bleu{
+        background-color: var(--bleu);
+    }
+    .jaune{
+        background-color: var(--jaune);
+    }
+
+}

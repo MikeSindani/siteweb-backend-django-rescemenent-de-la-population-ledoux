@@ -1,0 +1,107 @@
+
+    .sidebar{
+       /*left: -250px;*/
+        height: 120vh;
+        background-color: var(--third-color);
+        width: 250px;
+        position: fixed;
+        overflow-y: hidden;
+        transition: left 10s ease-in-out ;
+        
+        .logo{
+            margin: 15px 0;
+        }
+        /* debut menu side bar */ 
+        .menu{
+            .items{
+                line-height: 60px;
+                padding: 0 15px;
+                transition: .5s ease;
+                cursor: pointer;
+                position: relative;
+                &:hover{
+                    background-color: var(--second-color);
+                    color: black;
+                    font-weight: 500;         
+                }
+                i{
+                    margin-right: 15px;
+                }
+                .dropdown{
+                    position: absolute;
+                    right: 0;
+                    margin: 20px;
+                    transition: .6s ease;
+                }     
+
+            }
+            /* sub menu */ 
+            .sub-menu-1,.sub-menu-2{
+                display: none;
+                margin: 0 50px;
+               
+                .sub-item-menu{
+                        &:hover{
+                            font-weight: bold;
+                        }
+                   }      
+               }
+               .sub-menu{
+                
+                line-height: 50px;
+                background-color: var(--second-color);
+                .sub-item-menu{
+                    position: relative;
+                    left: 20px;
+                    transition: all 0.6ms ease-in-out;
+                    cursor: pointer;
+                    &:hover{
+                            font-weight: bold;
+                        }
+                }
+                
+
+               }
+            /* sub menu */ 
+        }
+        /* fin menu sidebar */ 
+        /* debut about sidebar */ 
+        .help{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            
+            
+            .items-helps{
+                padding: 7px 15px;
+                border-radius: 50%;
+                border: 2px solid black;
+                margin: 0 10px;
+                cursor: pointer;
+                &:hover{
+                    background-color: var(--second-color);
+                    border: none;
+                    
+                }
+            }
+
+        }
+    }
+/* code pour passe d'un ongle a un autre a travers display none */
+.menu-activeted{
+  display: none;
+} 
+.bg-secondary-color{
+    background-color: var(--second-color);
+}
+.bg-primary-color{
+    background-color: var(--primary-color);
+    color: white;
+}
+.d-grid{
+    display: grid !important;
+}
+.d-flex{
+    display: flex !important;
+}

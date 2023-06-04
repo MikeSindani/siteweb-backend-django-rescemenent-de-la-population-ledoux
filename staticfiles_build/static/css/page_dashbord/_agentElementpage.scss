@@ -1,0 +1,36 @@
+@mixin flex-center($justify){
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+}
+
+.gestion_agent_element{
+    .box{
+        box-shadow: var(--primary-box-shadow);
+        background-color: var(--third-color);
+        border-radius: var(--border-raduis);
+        
+        margin: var(--margin) 0;
+        padding: var(--padding) 100px;  
+    }
+
+    .gestion_agent-box-1{
+        @include flex-center(center);
+        @media (max-width: 768px){
+            flex-direction: column;
+        }
+        gap: 10px;
+    }
+    .gestion_agent-box-2{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        
+        .gestion_agent-box-2-part-1{
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+}
+}

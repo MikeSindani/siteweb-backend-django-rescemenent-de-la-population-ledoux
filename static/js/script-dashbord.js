@@ -563,6 +563,7 @@ $(document).on("submit", "#agent_zone_type_form", function (e) {
       csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
       nom_complet: $("#nom_complet").val(),
       email: $("#email").val(),
+      Zone:$("#list_zones_active").val(),
     },
     success: function (data) {
       if (data.etat == "sucessed") {

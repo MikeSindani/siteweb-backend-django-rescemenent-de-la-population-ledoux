@@ -166,14 +166,14 @@ class class__ajax__zone {
         var data = response.listes__zones;
         setTimeout(() => {
           console.log(data);
-
+          
           //const donnee = new Array(data);
           var lists__zones = document.getElementById("lists__zones");
           //lists__zones.innerHTML =""
           data.forEach((el) => {
             lists__zones.innerHTML += `
                         <tr class="tr2">
-                              <td><strong>00${el.id}</strong></td>
+                              <td><strong>${el.id}</strong></td>
                               <td>${el.nom}</td>
                               <td>${el.agent_rescenseur_id}</td>     
                               <td>${el.agent_controleur_id}</td>
@@ -428,12 +428,12 @@ get__lists__of__zones__on__modal(type__agent) {
       url: `ajax/get__lists__of__zones__on__modals/${type__agent}/`,
       success: function (response) {
         console.log(response);
-        var data = response.listes__agents;
+        var data = response.listes__zones;
         setTimeout(() => {
           console.log(data);
             
              var lists__agents = document.getElementById("list_zones_active");
-            
+          
           //const donnee = new Array(data);
           if (type__agent == "Controleur"){
             
