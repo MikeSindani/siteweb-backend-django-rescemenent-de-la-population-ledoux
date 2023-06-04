@@ -54,10 +54,10 @@ def get__lists__of__zones(request,num_avis):
     print(num_avis)
     if num_avis > 3 :
       upper = num_avis + 3 
-      lower = num_avis - 1 
+      lower = 0 #num_avis - 1 
     else : 
       upper = num_avis 
-      lower = 0
+      lower = 00000
     print(variable__listes__des__zones)
     print(variable__listes__des__zones[0])
 

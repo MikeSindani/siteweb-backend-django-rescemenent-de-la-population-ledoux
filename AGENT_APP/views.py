@@ -99,6 +99,7 @@ def creations__agents(request,type__d__agent):
                     print(p)
                     p.agent_controleur = get__user__agent__in__modal
                     p.save()
+                    f = Zones.objects.filter(id=zone_id_i).count()
                     print(f"sucess")
                     message__systeme = f"L'agent controleur {username}  a été créé"   
                     zone__id = f"{nom_de_la_zone(zone__id+1)+str(zone__id)} - {nom_de_la_zone(zone__id+5)+str(zone__id+i)}"
@@ -150,7 +151,7 @@ def get__lists__of__agents(request,num_avis,type__d__agent):
     print(num_avis)
     if num_avis > 3 :
       upper = num_avis + 3 
-      lower = num_avis - 1 
+      lower =0  #num_avis - 1 
     else : 
       upper = num_avis 
       lower = 0

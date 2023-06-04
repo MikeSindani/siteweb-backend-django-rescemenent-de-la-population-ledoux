@@ -1,9 +1,9 @@
 // var  for set interval
-const time_set_interval = 500;
+const time_set_interval = 2000;
 
 // for ajax  numbers
 
-var visible = 3;
+var visible = 0;
 
 // load screen
 
@@ -17,7 +17,9 @@ function off() {
 /* ce code est pour le temps de slash sreen  */
 
 setTimeout(() => {
+  
   document.getElementById("slash-screen").style.display = "none";
+  document.getElementById("main_div").style.visibility = "visible"; 
 }, time_set_interval);
 
 /* ####################################################################*/
@@ -415,6 +417,7 @@ function btn_gestion_agent_element(element) {
     nombres__agent__element = ajax_agents_home_section(element);
     //requette ajax */
     ajax__agent.ajax_nombres_agent_section_element(element);
+    visible = 3;
     ajax__agent.get__lists__of__agents(element)
 
     off(); // overlay off
@@ -429,7 +432,7 @@ const btn__load__section__zones = document.querySelector(
 btn__load__section__zones.addEventListener("click", () => {
   //spinnerBox.classList.remove('not-visible')
   //chargementBox.textContent="CHARGEMENT DES COMMENTAIRES EN COURS ... "
-  visible += 1;
+  visible += 3;
   on();
   ajax__zone.get__lists__of__zones();
   off();
@@ -468,7 +471,7 @@ const btn__load__section__agent__element = document.querySelector(
 );
 btn__load__section__agent__element.addEventListener("click", () => {
   on();
-  visible += 1;
+  visible += 3;
     var data_modal_agent = document.getElementById("modal-agent");
     data_modal_agent.getAttribute("data-type-agent-click");
     var element = data_modal_agent

@@ -169,15 +169,15 @@ class class__ajax__zone {
           
           //const donnee = new Array(data);
           var lists__zones = document.getElementById("lists__zones");
+          lists__zones.innerHTML =""
           //lists__zones.innerHTML =""
           data.forEach((el) => {
             lists__zones.innerHTML += `
                         <tr class="tr2">
-                              <td><strong>${el.id}</strong></td>
                               <td>${el.nom}</td>
                               <td>${el.agent_rescenseur_id}</td>     
                               <td>${el.agent_controleur_id}</td>
-                              <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+                              
                         </tr>  
                         `;
           });
@@ -189,6 +189,8 @@ class class__ajax__zone {
             } else if (response.size <= visible) {
               loadBtn.classList.add("not-visible");
               chargementBox.textContent = "Il y a plus de commantaire...";
+
+              <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
             }*/
       },
       error: function (error) {
@@ -372,7 +374,7 @@ class class__ajax__agent {
             
             lists__agents__controleur.style.display = "table"
             lists__agents__rescenseur.style.display = "none"
-            //lists__agents__controleur.innerHTML =''
+            lists__agents__controleur.innerHTML =''
             data.forEach((el) => {
                 lists__agents__controleur.innerHTML += `
                             <tr class="tr2">
@@ -380,8 +382,7 @@ class class__ajax__agent {
                                   <td>${el.username}</td>
                                   <td>${el.Matricule}</td>     
                                   <td>${el.password}</td>
-                                  <td>${el.password}</td>
-                                  <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+                                 
                             </tr>  
                             `;
               });
@@ -389,7 +390,7 @@ class class__ajax__agent {
             
             lists__agents__controleur.style.display = "none"
             lists__agents__rescenseur.style.display = "table"
-            //lists__agents__rescenseur.innerHTML =''
+            lists__agents__rescenseur.innerHTML =''
             data.forEach((el) => {
                 lists__agents__rescenseur.innerHTML += `
                             <tr class="tr2">
@@ -397,10 +398,10 @@ class class__ajax__agent {
                                   <td>${el.username}</td>
                                   <td>${el.Matricule}</td>     
                                   <td>${el.password}</td>
-                                  <td>${el.password}</td>
-                                  <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+                                  
                             </tr>  
                             `;
+                            //<td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
               });
           }
           
