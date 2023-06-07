@@ -47,7 +47,7 @@ def get__nombres__zones(request):
     return JsonResponse(context)
     
 def get__lists__of__zones(request,num_avis):
-    variable__listes__des__zones  = list(Zones.objects.all().values()) 
+    variable__listes__des__zones  = list(Zones.objects.all().values("nom","agent_controleur__username","agent_rescenseur__username")) 
     variable__listes__des__zones__new = list()
     dictionnaire = {}
     print("*"*100)

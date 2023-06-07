@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Zone_APP',
     'AGENT_APP',
     'Statistique_APP',
+    'suivi_rescensement_APP',
     'rest_framework',
     'rest_framework.authtoken',
 ]

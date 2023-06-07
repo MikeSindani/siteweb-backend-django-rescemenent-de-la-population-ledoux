@@ -20,6 +20,7 @@ setTimeout(() => {
   
   document.getElementById("slash-screen").style.display = "none";
   document.getElementById("main_div").style.visibility = "visible"; 
+  
 }, time_set_interval);
 
 /* ####################################################################*/

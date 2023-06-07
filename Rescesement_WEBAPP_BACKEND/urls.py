@@ -22,5 +22,6 @@ urlpatterns = [
     path('',include('Login_APP.urls')),
      path('ajax/',include('Statistique_APP.urls')),
      path('ajax/',include('Zone_APP.urls')),
-     path('ajax/',include('AGENT_APP.urls'))
+     path('ajax/',include('AGENT_APP.urls')),
+      path('ajax/',include('suivi_rescensement_APP.urls'))
 ]

@@ -20,6 +20,7 @@ const nombres__agent__total = document.querySelector("#nombres__agent__total");
 const nombres__agent__rescenseur = document.querySelector(
   "#nombres__agent__rescenseur"
 );
+/*
 data_nbrs = [nbrs_h, nbrs_f];
 var homme_data = {
   type: "pie",
@@ -67,7 +68,7 @@ var femme_data = {
 var homme_chart = new Chart(ctx1, homme_data);
 
 var femme_chart = new Chart(ctx3, femme_data);
-
+*/
 // envoyer les formulaires
 
 /*$(document).on('submit', '#agent_zone_type_form', function(e){
@@ -175,9 +176,9 @@ class class__ajax__zone {
             lists__zones.innerHTML += `
                         <tr class="tr2">
                               <td>${el.nom}</td>
-                              <td>${el.agent_rescenseur_id}</td>     
-                              <td>${el.agent_controleur_id}</td>
-                              
+                              <td>${el.agent_rescenseur__username}</td>     
+                              <td>${el.agent_controleur__username}</td>
+                            
                         </tr>  
                         `;
           });
@@ -227,10 +228,10 @@ class class__ajax__home {
         nombre_femme.setAttribute("data-target", response.nombre_femme);
         nombre_femme.innerHTML = response.nombre_femme;
 
-        homme_chart.destroy();
-        femme_chart.destroy();
+        //homme_chart.destroy();
+        //femme_chart.destroy();
 
-        homme_data = {
+       /* homme_data = {
           type: "pie",
           data: {
             labels: ["Homme", "Femme"],
@@ -273,7 +274,7 @@ class class__ajax__home {
           },
         };
         homme_chart = new Chart(ctx1, homme_data);
-        femme_chart = new Chart(ctx3, femme_data);
+        femme_chart = new Chart(ctx3, femme_data);*/
 
         //document.getElementById("message_systeme").textContent = data
       },
@@ -473,17 +474,100 @@ get__lists__of__zones__on__modal(type__agent) {
   }
 }
 
+class class__ajax__suivi__de__resecensement{
+    get__nombres__zones() {
+    //var catid;
+    //id = $(this).attr("data-id");
+    $.ajax({
+      type: "GET",
+      url: `/ajax/get__nombres__zones_suivi/`,
+      success: function (response) {
+        console.log("nombres__zones" + response.nombres__totals__des__zones);
+        var nombres__total__des__zones__suivi__1 = document.getElementById(
+          "nombres__total__des__zones__suivi__1"
+        );
+        var nombres__total__des__zones__suivi__1 = document.getElementById(
+          "nombres__total__des__zones__suivi__2"
+        );
+        var nombres__total__des__zones__valide = document.getElementById(
+          "nombres__total__des__zones__valide"
+        );
+        var nombres__total__des__zones__non__valide = document.getElementById(
+          "nombres__total__des__zones__non__valide"
+        );
+        //$('#btn-modal-follow-del').css("display","block");
+        //$('#btn-modal-follow-add').css("display","none");
+        nombres__total__des__zones__suivi__1.innerHTML = response.nombres__totals__des__zones;
+        nombres__total__des__zones__suivi__2.innerHTML = response.nombres__totals__des__zones;
+        nombres__total__des__zones__valide.innerHTML = nombres__totals__des__zones__valide
+        nombres__total__des__zones__non_valide.innerHTML = nombres__total__des__zones__suivi__1 - nombres__totals__des__zones__valide 
+      },
+    })}
+    get__lists__of__zones(visible) {
+      $.ajax({
+        type: "GET",
+        url: `ajax/get__lists__of__zones_suivi/${visible}/`,
+        success: function (response) {
+          console.log(response);
+          var data = response.listes__zones;
+          setTimeout(() => {
+            console.log(data);
+            
+            //const donnee = new Array(data);
+            var lists__zones = document.getElementById("lists__zones");
+            lists__zones.innerHTML =""
+            //lists__zones.innerHTML =""
+            var etat__termine ='Termine' ;
+            var etat__en__cour = 'en cours'
+            data.forEach((el) => {
+              lists__zones.innerHTML += `'
+                              <tr class="tr2">
+                              <td> <strong>${el.nom}</strong></td>
+                              <td>${el.agent_rescenseur__username}</td>
+                              <td>${el.agent_controleur__username}</td>
+                              <td>${ el.etat==200?etat__termine : etat__en__cour }</td>
+                              <td><progress id="file" value="${el.etat}" max="${ response.nombres__totals__par__zones }"></progress></td>
+                              <td>${el.etat}/${ response.nombres__totals__par__zones }</td>
+                          </tr> 
+                          `;
+            });
+          }, 1000);
+          /*chargementBox.textContent = "";
+              console.log(response.size);
+              if (response.size === 0) {
+                chargementBox.textContent = "Pas de commentaire";
+              } else if (response.size <= visible) {
+                loadBtn.classList.add("not-visible");
+                chargementBox.textContent = "Il y a plus de commantaire...";
+  
+                <td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+              }*/
+        },
+        error: function (error) {
+          console.log(error);
+        },
+      })
+    }
+  
+}
+
 // appel a la fonction
 
 const ajax__zone = new class__ajax__zone();
 const ajax__home = new class__ajax__home();
 const ajax__agent = new class__ajax__agent();
+const ajax__suivi__de_res = new class__ajax__suivi__de__resecensement()
 // set interval for all fonction
+var visible = 3
 setInterval(() => {
   ajax__home.ajax_home_section();
   ajax__home.ajax_stats_home_section();
   ajax__home.ajax_agents_home_section();
   ajax__zone.ajax_get__nombres__zones();
+  ajax__suivi__de_res.get__nombres__zones();
+
+  ajax__suivi__de_res.get__lists__of__zones(visible)
+
   
  
 }, 3000);

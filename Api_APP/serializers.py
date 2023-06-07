@@ -65,6 +65,7 @@ class table_zones_Serializer(serializers.ModelSerializer):
         model = Zones
         fields = [
         'id',
+        "nom",
         "agent_codificateur",
         "agent_controleur",
         "agent_rescenseur",

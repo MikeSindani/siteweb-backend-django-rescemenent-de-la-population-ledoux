@@ -52,7 +52,15 @@ class Statistique(models.Model):
         return "%.d" %(self.nbrs_femme + self.nbrs_homme)
     
 
-
+class menager (models.Model):
+    nombre_ocupant = models.CharField(max_length=100,null=True)
+    numero = models.CharField(max_length=100,null=True)
+    province = models.CharField(max_length=100,null=True)
+    commune = models.CharField(max_length=100,null=True)
+    quartier = models.CharField(max_length=100,null=True)
+    avenue = models.CharField(max_length=100,null=True)
+    ville = models.CharField(max_length=100,null=True)
+    zones = models.ForeignKey("Zones",null=True,on_delete=models.SET_NULL)
 class Personnes(models.Model):
     SEXE_CHOICES = (
         ('M', 'Masculin'),
@@ -66,35 +74,39 @@ class Personnes(models.Model):
     sexe = models.CharField(max_length=2,null=True,choices=SEXE_CHOICES)
     date_de_naissance = models.DateField(null=True)
     lien_parente= models.CharField(max_length=100,null=True)
-    age = models.CharField(max_length=100,null=True)
+    age = models.IntegerField(null=True)
     activite = models.CharField(max_length=100,null=True)
-    #----------------------------------------------------------------
+    #-------------------------------------------------------------
+    nombre_ocupant = models.CharField(max_length=100,null=True)
+    numero = models.CharField(max_length=100,null=True)
     province = models.CharField(max_length=100,null=True)
     commune = models.CharField(max_length=100,null=True)
     quartier = models.CharField(max_length=100,null=True)
     avenue = models.CharField(max_length=100,null=True)
     ville = models.CharField(max_length=100,null=True)
-    zones = models.ForeignKey("Zones",related_name='Zones',null=True,on_delete=models.SET_NULL)
+    zones = models.ForeignKey("Zones",null=True,on_delete=models.SET_NULL)
+    
     #----------------------------------------------------------------
     nationalite = models.CharField(max_length=100,null=True)
     niveau_d_etude = models.CharField(max_length=100,null=True)
     profession = models.CharField(max_length=100,null=True)
     etat_civil  = models.CharField(max_length=100,null=True)
-    classe = models.CharField(max_length=100,null=True)
+    classe = models.CharField(max_length=100,null=True) 
     comprendreLire = models.CharField(max_length=100,null=True)
     #----------------------------------------------------------------
-    situatioResidence = models.CharField(max_length=100,null=True)
-    numero = models.CharField(max_length=100,null=True)
     nombre_ocupant = models.CharField(max_length=100,null=True)
-    menage = models.CharField(max_length=100,null=True)
+    nombre = models.CharField(max_length=100,null=True)
+    situatioResidence = models.CharField(max_length=100,null=True)
     indexDataOcupant = models.CharField(max_length=100,null=True)
     etverifie = models.BooleanField(default=False)
-    
+    menager =  models.ForeignKey(menager,null=True,on_delete=models.SET_NULL)
+
     #verifie  = 
     
     def __str__(self):
        return "{} {}".format(self.nom, self.prenom)
-   
+
+
 class Zones(models.Model):
     nom = models.CharField(max_length=100,null=True,unique=True)
     agent_codificateur = models.ForeignKey(UserAgent,related_name='agent_codificateur',null=True,on_delete=models.SET_NULL)

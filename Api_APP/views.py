@@ -144,14 +144,16 @@ def zones_details_view_by_agent_controleur(request,pk,*args,**kwargs):
 @permission_classes([permissions.IsAuthenticated])
 def api_zone_update (request,pk,*args,**kwargs):
     instance  = Zones.objects.get(id=pk)
-    instance.etat = instance.etat + 1 
-    print(instance.etat)
-    print(instance.statut)
-    serializer_class = table_zones_Serializer(data=request.data,instance=instance)
+    #val = instance["etat"] + 1 
+    print(instance["etat"])
+    #print(instance.statut)
+    #request.data
+    serializer_class = table_zones_Serializer(data=val,instance=instance)
     if serializer_class.is_valid():
         serializer_class.save()
-
-    return Response(serializer_class.data)
+        return Response(serializer_class.data)
+    else:
+        return Response({"error": "probleme avec l'enregistrement de la zone"}, status=404)
 
 @api_view(["GET"])
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
