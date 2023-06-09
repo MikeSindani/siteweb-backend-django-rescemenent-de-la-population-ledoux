@@ -73,5 +73,17 @@ class table_zones_Serializer(serializers.ModelSerializer):
         'statut',
         ]
 
-
+class table_menager_Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = menager 
+        fields = [
+        'nombre_ocupant',
+        'numero',
+        'province',
+        'commune',
+        'quartier',
+        'avenue',
+        'ville',
+        'zones',
+        ]
         

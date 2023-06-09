@@ -24,13 +24,19 @@ def generer_code__agent(longueur):
     generer = ''.join(random.choice(caracteres) for i in range(longueur))
     return generer
 
+#def verifie__agent__type(type__d__agent):
+
+
+
+
 def get__nombres__agents__totals(request,type__d__agent):
     print("✔"*100)
     print(type__d__agent)
     if type__d__agent == "Controleur":
-        nombres__agent__total = UserAgent.objects.filter(type_agent=2).count()
+        nombres__agent__total = UserAgent.objects.filter(type_agent__name='Agent_controleur').count()
+
     else:
-        nombres__agent__total = UserAgent.objects.filter(type_agent=4).count()
+        nombres__agent__total = UserAgent.objects.filter(type_agent__name="Agent_rescenseur").count()
         
     context = {
                 'nombres__agents':nombres__agent__total, 
@@ -98,6 +104,7 @@ def creations__agents(request,type__d__agent):
                     p = Zones.objects.get(id=zone_id_i)
                     print(p)
                     p.agent_controleur = get__user__agent__in__modal
+                    p.etat = 0
                     p.save()
                     f = Zones.objects.filter(id=zone_id_i).count()
                     print(f"sucess")
@@ -121,6 +128,7 @@ def creations__agents(request,type__d__agent):
                     p = Zones.objects.get(id=zone__id)
                     print(p)
                     p.agent_rescenseur = get__user__agent__in__modal
+                    p.etat = 0
                     p.save()
                     print(f"sucess")
                     zone__id = f"{nom_de_la_zone(zone__id)+str(zone__id)}"
@@ -143,9 +151,9 @@ def creations__agents(request,type__d__agent):
 
 def get__lists__of__agents(request,num_avis,type__d__agent):
     if type__d__agent == "Controleur":
-        variable__listes__des__agents  = list(UserAgent.objects.filter(type_agent=2).values()) 
+        variable__listes__des__agents  = list(UserAgent.objects.filter(type_agent__name='Agent_controleur').values()) 
     else: 
-        variable__listes__des__agents  = list(UserAgent.objects.filter(type_agent=4).values()) 
+        variable__listes__des__agents  = list(UserAgent.objects.filter(type_agent__name='Agent_rescenseur').values()) 
 
     print("*"*100)
     print(num_avis)

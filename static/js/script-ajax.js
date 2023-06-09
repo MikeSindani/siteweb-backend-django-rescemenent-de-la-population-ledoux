@@ -486,7 +486,7 @@ class class__ajax__suivi__de__resecensement{
         var nombres__total__des__zones__suivi__1 = document.getElementById(
           "nombres__total__des__zones__suivi__1"
         );
-        var nombres__total__des__zones__suivi__1 = document.getElementById(
+        var nombres__total__des__zones__suivi__2 = document.getElementById(
           "nombres__total__des__zones__suivi__2"
         );
         var nombres__total__des__zones__valide = document.getElementById(
@@ -499,8 +499,10 @@ class class__ajax__suivi__de__resecensement{
         //$('#btn-modal-follow-add').css("display","none");
         nombres__total__des__zones__suivi__1.innerHTML = response.nombres__totals__des__zones;
         nombres__total__des__zones__suivi__2.innerHTML = response.nombres__totals__des__zones;
-        nombres__total__des__zones__valide.innerHTML = nombres__totals__des__zones__valide
-        nombres__total__des__zones__non_valide.innerHTML = nombres__total__des__zones__suivi__1 - nombres__totals__des__zones__valide 
+        nombres__total__des__zones__suivi__1 = response.nombres__totals__des__zones
+        nombres__total__des__zones__suivi__2 = response.nombres__totals__des__zones
+        nombres__total__des__zones__valide.innerHTML = response.nombres__totals__des__zones__valide;
+        nombres__total__des__zones__non__valide.innerHTML = (nombres__total__des__zones__suivi__1 - response.nombres__totals__des__zones__valide) 
       },
     })}
     get__lists__of__zones(visible) {
@@ -514,11 +516,12 @@ class class__ajax__suivi__de__resecensement{
             console.log(data);
             
             //const donnee = new Array(data);
-            var lists__zones = document.getElementById("lists__zones");
+            var lists__zones = document.getElementById("listes_of_suivi_by__zone");
             lists__zones.innerHTML =""
             //lists__zones.innerHTML =""
             var etat__termine ='Termine' ;
             var etat__en__cour = 'en cours'
+
             data.forEach((el) => {
               lists__zones.innerHTML += `'
                               <tr class="tr2">
