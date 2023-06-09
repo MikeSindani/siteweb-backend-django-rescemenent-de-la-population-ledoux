@@ -15,26 +15,33 @@
     }
     .home-box-1{
         @include flex-center(center);
+        flex-direction: row;
+        background-color: var(--primary-color);
+        color: white;
+        gap: 10px;
+        padding: 20px;
         @media (max-width: 768px){
             flex-direction: column;
         }
-        gap: 10px;
-        
-        
+ 
     }
     .home-box-2{
         gap: 20px;
         @include flex-center(space-around);
-        @media (max-width: 768px){
-            flex-direction: column;
+        flex-direction: column;
+        
+        .home-box-2-part-1{
+            display: flex;
+            gap: 10px;
         }
-
         .home-box-2-part-1,.home-box-2-part-2{      
             flex-grow: 1;
         }
         
         .home-box-2-part-3{
             flex-grow: 2;
+            display: flex;
+
             .homme,.femme{
                 display: flex;
                 gap: 10px;
