@@ -24,7 +24,10 @@
   
 }
 .body{
-  background-color: var(--second-color);
+  /*background-color: var(--second-color);*/ 
+  background-color: #e4f1ff;
+  background-image: linear-gradient(120deg, #e4f1ff 40%, #fdc4c4 50%, #fcfdd0 60%);
+  
 }
 
 *{

@@ -1,80 +1,22 @@
-<div id="section_stats_element" class="element-stats-page box-page" style="display: none;">
+{% load static %}
+<div id="section_stats_element" class="element-stats-page box-page" style="display: none;" data-categorie="">
     <div class="element-stats-box-1">
-        <select class="w3-select" name="option">
-            <option value="" disabled selected>Population</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+        <select id="listes__of__communes" class="w3-select" name="option" onchange="get__statistique__otherwise__categorie()">
+            
         </select>
     </div>
     <div class="box element-stats-box-2">
-        <div><h2 class="commune-name">Commune de lubumbashi </h2></div>
-        <div class="inner-element-stats-box-2">
-            <div class="element-stats-box-2-part-1">
-                <div class="total">
-                    <div><img src="img/person-team-svgrepo-com.svg" alt="" height="50" width="50"></div>
-                    <div>
-                        <div class="Ttl">Population total</div>
-                        <div class="stat-numbers"><h3>120000</h3></div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div id="graph-container" class="element-stats-box-2-part-2" style="height: 150px;">
-                <canvas id="Chart-by-stat"></canvas>
-            </div>
-            <div class="element-stats-box-2-part-3">
-                <div class="homme">
-                    <span><img src="img/man-svgrepo-com.svg" alt="" height="50" width="50"></span>
-                    <span>
-                        <div class="M sexe">Homme</div>
-                        <div class="stat-numbers"><h3>120000</h3></div>
-                    </span>
-                    
-                </div>
-                <div class="femme">
-                    <span><img src="img/woman-svgrepo-com.svg" alt="" height="50" width="50"></span>
-                    <span>
-                        <div class="F sexe">Femme</div>
-                        <div class="stat-numbers"><h3>190000</h3></div>
-                    </span>   
-                </div>
-            </div>
+        <div><h2 class="commune-name">Statistique generale <span id="categorie__name"></span> de la commune de <span id="commune__name"></span> </h2></div>
+        <div id="element_stats" class="inner-element-stats-box-2">
+           
             
         </div>
     </div>
     <div class="element-stats-box-2-part-4">
-        <table>
-            <tr class="tr">
-                <th colspan="4" ><h2>Par Quartier</h2></th>
-            </tr>
-            <tr class="tr1">
-              <th>Nom du Quatier</th>
-              <th>Alphabetisation</th>
-              <th>InAlphabet</th>
-              <th>Totals Populations</th>
-              
-            </tr>
-            <tr class="tr2">
-              <td> <strong>Alfreds Futterkiste</strong></td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-              <td>Germany</td>
-            </tr>
-            <tr class="tr2">
-                <td> <strong>Alfreds Futterkiste</strong></td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Germany</td>
-            </tr>
-            <tr class="tr2">
-                <td> <strong>Alfreds Futterkiste</strong></td>
-                <td>Maria Anders</td>
-                <td>Germany</td>
-                <td>Germany</td>
-              </tr>
+        <table  id="listes__of__communes__population">
             
-          </table>
+            
+        </table>
     </div>
    
 </div>

@@ -27,5 +27,7 @@ urlpatterns = [
     path('get_info_agent_resc_by_agent_controleur/<str:pk>/', views.api_get__agent__res_by_agent_controleur),
     path('get_info_agent_controleur_by_agent_resc/<str:pk>/', views.api_get_agent_controleur__by__agent__res),
     path('get_info_person_by_agent_controleur/<str:pk>/', views.api_get_person_by_agent_controleur), # il faut envoye la zone pas l'id de la personne 
+    path('get__manage__id/<str:pk>/', views.api_get__manage__id),
+    path('post__menage__for__creation/', views.api__post__menage__for__creation),
 
 ] 

@@ -151,9 +151,9 @@ def creations__agents(request,type__d__agent):
 
 def get__lists__of__agents(request,num_avis,type__d__agent):
     if type__d__agent == "Controleur":
-        variable__listes__des__agents  = list(UserAgent.objects.filter(type_agent__name='Agent_controleur').values()) 
+        variable__listes__des__agents  = list(Zones.objects.filter(agent_controleur__type_agent__name='Agent_controleur').values("nom","agent_controleur__username","agent_controleur__code_agent","agent_controleur__Matricule","agent_controleur__password")) 
     else: 
-        variable__listes__des__agents  = list(UserAgent.objects.filter(type_agent__name='Agent_rescenseur').values()) 
+        variable__listes__des__agents  = list(Zones.objects.filter(agent_rescenseur__type_agent__name='Agent_rescenseur').values("nom","agent_rescenseur__username","agent_rescenseur__code_agent","agent_rescenseur__Matricule","agent_rescenseur__password")) 
 
     print("*"*100)
     print(num_avis)
@@ -177,3 +177,11 @@ def get__lists__of__agents(request,num_avis,type__d__agent):
                'listes__agents':variable__listes__des__agents[lower:upper], 'size': size
             }      
     return JsonResponse(context)
+
+def delete__agent(request,agent):
+  get__agent = UserAgent.objects.get(username=agent)
+  get__agent.delete()
+  context = {
+               'message_systeme':f"l'agent {agent} a été effacée."
+            }      
+  return JsonResponse(context)

@@ -28,7 +28,7 @@ class table_personnes_Serializer(serializers.ModelSerializer):
         "situatioResidence",
         "numero",
         "nombre_ocupant",
-        "menage",
+        "menager",
         "zones",
         'indexDataOcupant',
         "etverifie",
@@ -86,4 +86,4 @@ class table_menager_Serializer(serializers.ModelSerializer):
         'ville',
         'zones',
         ]
-        
+       

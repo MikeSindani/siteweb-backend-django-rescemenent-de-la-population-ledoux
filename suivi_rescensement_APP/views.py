@@ -17,12 +17,11 @@ def get__nombres__zones__suivi(request):
     return JsonResponse(context)
 def get_listes__of__zones__suivi(request,num_avis):
     variable__listes__des__zones  = list(Zones.objects.all().values("nom","agent_controleur__username","agent_rescenseur__username","etat","statut")) 
-    variable__listes__des__zones__new = list()
     nombres__totals__des__zones  = Zones.objects.all().count()
     dictionnaire = {}
     print("*"*100)
     print(num_avis)
-    if num_avis > 3 :
+    if num_avis > 3 or num_avis == 0 :
       upper = num_avis + 3 
       lower = 0 #num_avis - 1 
     else : 
@@ -37,6 +36,9 @@ def get_listes__of__zones__suivi(request,num_avis):
         size = len(variable__listes__des__zones)
         
     context = {
-               'listes__zones':variable__listes__des__zones[lower:upper], 'size': size,'nombres__totals__par__zones': 200,
+               'listes__zones':variable__listes__des__zones[lower:upper],
+                'size': size,
+                'nombres__totals__par__zones': 200,
+                'm':num_avis,
             }      
     return JsonResponse(context)

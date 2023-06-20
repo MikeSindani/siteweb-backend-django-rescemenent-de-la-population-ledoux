@@ -233,7 +233,7 @@ sub_btn_agent.addEventListener("click", () => {
 /* FIN BOUTON SUB MENU AGENT */
 /* DEBUT BOUTON  STATISTIQUE POPULATION  */
 
-function function_chart_stats_element(data1) {
+/*function function_chart_stats_element(data1) {
   const ctx4 = document.querySelector("#Chart-by-stat");
   new Chart(ctx4, {
     type: "pie",
@@ -254,7 +254,7 @@ function function_chart_stats_element(data1) {
       },
     },
   });
-}
+}*/
 
 // BTN POUPULATION  STATS
 function function_btn_stats_population() {
@@ -285,34 +285,35 @@ function function_btn_stats_population() {
   }
       
 }*/
-
+function get__statistique__otherwise__categorie(){
+  var section_stats_element = document.querySelector("#section_stats_element")
+  section_stats_element.getAttribute("data-categorie")
+  var commune = document.querySelector("#listes__of__communes").value
+  document.querySelector("#commune__name").innerHTML = commune
+  ajax__stats.get__stats__of__commune__population()
+    ajax__stats.get__stats__lists__of__quarter(visible)
+      
+}
 // btn population
 function btn_stats_element(element) {
   //.style.fontWeight="normal"
   $("." + element).css("font-weight", "bold");
   $("." + element).css("font-size", "16px");
-  //this.style.fontSize="inherit"
-  /*
-  var resetCanvas = function(){
-    
-    canvas = document.querySelector('#results-graph');
-    ctx = canvas.getContext('2d');
-    ctx.canvas.width = $('#graph').width(); // resize to parent width
-    ctx.canvas.height = $('#graph').height(); // resize to parent height
-    var x = canvas.width/2;
-    var y = canvas.height/2;
-    ctx.font = '10pt Verdana';
-    ctx.textAlign = 'center';
-    ctx.fillText('This text is centered on the canvas', x, y);
-  };*/
+ 
+  var section_stats_element = document.querySelector("#section_stats_element")
+  section_stats_element.setAttribute("data-categorie",element)
 
-  $("#Chart-by-stat").remove(); // this is my <canvas> element
-  $("#graph-container").append('<canvas id="Chart-by-stat"></canvas>');
+  var categorie = document.querySelector("#listes__of__communes").value
+  document.querySelector("#commune__name").innerHTML = categorie
+  //$("#Chart-by-stat").remove(); // this is my <canvas> element
+  //$("#graph-container").append('<canvas id="Chart-by-stat"></canvas>');
 
   on();
   setTimeout(() => {
     function_btn_stats_population();
-    function_chart_stats_element([120000, 180000]);
+    ajax__stats.get__lists__of__commune()
+    get__statistique__otherwise__categorie()
+    
     off();
   }, time_set_interval);
 }
@@ -492,29 +493,7 @@ close_msg.addEventListener("click", () => {
 });
 /* fin  du code pour le message */
 /* CODE DE CHART */
-const ctx = document.getElementById("Chart-by-Commune");
 
-new Chart(ctx, {
-  type: "bar",
-  data: {
-    labels: ["Katuba", "Lubumbashi", "Kambeba", "Annexe", "Rwashi", "Orange"],
-    datasets: [
-      {
-        label: "# of Votes",
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1,
-        backgroundColor: ["#3098FF"],
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
 
 // AJAX POUR CREE UNE ZONE
 $(document).on("submit", "#zone__submit__from", function (e) {
@@ -586,6 +565,7 @@ $(document).on("submit", "#agent_zone_type_form", function (e) {
           data.message_systeme;
 
           ajax__agent.ajax_nombres_agent_section_element();
+          ajax__agent.get__lists__of__agents(data__agent__type)
 
       } else {
         // ON AFFICHE LA BOITE DE DIALOGE MESSAGE
@@ -603,3 +583,6 @@ $(document).on("submit", "#agent_zone_type_form", function (e) {
   });
 
 });
+
+
+

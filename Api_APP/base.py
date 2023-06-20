@@ -16,12 +16,12 @@ if auth_response.status_code == 200:
     headers = {
         "Authorization":f"Token {token}"
     }
-    endpoint = "http://127.0.0.1:8000/api/update_zone/43/"
+    endpoint = "http://127.0.0.1:8000/api/get_agents_user_info/0258/"
     #endpoint = "http://127.0.0.1:8000/api/post_create_personnes_res/"
     
-    #get_reponse = requests.get(endpoint,headers=headers)
+    get_reponse = requests.get(endpoint,headers=headers) 
     #get_reponse = requests.post(endpoint,headers=headers,json=data)
-    get_reponse = requests.put(endpoint,headers=headers,json=dat)
+    #get_reponse = requests.put(endpoint,headers=headers,json=dat)
 
     print(get_reponse.status_code)
     print(get_reponse.json())

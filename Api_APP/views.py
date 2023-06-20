@@ -190,3 +190,26 @@ def api_get_person_by_agent_controleur (request,pk,*args,**kwargs):
         return Response(serializer_class.data)
     else:
         return Response({"error": "Aucune personne trouvée pour cette zone"}, status=404) # Renvoyer un message d'erreur avec un code 404
+
+@api_view(["POST"])
+@authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def api__post__menage__for__creation (request,*args,**kwargs):
+    serializer = table_menager_Serializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+        print(serializer.data)
+        return Response(serializer.data)
+    return Response({"invalide":"not good data"},status=400)
+
+@api_view(["GET"])
+@authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def api_get__manage__id (request,pk,*args,**kwargs):
+    instance  = menager.objects.filter(numero=pk)
+    serializer_class = table_personnes_Serializer(instance,many=True)
+    if instance :
+        print(serializer_class.data)
+        return Response(serializer_class.data)
+    else:
+        return Response({"error": "Aucun manage trouvée pour cette zone"}, status=404)

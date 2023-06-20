@@ -250,7 +250,11 @@ header .message .close-msg {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  background-color: var(--primary-color);
+  color: white;
   gap: 10px;
+  padding: 20px;
 }
 @media (max-width: 768px) {
   .container-dashbord main .col-dashbord .home-page .home-box-1 {
@@ -262,17 +266,18 @@ header .message .close-msg {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-direction: column;
 }
-@media (max-width: 768px) {
-  .container-dashbord main .col-dashbord .home-page .home-box-2 {
-    flex-direction: column;
-  }
+.container-dashbord main .col-dashbord .home-page .home-box-2 .home-box-2-part-1 {
+  display: flex;
+  gap: 10px;
 }
 .container-dashbord main .col-dashbord .home-page .home-box-2 .home-box-2-part-1, .container-dashbord main .col-dashbord .home-page .home-box-2 .home-box-2-part-2 {
   flex-grow: 1;
 }
 .container-dashbord main .col-dashbord .home-page .home-box-2 .home-box-2-part-3 {
   flex-grow: 2;
+  display: flex;
 }
 .container-dashbord main .col-dashbord .home-page .home-box-2 .home-box-2-part-3 .homme, .container-dashbord main .col-dashbord .home-page .home-box-2 .home-box-2-part-3 .femme {
   display: flex;
@@ -792,7 +797,7 @@ header .message .close-msg {
 @media (max-width: 768px) {
   .modal-body-agent form label input,
   .modal-body-agent form label select {
-    width: 250px;
+    width: 100%;
   }
 }
 .modal-body-agent form div input {
