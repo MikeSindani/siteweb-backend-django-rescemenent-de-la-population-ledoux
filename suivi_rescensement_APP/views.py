@@ -8,8 +8,8 @@ from django.db.models import Q
 def get__nombres__zones__suivi(request):
     nombres__totals__des__zones  = Zones.objects.all().count()
     
+    
     nombres__totals__des__zones__valide  = Zones.objects.filter(etat=200).count()
-    nombres__totals__des__zones__valide  = Zones.objects.filter(etat__lt=200).count()
     context = {     
                   'nombres__totals__des__zones': nombres__totals__des__zones,
                   'nombres__totals__des__zones__valide': nombres__totals__des__zones__valide,  
@@ -26,7 +26,7 @@ def get_listes__of__zones__suivi(request,num_avis):
       lower = 0 #num_avis - 1 
     else : 
       upper = num_avis 
-      lower = 00000
+      lower = 0
     print(variable__listes__des__zones)
  
     if variable__listes__des__zones == False:

@@ -290,10 +290,13 @@ function get__statistique__otherwise__categorie(){
   section_stats_element.getAttribute("data-categorie")
   var commune = document.querySelector("#listes__of__communes").value
   document.querySelector("#commune__name").innerHTML = commune
-  ajax__stats.get__stats__of__commune__population()
-    ajax__stats.get__stats__lists__of__quarter(visible)
+  ajax__stats.get__stats__of__commune__population(commune)
+  ajax__stats.get__stats__lists__of__quarter(visible)
       
 }
+document.addEventListener("load", function() { 
+  get__statistique__otherwise__categorie()
+});
 // btn population
 function btn_stats_element(element) {
   //.style.fontWeight="normal"

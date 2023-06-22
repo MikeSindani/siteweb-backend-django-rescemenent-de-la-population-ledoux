@@ -172,6 +172,13 @@ class class__ajax__zone {
           //const donnee = new Array(data);
           var lists__zones = document.getElementById("lists__zones");
           lists__zones.innerHTML =""
+          lists__zones.innerHTML =`
+          <tr class="tr1">
+          <th>Nom de la Zone</th>
+          <th>Agent Rescenseur</th>
+          <th>Agent Controlleur</th>  
+          <th>Option</th>             
+        </tr>`
           //lists__zones.innerHTML =""
           data.forEach((el) => {
             lists__zones.innerHTML += `
@@ -294,7 +301,7 @@ class class__ajax__home {
         );
         //$('#btn-modal-follow-del').css("display","block");
         //$('#btn-modal-follow-add').css("display","none");
-
+      
         Population_total_lushi_section_stats.innerHTML =
           response.nombre_population_total;
         nbrs_Population.innerHTML = response.nombre_population_total;
@@ -302,8 +309,91 @@ class class__ajax__home {
         nbrs_migration.innerHTML = response.nbrs_migration;
         etat_civil.innerHTML = response.etat_civil;
 
+        document.getElementById("Alphabetisation_home_section").innerHTML=""
+        document.getElementById("Alphabetisation_home_section").innerHTML=`
+        <div><strong>Alphabetisation</strong>  </div>
+        <div><h3>${response.lire_et_comprendre}</h3></div>
+        `
+        document.getElementById("Analphabetisation_home_section").innerHTML=""
+        document.getElementById("Analphabetisation_home_section").innerHTML=`
+        <div><strong>Analphabetisation</strong>  </div>
+        <div><h3>${response.lire_et_comprendre__non}</h3></div>
+        `
+        document.getElementById("homme_alpha_home_section").innerHTML=""
+        document.getElementById("homme_alpha_home_section").innerHTML=`
+        <div class="M sexe">Homme</div>
+              <div class="stat-numbers">
+                    <span>
+                    <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
+                    ${response.lire_et_comprendre_homme_oui}
+                    </h3>
+                    <sup>(${response.lire_et_comprendre_homme_oui_pourcentage}%)</sup>
+            </span>
+        </div>
+        `
+        document.getElementById("homme_analpha_home_section").innerHTML=""
+        document.getElementById("homme_analpha_home_section").innerHTML=`
+        <div class="M sexe">Homme</div>
+              <div class="stat-numbers">
+                    <span>
+                    <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
+                    ${response.lire_et_comprendre_homme_oui}
+                    </h3>
+                    <sup>(${response.lire_et_comprendre_homme_oui_pourcentage}%)</sup>
+            </span>
+        </div>
+        `
+
+        document.getElementById("femme_alpha_home_section").innerHTML=""
+        document.getElementById("femme_alpha_home_section").innerHTML=`
+        <div class="F sexe">Femme</div>
+                <div class="stat-numbers">
+                  <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
+                  ${response.lire_et_comprendre_femme_oui}
+                  </h3>
+                  <sup>(---%)</sup>
+                </div>
+        `
+        document.getElementById("femme_analpha_home_section").innerHTML=""
+        document.getElementById("femme_analpha_home_section").innerHTML=`
+        <div class="F sexe">Femme</div>
+                <div class="stat-numbers">
+                  <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
+                  ${response.lire_et_comprendre_femme_oui}
+                  </h3>
+                  <sup>(---%)</sup>
+                </div>
+        `
+        document.getElementById("etat_civil_home_section").innerHTML=""
+        document.getElementById("etat_civil_home_section").innerHTML=`
+            <div>
+            <div  style="color: gray">Celibataire</div>
+            <div><h3>${response.nombre_etat_civil_celibataire}</h3></div>     
+          </div>
+          <div>
+            <div style="color: gray">Marié(e)</div>
+            <div><h3>${response.nombre_etat_civil_marie}</h3></div>     
+          </div>
+          <div>
+            <div style="color: gray">Union Libre</div>
+            <div><h3>${response.nombre_etat_civil_Union_Libre}</h3></div>     
+          </div>
+          <div>
+            <div style="color: gray">Veuf</div>
+            <div><h3>${response.nombre_etat_civil_veuve}</h3></div>     
+          </div>
+          <div>
+            <div style="color: gray">Divorcé</div>
+            <div><h3>${response.nombre_etat_civil_divorce}</h3></div>     
+          </div>
+          <div>
+            <div style="color: gray">Separé</div>
+            <div><h3>${response.nombre_etat_civil_separe}</h3></div>     
+          </div>
+        `
         //document.getElementById("message_systeme").textContent = data
-      },
+      
+    },
     });
   }
 
@@ -379,6 +469,15 @@ class class__ajax__agent {
             lists__agents__controleur.style.display = "table"
             lists__agents__rescenseur.style.display = "none"
             lists__agents__controleur.innerHTML =''
+            lists__agents__controleur.innerHTML =`
+            <tr class="tr1">
+            <th>N Agents</th>
+            <th>Nom Complet</th>
+            <th>Matricule</th>
+            <th>Mot de passe</th>
+            <th>Zone</th>
+            <th>Options</th>                           
+          </tr>`
             data.forEach((el) => {
                 lists__agents__controleur.innerHTML += `
                             <tr class="tr2">
@@ -396,6 +495,15 @@ class class__ajax__agent {
             lists__agents__controleur.style.display = "none"
             lists__agents__rescenseur.style.display = "table"
             lists__agents__rescenseur.innerHTML =''
+            lists__agents__rescenseur.innerHTML =`
+            <tr class="tr1">
+            <th>N Agents</th>
+            <th>Nom Complet</th>
+            <th>Matricule</th>
+            <th>Mot de passe</th>
+            <th>Zone</th>
+            <th>Options</th>                           
+          </tr>`
             data.forEach((el) => {
                 lists__agents__rescenseur.innerHTML += `
                             <tr class="tr2">
@@ -522,9 +630,21 @@ class class__ajax__suivi__de__resecensement{
             //const donnee = new Array(data);
             var lists__zones = document.getElementById("listes_of_suivi_by__zone");
             lists__zones.innerHTML =""
-            //lists__zones.innerHTML =""
+            lists__zones.innerHTML =`<tr class="tr">
+            <th colspan="6" ><h2>Par Zones</h2></th>
+              </tr>
+              <tr class="tr1">
+                <th>Nom de Zones</th>
+                <th>Agent Resenceur</th>
+                <th>Agent Controleur</th>
+                <th>Status</th>
+                <th>Progression</th>
+                <th>Etat</th>                           
+              </tr>`
+            
             var etat__termine ='Termine' ;
             var etat__en__cour = 'en cours'
+
 
             data.forEach((el) => {
               lists__zones.innerHTML += `'
@@ -558,7 +678,7 @@ class class__ajax__suivi__de__resecensement{
   
 }
 class class__ajax__statistique {
-      get__stats__of__commune__population() {
+      get__stats__of__commune__population(commune) {
         //var catid;
         //id = 
         var categorie = $("#section_stats_element").attr("data-categorie");
@@ -699,7 +819,7 @@ class class__ajax__statistique {
               element_stats.innerHTML = ` 
               <div class="element-stats-box-2-part-1">
               <div class="total">
-                  <div><img src="{% static 'img/person-team-svgrepo-com.svg' %}" alt="" height="100"
+                  <div><img src="{% 'static/img/person-team-svgrepo-com.svg' %}" alt="" height="100"
                 width="100"></div>
                   <div>
                     <div class="Ttl">Population total de la ${commune}</div>
@@ -726,7 +846,7 @@ class class__ajax__statistique {
                 width="100"></span>
                   <span>
                       <div class="F sexe">Marié</div>
-                      <div class="stat-numbers"><h3 id="stat__population__total__femme">${response.Statistique__by__aera__Marié}</h3></div>
+                      <div class="stat-numbers"><h3 id="stat__population__total__femme">${response.Statistique__by__aera__Marie}</h3></div>
                   </span>   
               </div>
               <div class="femme"> 
@@ -734,7 +854,7 @@ class class__ajax__statistique {
                 width="100"></span>
                   <span>
                       <div class="F sexe">Divorcé</div>
-                      <div class="stat-numbers"><h3 id="stat__population__total__femme">${response.Statistique__by__aera__Divorcé}</h3></div>
+                      <div class="stat-numbers"><h3 id="stat__population__total__femme">${response.Statistique__by__aera__Divorce}</h3></div>
                   </span>   
               </div>
               <div class="femme"> 
@@ -750,7 +870,7 @@ class class__ajax__statistique {
                 width="100"></span>
                   <span>
                       <div class="F sexe">Separé</div>
-                      <div class="stat-numbers"><h3 id="stat__population__total__femme">${response.Statistique__by__aera__Separé}</h3></div>
+                      <div class="stat-numbers"><h3 id="stat__population__total__femme">${response.Statistique__by__aera__Separe}</h3></div>
                   </span>   
               </div>
               <div class="femme"> 
@@ -802,9 +922,9 @@ class class__ajax__statistique {
                   listes__of__communes__population.innerHTML += `
                               <tr class="tr2">
                                   <td><h5><strong>${el.name__aera}</strong></h5></td>
-                                  <td><h3>${el.Statistique__by__aera__homme}</h3></td>
-                                  <td><h3>${el.Statistique__by__aera__femme}</h3></td>
-                                  <td><h3>${ el.Statistique__by__aera}</h3></td>
+                                  <td><h5>${el.Statistique__by__aera__homme}</h5></td>
+                                  <td><h5>${el.Statistique__by__aera__femme}</h5></td>
+                                  <td><h5>${ el.Statistique__by__aera}</h5></td>
                               </tr> 
                               `;
                 });}
@@ -827,9 +947,9 @@ class class__ajax__statistique {
                     listes__of__communes__population.innerHTML += `
                                 <tr class="tr2">
                                     <td><h5><strong>${el.name__aera}</strong></h5></td>
-                                    <td><h3>${el.Statistique__by__aera__Alphabetisation}</h3></td>
-                                    <td><h3>${el.Statistique__by__aera__Analphabetisation}</h3></td>
-                                    <td><h3>${ el.Statistique__by__aera}</h3></td>
+                                    <td><h5>${el.Statistique__by__aera__Alphabetisation}</h5></td>
+                                    <td><h5>${el.Statistique__by__aera__Analphabetisation}</h5></td>
+                                    <td><h5>${ el.Statistique__by__aera}</h5></td>
                                 </tr> 
                                 `;
                   });}
@@ -852,9 +972,9 @@ class class__ajax__statistique {
                   listes__of__communes__population.innerHTML += `
                               <tr class="tr2">
                                   <td><h5><strong>${el.name__aera}</strong></h5></td>
-                                  <td><h3>${el.Statistique__by__aera__nationaux}</h3></td>
-                                  <td><h3>${el.Statistique__by__aera__etrangere}</h3></td>
-                                  <td><h3>${ el.Statistique__by__aera}</h3></td>
+                                  <td><h5>${el.Statistique__by__aera__nationaux}</h5></td>
+                                  <td><h5>${el.Statistique__by__aera__etrangere}</h5></td>
+                                  <td><h5>${ el.Statistique__by__aera}</h5></td>
                               </tr> 
                               `;
                 });}
@@ -881,13 +1001,13 @@ class class__ajax__statistique {
                     listes__of__communes__population.innerHTML += `
                                 <tr class="tr2">
                                     <td><h5><strong>${el.name__aera}</strong></h5></td>
-                                    <td><h3>${el.Statistique__by__aera__Celibataire}</h3></td>
-                                    <td><h3>${el.Statistique__by__aera__Marié}</h3></td>
-                                    <td><h3>${ el.Statistique__by__aera__Divorcé}</h3></td>
-                                    <td><h3>${ el.Statistique__by__aera__Veuf}</h3></td>
-                                    <td><h3>${ el.Statistique__by__aera__Separé}</h3></td>
-                                    <td><h3>${ el.Statistique__by__aera__Union_Libre}</h3></td> 
-                                    <td><h3>${ el.Statistique__by__aera}</h3></td> 
+                                    <td><h5>${el.Statistique__by__aera__Celibataire}</h5></td>
+                                    <td><h5>${el.Statistique__by__aera__Marié}</h5></td>
+                                    <td><h5>${ el.Statistique__by__aera__Divorcé}</h5></td>
+                                    <td><h5>${ el.Statistique__by__aera__Veuf}</h5></td>
+                                    <td><h5>${ el.Statistique__by__aera__Separé}</h5></td>
+                                    <td><h5>${ el.Statistique__by__aera__Union_Libre}</h5></td> 
+                                    <td><h5>${ el.Statistique__by__aera}</h5></td> 
                                 </tr> 
                                 `;
                   });}

@@ -1,11 +1,12 @@
+{% load static %}
 <div id="section_stats" class="stats-page box-page " style="display: none;">
     <!-- dubut home-box-1 -->
         <div class="stats-box-1 box">
-            <div class="stats-box-1-part-1">
-                <img src="img/person-team-svgrepo-com.svg" alt="" height="35" width="35">
+            <div class="stats-box-1-part-1"> 
+                <img src="{% static 'img/person-team-svgrepo-com.svg' %}" alt="" height="35" width="35">
             </div>
             <div class="stats-box-1-part-2"><h2>Population total de Lubumbashi:</h2></div>
-            <div class="stats-box-1-part-3"><h2 id ="Population_total_lushi_section_stats">-------</h2></div>
+            <div class="stats-box-1-part-3"><h3 id ="Population_total_lushi_section_stats">-------</h3></div>
         </div>
         <!--POPULATION-->
         <div onclick="btn_stats_element('Population')" id="btn_stats_population_2" class="btn_stats_population stats-box-cat-1 box">
