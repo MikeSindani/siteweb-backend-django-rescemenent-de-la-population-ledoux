@@ -59,8 +59,10 @@ class menager (models.Model):
     commune = models.CharField(max_length=100,null=True)
     quartier = models.CharField(max_length=100,null=True)
     avenue = models.CharField(max_length=100,null=True)
-    ville = models.CharField(max_length=100,null=True)
+    numero_parcelle = models.CharField(max_length=100,null=True)
     zones = models.ForeignKey("Zones",null=True,on_delete=models.SET_NULL)
+    def __str__(self):
+       return "{} {}".format(self.zone, self.commune)
 class Personnes(models.Model):
     SEXE_CHOICES = (
         ('M', 'Masculin'),
@@ -78,6 +80,7 @@ class Personnes(models.Model):
     activite = models.CharField(max_length=100,null=True)
     #-------------------------------------------------------------
     nombre_ocupant = models.CharField(max_length=100,null=True)
+    numero_parcelle = models.CharField(max_length=100,null=True)
     numero = models.CharField(max_length=100,null=True)
     province = models.CharField(max_length=100,null=True)
     commune = models.CharField(max_length=100,null=True)
@@ -94,7 +97,6 @@ class Personnes(models.Model):
     classe = models.CharField(max_length=100,null=True) 
     comprendreLire = models.CharField(max_length=100,null=True)
     #----------------------------------------------------------------
-    nombre_ocupant = models.CharField(max_length=100,null=True)
     nombre = models.CharField(max_length=100,null=True)
     situatioResidence = models.CharField(max_length=100,null=True)
     indexDataOcupant = models.CharField(max_length=100,null=True)

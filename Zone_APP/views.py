@@ -11,7 +11,7 @@ def nom_de_la_zone(variable__nombres__totals__des__zones):
      return  "ZD-"
 # Create your views here.
 def verifier__nom__zones(request):
-      variable__nombres__totals__des__zones  = Zones.objects.all().count()
+      variable__nombres__totals__des__zones  = Zones.objects.latest('id').id
       variable__nombres__totals__des__zones = variable__nombres__totals__des__zones + 1
       variable__nom__de__la__zones = nom_de_la_zone(variable__nombres__totals__des__zones)+str(variable__nombres__totals__des__zones)   
      
@@ -27,7 +27,7 @@ def creation__zones(request):
         nom__de__zone = request.POST['nom_de_zone']
         print('+'*20)
         print(nom__de__zone)
-        variable__nombres__totals__des__zones  = Zones.objects.all().count()
+        variable__nombres__totals__des__zones  = Zones.objects.latest('id').id
         variable__nombres__totals__des__zones = variable__nombres__totals__des__zones + 1
         variable__nom__de__la__zones = nom_de_la_zone(variable__nombres__totals__des__zones)+str(variable__nombres__totals__des__zones) 
         z = Zones(nom=variable__nom__de__la__zones,etat=0)

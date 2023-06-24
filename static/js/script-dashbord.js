@@ -14,10 +14,42 @@ function on() {
 function off() {
   document.getElementById("overlay").style.display = "none";
 }
-/* ce code est pour le temps de slash sreen  */
+/* overture de la barre de chargement */ 
 
+function loader__on(id__name){
+  document.getElementById("loader__bar__"+id__name).style.display = "block";
+
+}
+function loader__off(id__name){
+  document.getElementById("loader__bar__"+id__name).style.display = "none";
+
+}
+function box__message(message,color){
+  // ON AFFICHE LA BOITE DE DIALOGE MESSAGE
+  document.getElementById("popup-message_systeme").style.backgroundColor =
+  color;
+document.getElementById("message_systeme").textContent =
+  message;
+document.getElementById("popup-message_systeme").style.display = "flex";
+}
+
+// Fonction qui vérifie si la connexion internet est présente
+
+window.addEventListener("offline", (event) => {
+  console.log("La connexion internet est absente.");
+  box__message("La connexion internet est absente.","var(--rouge)");
+
+});
+
+window.addEventListener("online", (event) => {
+  console.log("La connexion internet est présente.");
+  box__message("La connexion internet est présente.","var(--bleu)");
+
+});
+
+/* ce code est pour le temps de slash sreen  */
 setTimeout(() => {
-  
+ 
   document.getElementById("slash-screen").style.display = "none";
   document.getElementById("main_div").style.visibility = "visible"; 
   
@@ -438,9 +470,9 @@ btn__load__section__zones.addEventListener("click", () => {
   //spinnerBox.classList.remove('not-visible')
   //chargementBox.textContent="CHARGEMENT DES COMMENTAIRES EN COURS ... "
   visible += 3;
-  on();
+  loader__on("zone")
   ajax__zone.get__lists__of__zones();
-  off();
+  loader__off("zone")
 });
 
 // bouton pour passe a la zone
@@ -475,14 +507,14 @@ const btn__load__section__agent__element = document.querySelector(
   "#btn__load__section__agent__element"
 );
 btn__load__section__agent__element.addEventListener("click", () => {
-  on();
+  loader__on("agent")
   visible += 3;
     var data_modal_agent = document.getElementById("modal-agent");
     data_modal_agent.getAttribute("data-type-agent-click");
     var element = data_modal_agent
     ajax__agent.ajax_nombres_agent_section_element(element);
     ajax__agent.get__lists__of__agents(element)
-  off();
+    loader__off("agent")
 });
 /* fin de side bar menu hamberger */
 /* ####################################################################*/
@@ -585,6 +617,19 @@ $(document).on("submit", "#agent_zone_type_form", function (e) {
     },
   });
 
+});
+
+const btn__load__section__suivi__zone = document.querySelector(
+  "#btn__load__section__suivi__zone"
+);
+btn__load__section__suivi__zone.addEventListener("click", () => {
+  loader__on("suivi")
+  visible += 3;
+    
+    /*data_modal_agent.getAttribute("data-type-agent-click");
+    var element = data_modal_agent*/
+    ajax__suivi__de_res.get__lists__of__zones(visible)
+    loader__off("suivi")
 });
 
 

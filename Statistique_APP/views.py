@@ -63,8 +63,8 @@ def stats_home_section(request):
 def agent_home_section(request):
       nombres__agent__total = UserAgent.objects.filter(type_agent__name="Agent_rescenseur") | UserAgent.objects.filter(type_agent__name='Agent_controleur')#2 for rescenseur and 4 for controlleur
       nombres__agent__total = nombres__agent__total.count()
-      nombres__agent__rescenseur__total = UserAgent.objects.filter(type_agent__name='Agent_controleur').count()
-      nombres__agent__controlleur__total = UserAgent.objects.filter(type_agent__name="Agent_rescenseur").count()
+      nombres__agent__rescenseur__total = UserAgent.objects.filter(type_agent__name='Agent_rescenseur').count()
+      nombres__agent__controlleur__total = UserAgent.objects.filter(type_agent__name="Agent_controleur").count()
       
 
       context = {

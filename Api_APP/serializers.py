@@ -28,6 +28,7 @@ class table_personnes_Serializer(serializers.ModelSerializer):
         "situatioResidence",
         "numero",
         "nombre_ocupant",
+        "numero_parcelle",
         "menager",
         "zones",
         'indexDataOcupant',

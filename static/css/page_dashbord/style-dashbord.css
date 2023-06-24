@@ -647,12 +647,13 @@ header .message .close-msg {
 
 #loader {
   width: 8px;
-  height: 48px;
+  margin: auto;
+  height: 40px;
   display: block;
   margin: auto;
-  left: -20px;
+  left: 0px;
   position: relative;
-  border-radius: 4px;
+  border-radius: 6px;
   box-sizing: border-box;
   animation: animloader 1s linear infinite alternate;
 }
