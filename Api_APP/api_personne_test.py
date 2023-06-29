@@ -6,15 +6,15 @@ auth_response = requests.post(endpoint_auth,json={"username":"0258","password":"
 #get_reponse = requests.get(endpoint)
 #endpoint = "https://httpbin.org/status/200/"
 
-'''data = {
-  'nom': 'kawama', 
-  'prenom': 'leatitia',
-   'postnom': 'kahulume',
-    'sexe': 'F', 
+data = {
+  'nom': "sindnai", 
+  'prenom': 'mike',
+   'postnom': 'mwebe sind',
+    'sexe': 'M', 
     'date_de_naissance': '2022-03-09', 
     'province': 'Katanga', 
-    'commune': 'Kenya',
-     'quartier': 'Luapula', 
+    'commune': 'Rwashi',
+     'quartier': 'Matoleo', 
      'avenue': 'apotre johnathan ilunga', 
      'nationalite': 'congolaise', 
      'niveau_d_etude': 'liencee',
@@ -23,20 +23,20 @@ auth_response = requests.post(endpoint_auth,json={"username":"0258","password":"
      'etat_civil': 'marie', 
      'numero_parcelle': '7',
       'menage': '1', 
-      'zones': 5,
+      'zones': 2,
       "menager":1,
-}'''
-data = {
+}
+'''data = {
     'province': 'Katanga', 
     'commune': "Rwashi",
      'quartier': 'Matoleo', 
      'avenue': 'apotre johnathan ilunga',
-     'numero_parcelle': 65,
-      'numero': 5, 
-      'zones': 12,
-      "nombre_ocupant":12,
+     'numero_parcelle': '7',
+      'numero': 3, 
+      'zones': 5,
+      "nombre_ocupant":10,
      
-}
+}'''
 dat = {'etat':1}
 if auth_response.status_code == 200:
     token = auth_response.json()["token"]
@@ -45,8 +45,8 @@ if auth_response.status_code == 200:
         "Authorization":f"Token {token}"
     }
     #endpoint = "http://127.0.0.1:8000/api/get_agents_user_info/0258/"
-    #endpoint = "http://127.0.0.1:8000/api/post_create_personnes_res/"
-    endpoint = "http://127.0.0.1:8000/api/post__menage__for__creation/"
+    endpoint = "http://127.0.0.1:8000/api/post_create_personnes_res/"
+    #endpoint = "http://127.0.0.1:8000/api/post__menage__for__creation/"
     #endpoint = "http://127.0.0.1:8000/api/get__manage__id/1/"
     
     #get_reponse = requests.get(endpoint,headers=headers) 

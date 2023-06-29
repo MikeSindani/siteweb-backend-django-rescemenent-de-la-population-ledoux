@@ -84,7 +84,7 @@ class table_menager_Serializer(serializers.ModelSerializer):
         'commune',
         'quartier',
         'avenue',
-        'ville',
         'zones',
+        "type_menage",
         ]
        

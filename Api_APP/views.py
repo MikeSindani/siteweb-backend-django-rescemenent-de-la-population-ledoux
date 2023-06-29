@@ -195,6 +195,12 @@ def api_get_person_by_agent_controleur (request,pk,*args,**kwargs):
 @authentication_classes([SessionAuthentication, BasicAuthentication,TokenAuthentication])
 @permission_classes([permissions.IsAuthenticated])
 def api__post__menage__for__creation (request,*args,**kwargs):
+    '''print("+"*100)
+    print("api__post__menage__for__creation")
+    print("+"*100)
+    t  = request
+    print(t.zones)
+    print("+"*100)'''
     serializer = table_menager_Serializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save()
@@ -207,7 +213,7 @@ def api__post__menage__for__creation (request,*args,**kwargs):
 @permission_classes([permissions.IsAuthenticated])
 def api_get__manage__id (request,pk,*args,**kwargs):
     instance  = menager.objects.filter(numero=pk)
-    serializer_class = table_personnes_Serializer(instance,many=True)
+    serializer_class = table_menager_Serializer(instance,many=True)
     if instance :
         print(serializer_class.data)
         return Response(serializer_class.data)

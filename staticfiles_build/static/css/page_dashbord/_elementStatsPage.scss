@@ -71,7 +71,6 @@
 }
 table{
     width: 100%;
-    border-spacing:0 20px;
 }
 th, td {
     padding: 15px;
@@ -82,7 +81,7 @@ th, td {
     background-color: var(--third-color);
     border-radius: var(--border-raduis); 
     position: relative;
-    top: 20px;
+    top: 10px;
     padding: 5px;
 }
 .tr1{

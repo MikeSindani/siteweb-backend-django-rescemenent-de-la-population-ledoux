@@ -2,14 +2,15 @@
 class LubumbashiArea:
    def funct__list__of__commune():
       return [
-            {"nom_commune":"Lubumbashi"},
-            {"nom_commune":"Annexe"},
-            {"nom_commune":"Katuba"},
-            {"nom_commune":"Kenya"},
-            {"nom_commune":"Kampemba"},
-            {"nom_commune":"Kamalondo"},
-            {"nom_commune":"Rwashi"},
+         "Lubumbashi",
+         "Annexe",
+         "Katuba",
+         "Kenya",
+         "Kampemba",
+         "Kamalondo",
+         "Rwashi",
       ]
+   
    def funct__list__of__aera(commune):
       if commune == "Lubumbashi":
          return [

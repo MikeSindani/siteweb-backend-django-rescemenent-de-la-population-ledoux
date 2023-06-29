@@ -53,16 +53,17 @@ class Statistique(models.Model):
     
 
 class menager (models.Model):
-    nombre_ocupant = models.CharField(max_length=100,null=True)
-    numero = models.CharField(max_length=100,null=True)
+    nombre_ocupant = models.IntegerField(null=True)
+    numero = models.IntegerField(null=True)
     province = models.CharField(max_length=100,null=True)
     commune = models.CharField(max_length=100,null=True)
     quartier = models.CharField(max_length=100,null=True)
     avenue = models.CharField(max_length=100,null=True)
     numero_parcelle = models.CharField(max_length=100,null=True)
+    type_menage = models.CharField(max_length=100,null=True)
     zones = models.ForeignKey("Zones",null=True,on_delete=models.SET_NULL)
     def __str__(self):
-       return "{} {}".format(self.zone, self.commune)
+       return "{} {} {}".format(self.commune,self.zones, self.commune)
 class Personnes(models.Model):
     SEXE_CHOICES = (
         ('M', 'Masculin'),

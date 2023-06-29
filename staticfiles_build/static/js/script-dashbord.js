@@ -35,23 +35,24 @@ document.getElementById("popup-message_systeme").style.display = "flex";
 
 // Fonction qui vérifie si la connexion internet est présente
 
-window.addEventListener("offline", (event) => {
-  console.log("La connexion internet est absente.");
-  box__message("La connexion internet est absente.","var(--rouge)");
 
-});
-
-window.addEventListener("online", (event) => {
-  console.log("La connexion internet est présente.");
-  box__message("La connexion internet est présente.","var(--bleu)");
-
-});
 
 /* ce code est pour le temps de slash sreen  */
 setTimeout(() => {
  
   document.getElementById("slash-screen").style.display = "none";
-  document.getElementById("main_div").style.visibility = "visible"; 
+  document.getElementById("main_div").style.visibility = "visible";
+  window.addEventListener("offline", (event) => {
+    console.log("La connexion internet est absente.");
+    box__message("La connexion internet est absente.","var(--rouge)");
+  
+  });
+  
+  window.addEventListener("online", (event) => {
+    console.log("La connexion internet est présente.");
+    box__message("La connexion internet est présente.","var(--bleu)");
+  
+  }); 
   
 }, time_set_interval);
 

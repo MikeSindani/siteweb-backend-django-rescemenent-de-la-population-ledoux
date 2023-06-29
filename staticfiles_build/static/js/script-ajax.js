@@ -114,7 +114,13 @@ var femme_chart = new Chart(ctx3, femme_data);
     },5000)
     
 });*/
+function is__null__and__undefine(valeur){
+  if(valeur == null)
+   return "Pas d'agent"
+  else 
+  return valeur
 
+ }
 // CLASS QUI REGROUPE FONCTIONNE AJAX ZONE
 class class__ajax__zone {
       /*constructor(name, year) {
@@ -184,8 +190,8 @@ class class__ajax__zone {
                 lists__zones.innerHTML += `
                             <tr class="tr2">
                                   <td>${el.nom}</td>
-                                  <td>${el.agent_rescenseur__username}</td>     
-                                  <td>${el.agent_controleur__username}</td>
+                                  <td>${is__null__and__undefine(el.agent_rescenseur__username)}</td>     
+                                  <td>${is__null__and__undefine(el.agent_controleur__username)}</td>
                                   
                             </tr>  
                             `;
@@ -210,7 +216,9 @@ class class__ajax__zone {
 }
 
 // CLASS QUI REGROUPE FONCTIONNE AJAX HOME
+
 class class__ajax__home {
+
     ajax_home_section() {
       //var catid;
       //id = $(this).attr("data-id");
@@ -235,6 +243,34 @@ class class__ajax__home {
 
           nombre_femme.setAttribute("data-target", response.nombre_femme);
           nombre_femme.innerHTML = response.nombre_femme;
+
+          document.getElementById("nombre_homme_home_section").innerHTML=""
+          document.getElementById("nombre_homme_home_section").innerHTML=`
+          
+          <div class="M sexe">Homme</div>
+                <div class="stat-numbers" >
+                    <span >
+                        <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
+                            ${response.nombre_homme}
+                          </h3>
+                          <sup>(${(response.nombre_homme/response.nombre_population_total)*100} %)</sup>
+                    </span>
+                  
+                </div>
+          
+          `
+          document.getElementById("nombre_femme_home_section").innerHTML=""
+          document.getElementById("nombre_femme_home_section").innerHTML=`
+          
+          <div class="F sexe">Femme</div>
+          <div class="stat-numbers">
+            <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
+            ${response.nombre_femme}
+            </h3>
+            <sup>( ${(response.nombre_femme/response.nombre_population_total)*100} %)</sup>
+          </div>
+          
+          `
 
           //homme_chart.destroy();
           //femme_chart.destroy();
@@ -314,6 +350,8 @@ class class__ajax__home {
           <div><strong>Alphabetisation</strong>  </div>
           <div><h3>${response.lire_et_comprendre}</h3></div>
           `
+          
+         
           document.getElementById("Analphabetisation_home_section").innerHTML=""
           document.getElementById("Analphabetisation_home_section").innerHTML=`
           <div><strong>Analphabetisation</strong>  </div>
@@ -337,9 +375,9 @@ class class__ajax__home {
                 <div class="stat-numbers">
                       <span>
                       <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
-                      ${response.lire_et_comprendre_homme_oui}
+                      ${response.lire_et_comprendre_homme_non}
                       </h3>
-                      <sup>(${response.lire_et_comprendre_homme_oui_pourcentage}%)</sup>
+                      <sup>( ${(response.lire_et_comprendre_homme_non/response.nombre_population_total)*100} %)</sup>
               </span>
           </div>
           `
@@ -351,7 +389,7 @@ class class__ajax__home {
                     <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
                     ${response.lire_et_comprendre_femme_oui}
                     </h3>
-                    <sup>(---%)</sup>
+                    <sup>( ${(response.lire_et_comprendre_femme_oui/response.nombre_population_total)*100} %)</sup>
                   </div>
           `
           document.getElementById("femme_analpha_home_section").innerHTML=""
@@ -359,39 +397,123 @@ class class__ajax__home {
           <div class="F sexe">Femme</div>
                   <div class="stat-numbers">
                     <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
-                    ${response.lire_et_comprendre_femme_oui}
+                    ${response.lire_et_comprendre_femme_non}
                     </h3>
-                    <sup>(---%)</sup>
+                    <sup>( ${(response.lire_et_comprendre_femme_non/response.nombre_population_total)*100} %)</sup>
                   </div>
           `
           document.getElementById("etat_civil_home_section").innerHTML=""
           document.getElementById("etat_civil_home_section").innerHTML=`
               <div>
               <div  style="color: gray">Celibataire</div>
-              <div><h3>${response.nombre_etat_civil_celibataire}</h3></div>     
+              <div>
+              <h3>${response.nombre_etat_civil_celibataire}</h3>
+              <sup>( ${(response.nombre_etat_civil_celibataire/response.nombre_population_total)*100} %)</sup>
+              </div>     
             </div>
             <div>
               <div style="color: gray">Marié(e)</div>
-              <div><h3>${response.nombre_etat_civil_marie}</h3></div>     
+              <div><h3>${response.nombre_etat_civil_marie}</h3></div> 
+              <sup>( ${(response.nombre_etat_civil_marie/response.nombre_population_total)*100} %)</sup>    
             </div>
             <div>
               <div style="color: gray">Union Libre</div>
-              <div><h3>${response.nombre_etat_civil_Union_Libre}</h3></div>     
+              <div><h3>${response.nombre_etat_civil_Union_Libre}</h3></div>  
+              <span>( ${(response.nombre_etat_civil_Union_Libre/response.nombre_population_total)*100} %)</span>   
             </div>
             <div>
               <div style="color: gray">Veuf</div>
-              <div><h3>${response.nombre_etat_civil_veuve}</h3></div>     
+              <div><h3>${response.nombre_etat_civil_veuve}</h3></div>  
+              <span>( ${(response.nombre_etat_civil_veuve/response.nombre_population_total)*100} %)</span>      
             </div>
             <div>
               <div style="color: gray">Divorcé</div>
-              <div><h3>${response.nombre_etat_civil_divorce}</h3></div>     
+              <div><h3>${response.nombre_etat_civil_divorce}</h3></div>
+              <span>( ${(response.nombre_etat_civil_divorce/response.nombre_population_total)*100} %)</span>      
             </div>
             <div>
               <div style="color: gray">Separé</div>
-              <div><h3>${response.nombre_etat_civil_separe}</h3></div>     
+              <div><h3>${response.nombre_etat_civil_separe}</h3></div>
+              <span>( ${(response.nombre_etat_civil_separe/response.nombre_population_total)*100} %)</span>      
             </div>
           `
+          document.getElementById("Repartition_congolaise_non_home_section").innerHTML=""
+          document.getElementById("Repartition_congolaise_non_home_section").innerHTML=`
+          <div>
+            <div  style="color: gray">Population Congolaise</div>
+            <div>
+            <h3>${response.Statistique__nationaux}</h3>
+            <span>( ${(response.Statistique__nationaux/response.nombre_population_total)*100} %)</span>
+            </div>     
+          </div>
+          <div>
+            <div style="color: gray">Population Etrangere</div>
+            <div>
+              <h3>${response.Statistique__etrangere}</h3>
+              <span>( ${(response.Statistique__etrangere/response.nombre_population_total)*100} %)</span>
+            </div>     
+          </div>
+          `
+          
+          document.getElementById("effective_des_menages").innerHTML=""
+          document.getElementById("effective_des_menages").innerHTML=`
+            <span><span>Effective des menages admins:</span>${response.Effective__des__menages__admins}<span></span></span>
+            <span><span>Taille moyens des menages:</span>${response.Taille__moyens__des__menages}<span></span></span>
+          `
+
+          
+
+          document.getElementById("Activite_home_section").innerHTML=""
+          document.getElementById("Activite_home_section").innerHTML=`
+          <div>
+          <div  style="color: gray">Travailleur Salarie</div>
+          <div><h3>${(response.Statistique__by__aera__travail__oui/response.nombre_population_total)*100}%</h3></div>     
+        </div>
+        <div>
+          <div style="color: gray">Travailleur Non Salarie</div>
+          <div><h3>${(response.Statistique__by__aera__travail__non/response.nombre_population_total)*100} %</h3></div>     
+        </div>
+        <div>
+          <div style="color: gray">Taux de chomage</div>
+          <div><h3>${(response.Statistique__by__aera__chomeur/response.nombre_population_total)*100}%</h3></div>      
+        </div>
+        <div>
+          <div style="color: gray">Retraite</div>
+          <div><h3>${(response.Statistique__by__aera__Retraite/response.nombre_population_total)*100}%</h3></div>     
+        </div>
+          `
           //document.getElementById("message_systeme").textContent = data
+          var data = response.list__result;
+          var listes__of__communes__population = document.getElementById("listes__of__communes__population_home_section");
+            console.log(data);
+
+              listes__of__communes__population.style.display ="table"
+              listes__of__communes__population.innerHTML =""
+              listes__of__communes__population.innerHTML =`
+                                        <tr class="tr" >
+                                            <th colspan="4" >
+                                            <h4  style="color:gray;border-bottom: 1px solid gray;" >
+                                            Repartition Par commune
+                                            </h4>
+                                            </th>
+                                        </tr>
+                                        <tr class="tr1" width: 100%;">
+                                          <th>Nom de commune</th>
+                                          <th>Homme</th>
+                                          <th>Femme</th>
+                                          <th>Totals Populations</th>
+                                        </tr>`
+                
+                data.forEach((el) => {
+                  listes__of__communes__population.innerHTML += `
+                              <tr class="tr2">
+                                  <td><h5><strong>${el.name__aera}</strong></h5></td>
+                                  <td><h4>${el.Statistique__by__aera__homme}</h4><span>( ${(el.Statistique__by__aera__homme/el.Statistique__by__aera)*100} %)</span></td>
+                                  <td><h4>${el.Statistique__by__aera__femme}</h4><span>( ${(el.Statistique__by__aera__femme/el.Statistique__by__aera)*100} %)</span></td>
+                                  <td><h4>${ el.Statistique__by__aera}</h4><span>( 100 %)</span></td>
+                              </tr> 
+                              `;
+                });
         
       },
       });
@@ -630,7 +752,8 @@ class class__ajax__suivi__de__resecensement{
             //const donnee = new Array(data);
             var lists__zones = document.getElementById("listes_of_suivi_by__zone");
             lists__zones.innerHTML =""
-            lists__zones.innerHTML =`<tr class="tr">
+            lists__zones.innerHTML =`
+            <tr class="tr">
             <th colspan="6" ><h2>Par Zones</h2></th>
               </tr>
               <tr class="tr1">
@@ -650,11 +773,11 @@ class class__ajax__suivi__de__resecensement{
               lists__zones.innerHTML += `'
                               <tr class="tr2">
                               <td> <strong>${el.nom}</strong></td>
-                              <td>${el.agent_rescenseur__username}</td>
-                              <td>${el.agent_controleur__username}</td>
+                              <td>${is__null__and__undefine(el.agent_rescenseur__username)}</td>
+                              <td>${is__null__and__undefine(el.agent_controleur__username)}</td>
                               <td>${ el.etat==200?etat__termine : etat__en__cour}</td>
-                              <td><progress id="file" value="${el.etat}" max="${ response.nombres__totals__par__zones }"></progress></td>
-                              <td>${el.etat}/${ response.nombres__totals__par__zones }</td>
+                              <td><progress id="file" value="${el.etat}" max="${ response.nombres__totals__par__zones}"></progress></td>
+                              <td>${el.etat}/${ response.nombres__totals__par__zones}(${(el.etat*response.nombres__totals__par__zones)/100}%)</td>
                           </tr> 
                           `;
             });

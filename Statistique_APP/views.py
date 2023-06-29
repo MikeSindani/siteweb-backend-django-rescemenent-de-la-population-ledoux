@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from BD_APP.models import *
 from django.db.models import Q
 from .listOfArea import LubumbashiArea
+from django.db.models import Avg
 
      
 def home_section(request):
@@ -25,20 +26,43 @@ def stats_home_section(request):
       lire_et_comprendre = Personnes.objects.filter(comprendreLire__icontains='Facilement').count()
       lire_et_comprendre__non = Personnes.objects.exclude(comprendreLire__icontains='Facilement').count()
       lire_et_comprendre_homme_oui = Personnes.objects.filter(comprendreLire__icontains="Facilement",sexe='M').count()
-      lire_et_comprendre_homme_oui_pourcentage = (lire_et_comprendre_homme_oui/lire_et_comprendre)*100
       lire_et_comprendre_homme_non = Personnes.objects.exclude(comprendreLire__icontains="Facilement",sexe='M').count()
-      lire_et_comprendre_homme_non_pourcentage = (lire_et_comprendre_homme_non/lire_et_comprendre)*100
       lire_et_comprendre_femme_oui = Personnes.objects.filter(comprendreLire__icontains="Facilement",sexe='F').count()
-      lire_et_comprendre_femme_oui_pourcentage = (lire_et_comprendre_femme_oui/lire_et_comprendre)*100
       lire_et_comprendre_femme_non = Personnes.objects.exclude(comprendreLire__icontains="Facilement",sexe='F').count()
-      lire_et_comprendre_femme_non_pourcentage = (lire_et_comprendre_femme_non/lire_et_comprendre)*100
-
+      #statistique generales pour les etat civil 
       nombre_etat_civil_marie = Personnes.objects.filter(etat_civil__icontains='Marie').count()
       nombre_etat_civil_celibataire = Personnes.objects.filter(etat_civil__icontains='Celibataire').count()
       nombre_etat_civil_separe = Personnes.objects.filter(etat_civil__icontains='Separe').count()
       nombre_etat_civil_veuve = Personnes.objects.filter(etat_civil__icontains='Veuve').count()
       nombre_etat_civil_divorce = Personnes.objects.filter(etat_civil__icontains='Divorce').count()
       nombre_etat_civil_Union_Libre = Personnes.objects.filter(etat_civil__icontains='Union Libre').count()
+      #statistique pour les migrations generales 
+      Statistique__nationaux = Personnes.objects.filter(Q(nationalite__icontains="Congolais")).count()
+      Statistique__etrangere = Personnes.objects.filter(~Q(nationalite__icontains="Congolais")).count()
+      #statistique par commune 
+      list__of__commune = LubumbashiArea.funct__list__of__commune()
+      list__result=[]
+      #statistique pour les menages 
+      Effective__des__menages__admins = menager.objects.all().count()
+      Taille__moyens__des__menages = menager.objects.aggregate(Avg('nombre_ocupant'))
+      # stitistique pour les menages 
+      Statistique__by__aera__travail__oui  = Personnes.objects.filter(Q(activite__icontains="travailleur salari")).count()
+      Statistique__by__aera__travail__non  = Personnes.objects.filter(Q(nationalite__icontains="travailleur non salari")).count() 
+      Statistique__by__aera__Retraite  = Personnes.objects.filter(Q(activite__icontains="Retrait")).count()
+      Statistique__by__aera__chomeur  = Personnes.objects.filter(Q(activite__icontains="chomeur")).count() 
+      #Statistique__by__aera__emploi__all  = Statistique__by__aera__travail__oui + 
+
+
+
+      for i in  list__of__commune:
+            Statistique__by__aera = Personnes.objects.filter(commune=i).count()
+            Statistique__by__aera__homme = Personnes.objects.filter(commune=i,sexe="M").count()
+            Statistique__by__aera__femme = Personnes.objects.filter(commune=i,sexe="F").count()
+            tup = {'Statistique__by__aera':Statistique__by__aera,
+                  'name__aera':i,
+                  "Statistique__by__aera__homme":Statistique__by__aera__homme,
+                  "Statistique__by__aera__femme":Statistique__by__aera__femme}
+            list__result.append(tup)
 
       context = {
                   'nombre_population_total':nombre_population_total, 
@@ -47,7 +71,6 @@ def stats_home_section(request):
                   "etat_civil":etat_civil,
                   "lire_et_comprendre":lire_et_comprendre,
                   'lire_et_comprendre_homme_oui':lire_et_comprendre_homme_oui,
-                  "lire_et_comprendre_homme_oui_pourcentage":lire_et_comprendre_homme_oui_pourcentage,
                   'lire_et_comprendre_homme_non':lire_et_comprendre_homme_non,
                   'lire_et_comprendre_femme_oui':lire_et_comprendre_femme_oui,
                   'lire_et_comprendre_femme_non':lire_et_comprendre_femme_non,
@@ -58,7 +81,16 @@ def stats_home_section(request):
                   "nombre_etat_civil_Union_Libre":nombre_etat_civil_Union_Libre,
                   "nombre_etat_civil_divorce":nombre_etat_civil_divorce,
                   "lire_et_comprendre__non":lire_et_comprendre__non,
-                }      
+                  "Statistique__nationaux":Statistique__nationaux,
+                  "Statistique__etrangere":Statistique__etrangere,
+                  "list__result":list__result,
+                  "Effective__des__menages__admins":Effective__des__menages__admins,
+                  "Taille__moyens__des__menages":Taille__moyens__des__menages,
+                  "Statistique__by__aera__travail__oui"  :  Statistique__by__aera__travail__oui,  
+                  "Statistique__by__aera__travail__non"  :  Statistique__by__aera__travail__non, 
+                  "Statistique__by__aera__Retraite"  :   Statistique__by__aera__Retraite,       
+                  "Statistique__by__aera__chomeur":   Statistique__by__aera__chomeur,
+                       }      
       return JsonResponse(context)
 def agent_home_section(request):
       nombres__agent__total = UserAgent.objects.filter(type_agent__name="Agent_rescenseur") | UserAgent.objects.filter(type_agent__name='Agent_controleur')#2 for rescenseur and 4 for controlleur
@@ -77,9 +109,12 @@ def agent_home_section(request):
 def get__listes__of__commune(request):
       
       list__of__commune = LubumbashiArea.funct__list__of__commune()
+      list_temp = []
+      for i in list__of__commune:
+            list_temp.append({"nom_commune":i})
 
       context = {
-                  'list__of__commune': list__of__commune,
+                  'list__of__commune': list_temp,
                 }      
       return JsonResponse(context)
 
