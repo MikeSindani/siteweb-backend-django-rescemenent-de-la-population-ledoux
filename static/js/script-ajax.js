@@ -116,7 +116,7 @@ var femme_chart = new Chart(ctx3, femme_data);
 });*/
 function is__null__and__undefine(valeur){
   if(valeur == null)
-   return "Pas d'agent"
+   return "Pas d'agent affecté à la zone"
   else 
   return valeur
 
@@ -189,7 +189,7 @@ class class__ajax__zone {
               data.forEach((el) => {
                 lists__zones.innerHTML += `
                             <tr class="tr2">
-                                  <td>${el.nom}</td>
+                                  <td><strong>${el.nom}</strong></td>
                                   <td>${is__null__and__undefine(el.agent_rescenseur__username)}</td>     
                                   <td>${is__null__and__undefine(el.agent_controleur__username)}</td>
                                   
