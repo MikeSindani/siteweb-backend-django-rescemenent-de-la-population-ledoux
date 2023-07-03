@@ -6,8 +6,6 @@ from rest_framework.decorators import api_view
 from django.forms.models import model_to_dict
 from .serializers import *
 from rest_framework.generics import RetrieveAPIView ,CreateAPIView
-from tinydb import TinyDB, Query
-db = TinyDB('db.json')
 from django.http import JsonResponse
 from rest_framework.permissions import IsAuthenticated , DjangoModelPermissions
 from rest_framework import generics, authentication
