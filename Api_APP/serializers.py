@@ -78,6 +78,7 @@ class table_menager_Serializer(serializers.ModelSerializer):
     class Meta:
         model = menager 
         fields = [
+        "id",
         'nombre_ocupant',
         'numero',
         'province',

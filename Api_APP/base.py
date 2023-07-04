@@ -1,12 +1,14 @@
 import requests  
 #endpoint = "https://httpbin.org/status/200/"
-endpoint_auth = "http://127.0.0.1:8000/api/auth/"
+#url_base = "https://ins-rensecement-rdc.onrender.com/api" 
+url_base = http://127.0.0.1:8000/api
+endpoint_auth = f"{url_base}/auth/"
 #password = getpass()
 auth_response = requests.post(endpoint_auth,json={"username":"0258","password":"02580258"})
 #get_reponse = requests.get(endpoint)
 #endpoint = "https://httpbin.org/status/200/"
-
-'''data = {
+'''
+data = {
   'nom': 'kawama', 
   'prenom': 'leatitia',
    'postnom': 'kahulume',
@@ -24,18 +26,17 @@ auth_response = requests.post(endpoint_auth,json={"username":"0258","password":"
      'numero_parcelle': '7',
       'menage': '1', 
       'zones': 5,
-      "menager":1,
+      "menager":4,
 }'''
 data = {
-    'province': 'Katanga', 
+    'province': 'haut-Katanga', 
     'commune': "Rwashi",
      'quartier': 'Matoleo', 
      'avenue': 'apotre johnathan ilunga',
-     'numero_parcelle': 65,
-      'numero': 5, 
+     'numero_parcelle': 6554,
+      'numero': 6, 
       'zones': 12,
-      "nombre_ocupant":12,
-     
+      "nombre_ocupant":12, 
 }
 dat = {'etat':1}
 if auth_response.status_code == 200:
@@ -44,13 +45,13 @@ if auth_response.status_code == 200:
     headers = {
         "Authorization":f"Token {token}"
     }
-    #endpoint = "http://127.0.0.1:8000/api/get_agents_user_info/0258/"
-    #endpoint = "http://127.0.0.1:8000/api/post_create_personnes_res/"
-    endpoint = "http://127.0.0.1:8000/api/post__menage__for__creation/"
-    #endpoint = "http://127.0.0.1:8000/api/get__manage__id/1/"
+    #endpoint =f"{url_base}/get_agents_user_info/0258/"
+    #endpoint = f"{url_base}/post_create_personnes_res/"
+    endpoint =  f"{url_base}/post__menage__for__creation/"
+    #endpoint = f"{url_base}/get__manage__id/4/"
     
     #get_reponse = requests.get(endpoint,headers=headers) 
-    get_reponse = requests.post(endpoint,headers=headers,json=data)
+    get_reponse = requests.post(endpoint,headers=headers,json=data) 
     #get_reponse = requests.put(endpoint,headers=headers,json=dat)
 
     print(get_reponse.status_code)

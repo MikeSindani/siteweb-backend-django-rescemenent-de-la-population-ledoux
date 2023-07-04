@@ -21,21 +21,22 @@ def stats_home_section(request):
       nombre_population_total = Personnes.objects.all().count()
       nombre_migration = Personnes.objects.filter(nationalite__icontains='congolais').count()
       nbrs_education = Personnes.objects.filter(comprendreLire__icontains='Facilement').count()
-      etat_civil = Personnes.objects.filter(etat_civil__icontains="marie").count()
+      etat_civil = Personnes.objects.filter(etat_civil__icontains="mari").count()
 
       lire_et_comprendre = Personnes.objects.filter(comprendreLire__icontains='Facilement').count()
       lire_et_comprendre__non = Personnes.objects.exclude(comprendreLire__icontains='Facilement').count()
       lire_et_comprendre_homme_oui = Personnes.objects.filter(comprendreLire__icontains="Facilement",sexe='M').count()
-      lire_et_comprendre_homme_non = Personnes.objects.exclude(comprendreLire__icontains="Facilement",sexe='M').count()
+      lire_et_comprendre_homme_non = Personnes.objects.filter(~Q(comprendreLire__icontains="Facilement") & Q(sexe='M')).count()
       lire_et_comprendre_femme_oui = Personnes.objects.filter(comprendreLire__icontains="Facilement",sexe='F').count()
-      lire_et_comprendre_femme_non = Personnes.objects.exclude(comprendreLire__icontains="Facilement",sexe='F').count()
+      lire_et_comprendre_femme_non = Personnes.objects.filter(~Q(comprendreLire__icontains="Facilement") & Q(sexe='F')).count()
       #statistique generales pour les etat civil 
-      nombre_etat_civil_marie = Personnes.objects.filter(etat_civil__icontains='Marie').count()
+        
+      nombre_etat_civil_marie = Personnes.objects.filter(etat_civil__icontains='Mari').count()
       nombre_etat_civil_celibataire = Personnes.objects.filter(etat_civil__icontains='Celibataire').count()
-      nombre_etat_civil_separe = Personnes.objects.filter(etat_civil__icontains='Separe').count()
+      nombre_etat_civil_separe = Personnes.objects.filter(etat_civil__icontains='Separ').count()
       nombre_etat_civil_veuve = Personnes.objects.filter(etat_civil__icontains='Veuve').count()
-      nombre_etat_civil_divorce = Personnes.objects.filter(etat_civil__icontains='Divorce').count()
-      nombre_etat_civil_Union_Libre = Personnes.objects.filter(etat_civil__icontains='Union Libre').count()
+      nombre_etat_civil_divorce = Personnes.objects.filter(etat_civil__icontains='Divorc').count()
+      nombre_etat_civil_Union_Libre = Personnes.objects.filter(etat_civil__icontains='Union').count()
       #statistique pour les migrations generales 
       Statistique__nationaux = Personnes.objects.filter(Q(nationalite__icontains="Congolais")).count()
       Statistique__etrangere = Personnes.objects.filter(~Q(nationalite__icontains="Congolais")).count()
@@ -48,10 +49,10 @@ def stats_home_section(request):
       # stitistique pour les menages 
       Statistique__by__aera__travail__oui  = Personnes.objects.filter(Q(activite__icontains="travailleur salari")).count()
       Statistique__by__aera__travail__non  = Personnes.objects.filter(Q(nationalite__icontains="travailleur non salari")).count() 
-      Statistique__by__aera__Retraite  = Personnes.objects.filter(Q(activite__icontains="Retrait")).count()
+      Statistique__by__aera__Retraite  = Personnes.objects.filter(Q(activite__icontains="retrait")).count()
       Statistique__by__aera__chomeur  = Personnes.objects.filter(Q(activite__icontains="chomeur")).count() 
       #Statistique__by__aera__emploi__all  = Statistique__by__aera__travail__oui + 
-
+      
 
 
       for i in  list__of__commune:
@@ -155,11 +156,11 @@ def get__resencement__population__stats_section(request,commune,categorie):
             
               stat__population__total = Personnes.objects.filter(commune=commune).count()
               Statistique__by__aera__Celibataire = Personnes.objects.filter(Q(etat_civil__icontains="Celibataire") & Q(commune=commune)).count()
-              Statistique__by__aera__Marie = Personnes.objects.filter(Q(etat_civil__icontains="Marié") & Q(commune=commune)).count()
-              Statistique__by__aera__Union_Libre = Personnes.objects.filter(Q(etat_civil__icontains="Union Libre") & Q(commune=commune)).count()
+              Statistique__by__aera__Marie = Personnes.objects.filter(Q(etat_civil__icontains="Mari") & Q(commune=commune)).count()
+              Statistique__by__aera__Union_Libre = Personnes.objects.filter(Q(etat_civil__icontains="Union") & Q(commune=commune)).count()
               Statistique__by__aera__Veuf = Personnes.objects.filter(Q(etat_civil__icontains="Veuf") & Q(commune=commune)).count()
-              Statistique__by__aera__Divorce = Personnes.objects.filter(Q(etat_civil__icontains="Divorcé") & Q(commune=commune)).count()
-              Statistique__by__aera__Separe = Personnes.objects.filter(Q(etat_civil__icontains="Separé") & Q(commune=commune)).count()
+              Statistique__by__aera__Divorce = Personnes.objects.filter(Q(etat_civil__icontains="Divorc") & Q(commune=commune)).count()
+              Statistique__by__aera__Separe = Personnes.objects.filter(Q(etat_civil__icontains="Separ") & Q(commune=commune)).count()
               
               context = {
                         'stat__population__total':stat__population__total,
@@ -224,11 +225,11 @@ def get__statistique__otherwise__quartier(request,categorie,commune):
             for i in  list__of__quartier:
               Statistique__by__aera = Personnes.objects.filter(quartier=i).count()
               Statistique__by__aera__Celibataire = Personnes.objects.filter(Q(etat_civil__icontains="Celibataire") & Q(quartier=i)).count()
-              Statistique__by__aera__Marié = Personnes.objects.filter(Q(etat_civil__icontains="Marié") & Q(quartier=i)).count()
-              Statistique__by__aera__Union_Libre = Personnes.objects.filter(Q(etat_civil__icontains="Union Libre") & Q(quartier=i)).count()
+              Statistique__by__aera__Marié = Personnes.objects.filter(Q(etat_civil__icontains="Mari") & Q(quartier=i)).count()
+              Statistique__by__aera__Union_Libre = Personnes.objects.filter(Q(etat_civil__icontains="Union") & Q(quartier=i)).count()
               Statistique__by__aera__Veuf = Personnes.objects.filter(Q(etat_civil__icontains="Veuf") & Q(quartier=i)).count()
-              Statistique__by__aera__Divorcé = Personnes.objects.filter(Q(etat_civil__icontains="Divorcé") & Q(quartier=i)).count()
-              Statistique__by__aera__Separé = Personnes.objects.filter(Q(etat_civil__icontains="Separé") & Q(quartier=i)).count()
+              Statistique__by__aera__Divorcé = Personnes.objects.filter(Q(etat_civil__icontains="Divorc") & Q(quartier=i)).count()
+              Statistique__by__aera__Separé = Personnes.objects.filter(Q(etat_civil__icontains="Separ") & Q(quartier=i)).count()
               
               tup = {'Statistique__by__aera':Statistique__by__aera,
                      'name__aera':i,

@@ -116,7 +116,7 @@ var femme_chart = new Chart(ctx3, femme_data);
 });*/
 function is__null__and__undefine(valeur){
   if(valeur == null)
-   return "Pas d'agent affecté à la zone"
+   return "Pas d'agent affecté"
   else 
   return valeur
 
@@ -338,8 +338,7 @@ class class__ajax__home {
           //$('#btn-modal-follow-del').css("display","block");
           //$('#btn-modal-follow-add').css("display","none");
         
-          Population_total_lushi_section_stats.innerHTML =
-            response.nombre_population_total;
+          Population_total_lushi_section_stats.innerHTML = response.nombre_population_total;
           nbrs_Population.innerHTML = response.nombre_population_total;
           nbrs_education.innerHTML = response.nbrs_education;
           nbrs_migration.innerHTML = response.nbrs_migration;
