@@ -216,497 +216,510 @@ class class__ajax__zone {
 }
 
 // CLASS QUI REGROUPE FONCTIONNE AJAX HOME
-
+function reduction(valeur,combien_apres_virgule){
+  if(combien_apres_virgule >=0)
+    combien_apres_virgule = combien_apres_virgule
+  else{
+    combien_apres_virgule = 2 
+  }
+  return valeur.toFixed(combien_apres_virgule)
+}
 class class__ajax__home {
 
-    ajax_home_section() {
-      //var catid;
-      //id = $(this).attr("data-id");
-      $.ajax({
-        type: "GET",
-        url: `/ajax/home_section/`,
-        success: function (response) {
-          console.log(
-            "nombre_population_total" + response.nombre_population_total
-          );
-          //$('#btn-modal-follow-del').css("display","block");
-          //$('#btn-modal-follow-add').css("display","none");
+        ajax_home_section() {
+          //var catid;
+          //id = $(this).attr("data-id");
+          $.ajax({
+            type: "GET",
+            url: `/ajax/home_section/`,
+            success: function (response) {
+              console.log(
+                "nombre_population_total" + response.nombre_population_total
+              );
+              //$('#btn-modal-follow-del').css("display","block");
+              //$('#btn-modal-follow-add').css("display","none");
 
-          nombre_population_total.setAttribute(
-            "data-target",
-            response.nombre_population_total
-          );
-          nombre_population_total.innerHTML = response.nombre_population_total;
+              nombre_population_total.setAttribute(
+                "data-target",
+                response.nombre_population_total
+              );
+              nombre_population_total.innerHTML = response.nombre_population_total;
 
-          nombre_homme.setAttribute("data-target", response.nombre_homme);
-          nombre_homme.innerHTML = response.nombre_homme;
+              nombre_homme.setAttribute("data-target", response.nombre_homme);
+              nombre_homme.innerHTML = response.nombre_homme;
 
-          nombre_femme.setAttribute("data-target", response.nombre_femme);
-          nombre_femme.innerHTML = response.nombre_femme;
+              nombre_femme.setAttribute("data-target", response.nombre_femme);
+              nombre_femme.innerHTML = response.nombre_femme;
 
-          document.getElementById("nombre_homme_home_section").innerHTML=""
-          document.getElementById("nombre_homme_home_section").innerHTML=`
-          
-          <div class="M sexe">Homme</div>
-                <div class="stat-numbers" >
-                    <span >
-                        <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
-                            ${response.nombre_homme}
+              document.getElementById("nombre_homme_home_section").innerHTML=""
+              document.getElementById("nombre_homme_home_section").innerHTML=`
+              
+              <div class="M sexe">Homme</div>
+                    <div class="stat-numbers" >
+                        <span >
+                            <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
+                                ${response.nombre_homme}
+                              </h3>
+                              <sup>(${reduction((response.nombre_homme/response.nombre_population_total)*100)} %)</sup>
+                        </span>
+                      
+                    </div>
+              
+              `
+              var pourcenatge__femme = (response.nombre_femme/response.nombre_population_total)*100
+              document.getElementById("nombre_femme_home_section").innerHTML=""
+              document.getElementById("nombre_femme_home_section").innerHTML=`
+              
+              <div class="F sexe">Femme</div>
+              <div class="stat-numbers">
+                <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
+                ${response.nombre_femme}
+                </h3>
+                <sup>( ${pourcenatge__femme.toFixed(2)} %)</sup>
+              </div>
+              
+              `
+
+              //homme_chart.destroy();
+              //femme_chart.destroy();
+
+            /* homme_data = {
+                type: "pie",
+                data: {
+                  labels: ["Homme", "Femme"],
+                  datasets: [
+                    {
+                      label: "Nombre des hommes  et des femmes",
+                      data: [response.nombre_homme, response.nombre_femme],
+                      borderWidth: 1,
+                      backgroundColor: ["#3098FF", "#F8DB34"],
+                    },
+                  ],
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                },
+              };
+              femme_data = {
+                type: "bar",
+                data: {
+                  labels: ["Homme", "Femme"],
+                  datasets: [
+                    {
+                      label: "Nombre des hommes  et des femmes",
+                      data: [response.nombre_homme, response.nombre_femme],
+                      borderWidth: 1,
+                      backgroundColor: ["#3098FF", "#F8DB34"],
+                    },
+                  ],
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                    },
+                  },
+                },
+              };
+              homme_chart = new Chart(ctx1, homme_data);
+              femme_chart = new Chart(ctx3, femme_data);*/
+
+              //document.getElementById("message_systeme").textContent = data
+            },
+          });
+        }
+      // la fonction ajax qui actualise les statitiques de la partie statistique et poupulation '
+        ajax_stats_home_section() {
+          //var catid;
+          //id = $(this).attr("data-id");
+          $.ajax({
+            type: "GET",
+            url: `/ajax/stats_home_section/`,
+            success: function (response) {
+              console.log(
+                "nombre_population_total" + response.nombre_population_total
+              );
+              //$('#btn-modal-follow-del').css("display","block");
+              //$('#btn-modal-follow-add').css("display","none");
+            
+              Population_total_lushi_section_stats.innerHTML = response.nombre_population_total;
+              nbrs_Population.innerHTML = response.nombre_population_total;
+              nbrs_education.innerHTML = response.nbrs_education;
+              nbrs_migration.innerHTML = response.nbrs_migration;
+              etat_civil.innerHTML = response.etat_civil;
+
+              document.getElementById("Alphabetisation_home_section").innerHTML=""
+              document.getElementById("Alphabetisation_home_section").innerHTML=`
+              <div><strong>Alphabetisation</strong>  </div>
+              <div><h3>${response.lire_et_comprendre}</h3></div>
+              `
+              
+            
+              document.getElementById("Analphabetisation_home_section").innerHTML=""
+              document.getElementById("Analphabetisation_home_section").innerHTML=`
+              <div><strong>Analphabetisation</strong>  </div>
+              <div><h3>${response.lire_et_comprendre__non}</h3></div>
+              `
+              document.getElementById("homme_alpha_home_section").innerHTML=""
+              document.getElementById("homme_alpha_home_section").innerHTML=`
+              <div class="M sexe">Homme</div>
+                    <div class="stat-numbers">
+                          <span>
+                          <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
+                          ${response.lire_et_comprendre_homme_oui}
                           </h3>
-                          <sup>(${(response.nombre_homme/response.nombre_population_total)*100} %)</sup>
-                    </span>
-                  
+                          <sup>(${response.lire_et_comprendre_homme_oui_pourcentage.toFixed(2)}%)</sup>
+                  </span>
+              </div>
+              `
+              var pourcentage__lire_et_comprendre_homme_non =  (response.lire_et_comprendre_homme_non/response.nombre_population_total)*100
+              document.getElementById("homme_analpha_home_section").innerHTML=""
+              document.getElementById("homme_analpha_home_section").innerHTML=`
+              <div class="M sexe">Homme</div>
+                    <div class="stat-numbers">
+                          <span>
+                          <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
+                          ${response.lire_et_comprendre_homme_non}
+                          </h3>
+                          <sup>( ${pourcentage__lire_et_comprendre_homme_non.toFixed(2)} %)</sup>
+                  </span>
+              </div>
+              `
+              var pourcentage__lire_et_comprendre_femme_oui  = (response.lire_et_comprendre_femme_oui/response.nombre_population_total)*100
+              document.getElementById("femme_alpha_home_section").innerHTML=""
+              document.getElementById("femme_alpha_home_section").innerHTML=`
+              <div class="F sexe">Femme</div>
+                      <div class="stat-numbers">
+                        <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
+                        ${response.lire_et_comprendre_femme_oui}
+                        </h3>
+                        <sup>( ${pourcentage__lire_et_comprendre_femme_oui.toFixed(2)} %)</sup>
+                      </div>
+              `
+              var pourcentage__lire_et_comprendre_femme_non =  (response.lire_et_comprendre_femme_non/response.nombre_population_total)*100
+              document.getElementById("femme_analpha_home_section").innerHTML=""
+              document.getElementById("femme_analpha_home_section").innerHTML=`
+              <div class="F sexe">Femme</div>
+                      <div class="stat-numbers">
+                        <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
+                        ${response.lire_et_comprendre_femme_non}
+                        </h3>
+                        <sup>(${pourcentage__lire_et_comprendre_femme_non.toFixed(2)} %)</sup>
+                      </div>
+              `
+              var pourcenatge__nombre_etat_civil_celibataire = (response.nombre_etat_civil_celibataire/response.nombre_population_total)*100
+              var pourcenetage__nombre_etat_civil_marie = (response.nombre_etat_civil_marie/response.nombre_population_total)*100
+              
+              document.getElementById("etat_civil_home_section").innerHTML=""
+              document.getElementById("etat_civil_home_section").innerHTML=`
+                  <div>
+                  <div  style="color: gray">Celibataire</div>
+                  <div>
+                  <h3>${response.nombre_etat_civil_celibataire}</h3>
+                  <sup>( ${pourcenatge__nombre_etat_civil_celibataire.toFixed(2)} %)</sup>
+                  </div>     
                 </div>
-          
-          `
-          document.getElementById("nombre_femme_home_section").innerHTML=""
-          document.getElementById("nombre_femme_home_section").innerHTML=`
-          
-          <div class="F sexe">Femme</div>
-          <div class="stat-numbers">
-            <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
-            ${response.nombre_femme}
-            </h3>
-            <sup>( ${(response.nombre_femme/response.nombre_population_total)*100} %)</sup>
-          </div>
-          
-          `
-
-          //homme_chart.destroy();
-          //femme_chart.destroy();
-
-        /* homme_data = {
-            type: "pie",
-            data: {
-              labels: ["Homme", "Femme"],
-              datasets: [
-                {
-                  label: "Nombre des hommes  et des femmes",
-                  data: [response.nombre_homme, response.nombre_femme],
-                  borderWidth: 1,
-                  backgroundColor: ["#3098FF", "#F8DB34"],
-                },
-              ],
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            },
-          };
-          femme_data = {
-            type: "bar",
-            data: {
-              labels: ["Homme", "Femme"],
-              datasets: [
-                {
-                  label: "Nombre des hommes  et des femmes",
-                  data: [response.nombre_homme, response.nombre_femme],
-                  borderWidth: 1,
-                  backgroundColor: ["#3098FF", "#F8DB34"],
-                },
-              ],
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true,
-                },
-              },
-            },
-          };
-          homme_chart = new Chart(ctx1, homme_data);
-          femme_chart = new Chart(ctx3, femme_data);*/
-
-          //document.getElementById("message_systeme").textContent = data
-        },
-      });
-    }
-  // la fonction ajax qui actualise les statitiques de la partie statistique et poupulation '
-    ajax_stats_home_section() {
-      //var catid;
-      //id = $(this).attr("data-id");
-      $.ajax({
-        type: "GET",
-        url: `/ajax/stats_home_section/`,
-        success: function (response) {
-          console.log(
-            "nombre_population_total" + response.nombre_population_total
-          );
-          //$('#btn-modal-follow-del').css("display","block");
-          //$('#btn-modal-follow-add').css("display","none");
-        
-          Population_total_lushi_section_stats.innerHTML = response.nombre_population_total;
-          nbrs_Population.innerHTML = response.nombre_population_total;
-          nbrs_education.innerHTML = response.nbrs_education;
-          nbrs_migration.innerHTML = response.nbrs_migration;
-          etat_civil.innerHTML = response.etat_civil;
-
-          document.getElementById("Alphabetisation_home_section").innerHTML=""
-          document.getElementById("Alphabetisation_home_section").innerHTML=`
-          <div><strong>Alphabetisation</strong>  </div>
-          <div><h3>${response.lire_et_comprendre}</h3></div>
-          `
-          
-         
-          document.getElementById("Analphabetisation_home_section").innerHTML=""
-          document.getElementById("Analphabetisation_home_section").innerHTML=`
-          <div><strong>Analphabetisation</strong>  </div>
-          <div><h3>${response.lire_et_comprendre__non}</h3></div>
-          `
-          document.getElementById("homme_alpha_home_section").innerHTML=""
-          document.getElementById("homme_alpha_home_section").innerHTML=`
-          <div class="M sexe">Homme</div>
-                <div class="stat-numbers">
-                      <span>
-                      <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
-                      ${response.lire_et_comprendre_homme_oui}
-                      </h3>
-                      <sup>(${response.lire_et_comprendre_homme_oui_pourcentage}%)</sup>
-              </span>
-          </div>
-          `
-          document.getElementById("homme_analpha_home_section").innerHTML=""
-          document.getElementById("homme_analpha_home_section").innerHTML=`
-          <div class="M sexe">Homme</div>
-                <div class="stat-numbers">
-                      <span>
-                      <h3 id="nombre_homme" class="counter" data-target="{{nbrs_m}}">
-                      ${response.lire_et_comprendre_homme_non}
-                      </h3>
-                      <sup>( ${(response.lire_et_comprendre_homme_non/response.nombre_population_total)*100} %)</sup>
-              </span>
-          </div>
-          `
-
-          document.getElementById("femme_alpha_home_section").innerHTML=""
-          document.getElementById("femme_alpha_home_section").innerHTML=`
-          <div class="F sexe">Femme</div>
-                  <div class="stat-numbers">
-                    <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
-                    ${response.lire_et_comprendre_femme_oui}
-                    </h3>
-                    <sup>( ${(response.lire_et_comprendre_femme_oui/response.nombre_population_total)*100} %)</sup>
-                  </div>
-          `
-          document.getElementById("femme_analpha_home_section").innerHTML=""
-          document.getElementById("femme_analpha_home_section").innerHTML=`
-          <div class="F sexe">Femme</div>
-                  <div class="stat-numbers">
-                    <h3 id="nombre_femme" class="counter" data-target="{{nbrs_f}}">
-                    ${response.lire_et_comprendre_femme_non}
-                    </h3>
-                    <sup>( ${(response.lire_et_comprendre_femme_non/response.nombre_population_total)*100} %)</sup>
-                  </div>
-          `
-          document.getElementById("etat_civil_home_section").innerHTML=""
-          document.getElementById("etat_civil_home_section").innerHTML=`
+                <div>
+                  <div style="color: gray">Marié(e)</div>
+                  <div><h3>${response.nombre_etat_civil_marie}</h3></div> 
+                  <sup>( ${pourcenetage__nombre_etat_civil_marie.toFixed(2)} %)</sup>    
+                </div>
+                <div>
+                  <div style="color: gray">Union Libre</div>
+                  <div><h3>${response.nombre_etat_civil_Union_Libre}</h3></div>  
+                  <span>( ${reduction((response.nombre_etat_civil_Union_Libre/response.nombre_population_total)*100)} %)</span>   
+                </div>
+                <div>
+                  <div style="color: gray">Veuf</div>
+                  <div><h3>${response.nombre_etat_civil_veuve}</h3></div>  
+                  <span>( ${reduction((response.nombre_etat_civil_veuve/response.nombre_population_total)*100)} %)</span>      
+                </div>
+                <div>
+                  <div style="color: gray">Divorcé</div>
+                  <div><h3>${response.nombre_etat_civil_divorce}</h3></div>
+                  <span>( ${reduction((response.nombre_etat_civil_divorce/response.nombre_population_total)*100)} %)</span>      
+                </div>
+                <div>
+                  <div style="color: gray">Separé</div>
+                  <div><h3>${response.nombre_etat_civil_separe}</h3></div>
+                  <span>( ${reduction((response.nombre_etat_civil_separe/response.nombre_population_total)*100)} %)</span>      
+                </div>
+              `
+              document.getElementById("Repartition_congolaise_non_home_section").innerHTML=""
+              document.getElementById("Repartition_congolaise_non_home_section").innerHTML=`
               <div>
-              <div  style="color: gray">Celibataire</div>
+                <div  style="color: gray">Population Congolaise</div>
+                <div>
+                <h3>${response.Statistique__nationaux}</h3>
+                <span>( ${reduction((response.Statistique__nationaux/response.nombre_population_total)*100)} %)</span>
+                </div>     
+              </div>
               <div>
-              <h3>${response.nombre_etat_civil_celibataire}</h3>
-              <sup>( ${(response.nombre_etat_civil_celibataire/response.nombre_population_total)*100} %)</sup>
-              </div>     
-            </div>
-            <div>
-              <div style="color: gray">Marié(e)</div>
-              <div><h3>${response.nombre_etat_civil_marie}</h3></div> 
-              <sup>( ${(response.nombre_etat_civil_marie/response.nombre_population_total)*100} %)</sup>    
-            </div>
-            <div>
-              <div style="color: gray">Union Libre</div>
-              <div><h3>${response.nombre_etat_civil_Union_Libre}</h3></div>  
-              <span>( ${(response.nombre_etat_civil_Union_Libre/response.nombre_population_total)*100} %)</span>   
-            </div>
-            <div>
-              <div style="color: gray">Veuf</div>
-              <div><h3>${response.nombre_etat_civil_veuve}</h3></div>  
-              <span>( ${(response.nombre_etat_civil_veuve/response.nombre_population_total)*100} %)</span>      
-            </div>
-            <div>
-              <div style="color: gray">Divorcé</div>
-              <div><h3>${response.nombre_etat_civil_divorce}</h3></div>
-              <span>( ${(response.nombre_etat_civil_divorce/response.nombre_population_total)*100} %)</span>      
-            </div>
-            <div>
-              <div style="color: gray">Separé</div>
-              <div><h3>${response.nombre_etat_civil_separe}</h3></div>
-              <span>( ${(response.nombre_etat_civil_separe/response.nombre_population_total)*100} %)</span>      
-            </div>
-          `
-          document.getElementById("Repartition_congolaise_non_home_section").innerHTML=""
-          document.getElementById("Repartition_congolaise_non_home_section").innerHTML=`
-          <div>
-            <div  style="color: gray">Population Congolaise</div>
-            <div>
-            <h3>${response.Statistique__nationaux}</h3>
-            <span>( ${(response.Statistique__nationaux/response.nombre_population_total)*100} %)</span>
-            </div>     
-          </div>
-          <div>
-            <div style="color: gray">Population Etrangere</div>
-            <div>
-              <h3>${response.Statistique__etrangere}</h3>
-              <span>( ${(response.Statistique__etrangere/response.nombre_population_total)*100} %)</span>
-            </div>     
-          </div>
-          `
-          
-          document.getElementById("effective_des_menages").innerHTML=""
-          document.getElementById("effective_des_menages").innerHTML=`
-            <span><span>Effective des menages admins:</span>${response.Effective__des__menages__admins}<span></span></span>
-            <span><span>Taille moyens des menages:</span>${response.Taille__moyens__des__menages}<span></span></span>
-          `
+                <div style="color: gray">Population Etrangere</div>
+                <div>
+                  <h3>${response.Statistique__etrangere}</h3>
+                  <span>( ${reduction((response.Statistique__etrangere/response.nombre_population_total)*100)} %)</span>
+                </div>     
+              </div>
+              `
+              
+              document.getElementById("effective_des_menages").innerHTML=""
+              document.getElementById("effective_des_menages").innerHTML=`
+                <span><span>Effective des menages admins:</span>${response.Effective__des__menages__admins}<span></span></span>
+                <span><span>Taille moyens des menages:</span>${response.Taille__moyens__des__menages}<span></span></span>
+              `
 
-          
+              
 
-          document.getElementById("Activite_home_section").innerHTML=""
-          document.getElementById("Activite_home_section").innerHTML=`
-          <div>
-          <div  style="color: gray">Travailleur Salarie</div>
-          <div><h3>${(response.Statistique__by__aera__travail__oui/response.nombre_population_total)*100}%</h3></div>     
-        </div>
-        <div>
-          <div style="color: gray">Travailleur Non Salarie</div>
-          <div><h3>${(response.Statistique__by__aera__travail__non/response.nombre_population_total)*100} %</h3></div>     
-        </div>
-        <div>
-          <div style="color: gray">Taux de chomage</div>
-          <div><h3>${(response.Statistique__by__aera__chomeur/response.nombre_population_total)*100}%</h3></div>      
-        </div>
-        <div>
-          <div style="color: gray">Retraite</div>
-          <div><h3>${(response.Statistique__by__aera__Retraite/response.nombre_population_total)*100}%</h3></div>     
-        </div>
-          `
-          //document.getElementById("message_systeme").textContent = data
-          var data = response.list__result;
-          var listes__of__communes__population = document.getElementById("listes__of__communes__population_home_section");
-            console.log(data);
+              document.getElementById("Activite_home_section").innerHTML=""
+              document.getElementById("Activite_home_section").innerHTML=`
+              <div>
+              <div  style="color: gray">Travailleur Salarie</div>
+              <div><h3>${reduction((response.Statistique__by__aera__travail__oui/response.nombre_population_total)*100)}%</h3></div>     
+            </div>
+            <div>
+              <div style="color: gray">Travailleur Non Salarie</div>
+              <div><h3>${reduction((response.Statistique__by__aera__travail__non/response.nombre_population_total)*100)} %</h3></div>     
+            </div>
+            <div>
+              <div style="color: gray">Taux de chomage</div>
+              <div><h3>${reduction((response.Statistique__by__aera__chomeur/response.nombre_population_total)*100)}%</h3></div>      
+            </div>
+            <div>
+              <div style="color: gray">Retraite</div>
+              <div><h3>${reduction((response.Statistique__by__aera__Retraite/response.nombre_population_total)*100)}%</h3></div>     
+            </div>
+              `
+              //document.getElementById("message_systeme").textContent = data
+              var data = response.list__result;
+              var listes__of__communes__population = document.getElementById("listes__of__communes__population_home_section");
+                console.log(data);
 
-              listes__of__communes__population.style.display ="table"
-              listes__of__communes__population.innerHTML =""
-              listes__of__communes__population.innerHTML =`
-                                        <tr class="tr" >
-                                            <th colspan="4" >
-                                            <h4  style="color:gray;border-bottom: 1px solid gray;" >
-                                            Repartition Par commune
-                                            </h4>
-                                            </th>
-                                        </tr>
-                                        <tr class="tr1" width: 100%;">
-                                          <th>Nom de commune</th>
-                                          <th>Homme</th>
-                                          <th>Femme</th>
-                                          <th>Totals Populations</th>
-                                        </tr>`
-                
-                data.forEach((el) => {
-                  listes__of__communes__population.innerHTML += `
-                              <tr class="tr2">
-                                  <td><h5><strong>${el.name__aera}</strong></h5></td>
-                                  <td><h4>${el.Statistique__by__aera__homme}</h4><span>( ${(el.Statistique__by__aera__homme/el.Statistique__by__aera)*100} %)</span></td>
-                                  <td><h4>${el.Statistique__by__aera__femme}</h4><span>( ${(el.Statistique__by__aera__femme/el.Statistique__by__aera)*100} %)</span></td>
-                                  <td><h4>${ el.Statistique__by__aera}</h4><span>( 100 %)</span></td>
-                              </tr> 
-                              `;
-                });
-        
-      },
-      });
-    }
+                  listes__of__communes__population.style.display ="table"
+                  listes__of__communes__population.innerHTML =""
+                  listes__of__communes__population.innerHTML =`
+                                            <tr class="tr" >
+                                                <th colspan="4" >
+                                                <h4  style="color:gray;border-bottom: 1px solid gray;" >
+                                                Repartition Par commune
+                                                </h4>
+                                                </th>
+                                            </tr>
+                                            <tr class="tr1" width: 100%;">
+                                              <th>Nom de commune</th>
+                                              <th>Homme</th>
+                                              <th>Femme</th>
+                                              <th>Totals Populations</th>
+                                            </tr>`
+                    
+                    data.forEach((el) => {
+                      listes__of__communes__population.innerHTML += `
+                                  <tr class="tr2">
+                                      <td><h5><strong>${el.name__aera}</strong></h5></td>
+                                      <td><h4>${el.Statistique__by__aera__homme}</h4><span>( ${(el.Statistique__by__aera__homme/el.Statistique__by__aera)*100} %)</span></td>
+                                      <td><h4>${el.Statistique__by__aera__femme}</h4><span>( ${(el.Statistique__by__aera__femme/el.Statistique__by__aera)*100} %)</span></td>
+                                      <td><h4>${ el.Statistique__by__aera}</h4><span>( 100 %)</span></td>
+                                  </tr> 
+                                  `;
+                    });
+            
+          },
+          });
+        }
 
-    ajax_agents_home_section(type) {
-      //var catid;
-      //id = $(this).attr("data-id");
-      console.log(type);
-      $.ajax({
-        type: "GET",
-        url: `/ajax/agent_home_section/`,
-        success: function (response) {
-          console.log("nombres__agent__total" + response.nombres__agent__total);
-          //$('#btn-modal-follow-del').css("display","block");
-          //$('#btn-modal-follow-add').css("display","none");
-          nombres__agent__total.innerHTML = response.nombres__agent__total;
-          nombres__agent__controlleur.innerHTML =
-            response.nombres__agent__controlleur;
-          nombres__agent__rescenseur.innerHTML =
-            response.nombres__agent__rescenseur;
-          //document.getElementById("message_systeme").textContent = data
-          if ((type = "rescenseur")) {
-            return response.nombres__agent__rescenseur;
-          }
-        },
-      });
-    }
+        ajax_agents_home_section(type) {
+          //var catid;
+          //id = $(this).attr("data-id");
+          console.log(type);
+          $.ajax({
+            type: "GET",
+            url: `/ajax/agent_home_section/`,
+            success: function (response) {
+              console.log("nombres__agent__total" + response.nombres__agent__total);
+              //$('#btn-modal-follow-del').css("display","block");
+              //$('#btn-modal-follow-add').css("display","none");
+              nombres__agent__total.innerHTML = response.nombres__agent__total;
+              nombres__agent__controlleur.innerHTML =
+                response.nombres__agent__controlleur;
+              nombres__agent__rescenseur.innerHTML =
+                response.nombres__agent__rescenseur;
+              //document.getElementById("message_systeme").textContent = data
+              if ((type = "rescenseur")) {
+                return response.nombres__agent__rescenseur;
+              }
+            },
+          });
+        }
 }
 // CLASS QUI REGROUPE FONCTIONNE AJAX AGENT
 
 class class__ajax__agent {
-  /*constructor(name, year) {
-      this.name = name;
-      this.year = year;
-    }*/  
-  
-  ajax_nombres_agent_section_element(type__agent) {
-    //var catid;
-    //id = $(this).attr("data-id");
-    //var data__agent__type=  $("#modal-agent").attr("data-type-agent-click");
-    console.log("DATA  ", type__agent);
+      /*constructor(name, year) {
+          this.name = name;
+          this.year = year;
+        }*/  
+      
+      ajax_nombres_agent_section_element(type__agent) {
+        //var catid;
+        //id = $(this).attr("data-id");
+        //var data__agent__type=  $("#modal-agent").attr("data-type-agent-click");
+        console.log("DATA  ", type__agent);
 
-    $.ajax({
-      type: "GET",
-      url: `ajax/get__nombres__agents__totals/${type__agent}/`,
-      success: function (response) {
-        document.getElementById("nbrs_agent").innerHTML =
-          response.nombres__agents;
+        $.ajax({
+          type: "GET",
+          url: `ajax/get__nombres__agents__totals/${type__agent}/`,
+          success: function (response) {
+            document.getElementById("nbrs_agent").innerHTML =
+              response.nombres__agents;
 
-        //document.getElementById("message_systeme").textContent = data
-        /* if(type="rescenseur"){
-                        return response.nombres__agents
-                    }*/
-      },
-    });
-  }
-//get__lists__of__zones__on__modal
-  // reperation de la liste des agents 
-  get__lists__of__agents(type__agent) {
-    $.ajax({
-      type: "GET",
-      url: `ajax/get__lists__of__agents/${visible}/${type__agent}`,
-      success: function (response) {
-        //console.log(response);
-        var data = response.listes__agents;
-        setTimeout(() => {
-          //console.log(data);
-            var lists__agents
-            var lists__agents__rescenseur = document.getElementById("lists__agents__rescenseur");
-            var lists__agents__controleur = document.getElementById("lists__agents__controleur");
-          //const donnee = new Array(data);
-          if (type__agent == "Controleur"){
-            
-            lists__agents__controleur.style.display = "table"
-            lists__agents__rescenseur.style.display = "none"
-            lists__agents__controleur.innerHTML =''
-            lists__agents__controleur.innerHTML =`
-            <tr class="tr1">
-            <th>N Agents</th>
-            <th>Nom Complet</th>
-            <th>Matricule</th>
-            <th>Mot de passe</th>
-            <th>Zone</th>
-            <th>Options</th>                           
-          </tr>`
-            data.forEach((el) => {
-                lists__agents__controleur.innerHTML += `
-                            <tr class="tr2">
-                                  <td><strong>${el.agent_controleur__code_agent}</strong></td>
-                                  <td>${el.agent_controleur__username}</td>
-                                  <td>${el.agent_controleur__Matricule}</td>     
-                                  <td>${el.agent_controleur__password}</td>
-                                  <td>${el.nom}</td>
-                                  <td onclick="funct__delete__agent('${el.agent_controleur__username}','${type__agent}')" style="cursor:pointeur;"><i class="fa-solid fa-trash"></i></td> 
-                            </tr>  
-                            `;
-              });
-          }else{
-            
-            lists__agents__controleur.style.display = "none"
-            lists__agents__rescenseur.style.display = "table"
-            lists__agents__rescenseur.innerHTML =''
-            lists__agents__rescenseur.innerHTML =`
-            <tr class="tr1">
-            <th>N Agents</th>
-            <th>Nom Complet</th>
-            <th>Matricule</th>
-            <th>Mot de passe</th>
-            <th>Zone</th>
-            <th>Options</th>                           
-          </tr>`
-            data.forEach((el) => {
-                lists__agents__rescenseur.innerHTML += `
-                            <tr class="tr2">
-                                  <td><strong>${el.agent_rescenseur__code_agent}</strong></td>
-                                  <td>${el.agent_rescenseur__username}</td>
-                                  <td>${el.agent_rescenseur__Matricule}</td>     
-                                  <td>${el.agent_rescenseur__password}</td>
-                                  <td>${el.nom}</td>
-                                  <td onclick="funct__delete__agent('${el.agent_rescenseur__username}','${type__agent}')" style="cursor:pointeur;"><i class="fa-solid fa-trash"></i></td>
-                            </tr>  
-                            `;
-                            //<td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
-              });
-          }
-          
-          
-        }, 1000);
-        /*chargementBox.textContent = "";
-            console.log(response.size);
-            if (response.size === 0) {
-              chargementBox.textContent = "Pas de commentaire";
-            } else if (response.size <= visible) {
-              loadBtn.classList.add("not-visible");
-              chargementBox.textContent = "Il y a plus de commantaire...";
-            }*/
-      },
-      error: function (error) {
-        console.log(error);
-      },
-    });
-  }
+            //document.getElementById("message_systeme").textContent = data
+            /* if(type="rescenseur"){
+                            return response.nombres__agents
+                        }*/
+          },
+        });
+      }
+    //get__lists__of__zones__on__modal
+      // reperation de la liste des agents 
+      get__lists__of__agents(type__agent) {
+        $.ajax({
+          type: "GET",
+          url: `ajax/get__lists__of__agents/${visible}/${type__agent}`,
+          success: function (response) {
+            //console.log(response);
+            var data = response.listes__agents;
+            setTimeout(() => {
+              //console.log(data);
+                var lists__agents
+                var lists__agents__rescenseur = document.getElementById("lists__agents__rescenseur");
+                var lists__agents__controleur = document.getElementById("lists__agents__controleur");
+              //const donnee = new Array(data);
+              if (type__agent == "Controleur"){
+                
+                lists__agents__controleur.style.display = "table"
+                lists__agents__rescenseur.style.display = "none"
+                lists__agents__controleur.innerHTML =''
+                lists__agents__controleur.innerHTML =`
+                <tr class="tr1">
+                <th>N Agents</th>
+                <th>Nom Complet</th>
+                <th>Matricule</th>
+                <th>Mot de passe</th>
+                <th>Zone</th>
+                <th>Options</th>                           
+              </tr>`
+                data.forEach((el) => {
+                    lists__agents__controleur.innerHTML += `
+                                <tr class="tr2">
+                                      <td><strong>${el.agent_controleur__code_agent}</strong></td>
+                                      <td>${el.agent_controleur__username}</td>
+                                      <td>${el.agent_controleur__Matricule}</td>     
+                                      <td>${el.agent_controleur__password}</td>
+                                      <td>${el.nom}</td>
+                                      <td onclick="funct__delete__agent('${el.agent_controleur__username}','${type__agent}')" style="cursor:pointeur;"><i class="fa-solid fa-trash"></i></td> 
+                                </tr>  
+                                `;
+                  });
+              }else{
+                
+                lists__agents__controleur.style.display = "none"
+                lists__agents__rescenseur.style.display = "table"
+                lists__agents__rescenseur.innerHTML =''
+                lists__agents__rescenseur.innerHTML =`
+                <tr class="tr1">
+                <th>N Agents</th>
+                <th>Nom Complet</th>
+                <th>Matricule</th>
+                <th>Mot de passe</th>
+                <th>Zone</th>
+                <th>Options</th>                           
+              </tr>`
+                data.forEach((el) => {
+                    lists__agents__rescenseur.innerHTML += `
+                                <tr class="tr2">
+                                      <td><strong>${el.agent_rescenseur__code_agent}</strong></td>
+                                      <td>${el.agent_rescenseur__username}</td>
+                                      <td>${el.agent_rescenseur__Matricule}</td>     
+                                      <td>${el.agent_rescenseur__password}</td>
+                                      <td>${el.nom}</td>
+                                      <td onclick="funct__delete__agent('${el.agent_rescenseur__username}','${type__agent}')" style="cursor:pointeur;"><i class="fa-solid fa-trash"></i></td>
+                                </tr>  
+                                `;
+                                //<td data-zone-id="${el.id}"><img src='{% static "svg/delete-filled-svgrepo-com.svg" %}' alt="" height="30" width="30"></td> 
+                  });
+              }
+              
+              
+            }, 1000);
+            /*chargementBox.textContent = "";
+                console.log(response.size);
+                if (response.size === 0) {
+                  chargementBox.textContent = "Pas de commentaire";
+                } else if (response.size <= visible) {
+                  loadBtn.classList.add("not-visible");
+                  chargementBox.textContent = "Il y a plus de commantaire...";
+                }*/
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        });
+      }
 
-//get__lists__of__zones__on__modal
-get__lists__of__zones__on__modal(type__agent) {
-    $.ajax({
-      type: "GET",
-      url: `ajax/get__lists__of__zones__on__modals/${type__agent}/`,
-      success: function (response) {
-        //console.log(response);
-        var data = response.listes__zones;
-        setTimeout(() => {
-          //console.log(data);
-            
-             var lists__agents = document.getElementById("list_zones_active");
-          
-          //const donnee = new Array(data);
-          if (type__agent == "Controleur"){
-            
-          
-            lists__agents.innerHTML =''
-            data.forEach((el) => {
-                lists__agents.innerHTML += `
-                              <option value="${el.id}">${el.nom}</option> 
-                            `;
-              });
-          }else{
-            
-            lists__agents.innerHTML =''
-            data.forEach((el) => {
-                lists__agents.innerHTML += `
-                             <option value="${el.id}">${el.nom}</option>
-                            `;
-              });
-          }
-          
-          
-        }, 1000);
-        /*chargementBox.textContent = "";
-            console.log(response.size);
-            if (response.size === 0) {
-              chargementBox.textContent = "Pas de commentaire";
-            } else if (response.size <= visible) {
-              loadBtn.classList.add("not-visible");
-              chargementBox.textContent = "Il y a plus de commantaire...";
-            }*/
-      },
-      error: function (error) {
-        console.log(error);
-      },
-    });
-  }
-}
+    //get__lists__of__zones__on__modal
+    get__lists__of__zones__on__modal(type__agent) {
+        $.ajax({
+          type: "GET",
+          url: `ajax/get__lists__of__zones__on__modals/${type__agent}/`,
+          success: function (response) {
+            //console.log(response);
+            var data = response.listes__zones;
+            setTimeout(() => {
+              //console.log(data);
+                
+                var lists__agents = document.getElementById("list_zones_active");
+              
+              //const donnee = new Array(data);
+              if (type__agent == "Controleur"){
+                
+              
+                lists__agents.innerHTML =''
+                data.forEach((el) => {
+                    lists__agents.innerHTML += `
+                                  <option value="${el.id}">${el.nom}</option> 
+                                `;
+                  });
+              }else{
+                
+                lists__agents.innerHTML =''
+                data.forEach((el) => {
+                    lists__agents.innerHTML += `
+                                <option value="${el.id}">${el.nom}</option>
+                                `;
+                  });
+              }
+              
+              
+            }, 1000);
+            /*chargementBox.textContent = "";
+                console.log(response.size);
+                if (response.size === 0) {
+                  chargementBox.textContent = "Pas de commentaire";
+                } else if (response.size <= visible) {
+                  loadBtn.classList.add("not-visible");
+                  chargementBox.textContent = "Il y a plus de commantaire...";
+                }*/
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        });
+      }
+    }
 
 class class__ajax__suivi__de__resecensement{
   get__nombres__zones() {
@@ -820,7 +833,7 @@ class class__ajax__statistique {
               element_stats.innerHTML = ` 
               <div class="element-stats-box-2-part-1">
               <div class="total">
-                  <div><img src="{% static 'img/person-team-svgrepo-com.svg' %}" alt="" height="100"
+                  <div><img src="https://ins-rensecement-rdc.onrender.com/static/img/person-team-svgrepo-com.svg" alt="" height="100"
                 width="100"></div>
                   <div>
                       <div class="Ttl">Population total</div>

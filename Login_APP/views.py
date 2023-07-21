@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, Group
 from .decorations import unauthentificated_user
 from django.contrib.auth import logout
 from BD_APP.models import *
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 @unauthentificated_user
@@ -23,8 +24,12 @@ def post_logIn(request):
                 login(request,user)
                 
                 return redirect("dashbord")
-        else:
-                return HttpResponse("password incorrect ou username")
+        else:   
+                 # Créer un objet HttpResponse avec les données à envoyer
+                response = HttpResponseRedirect("connexion")
+                # Retourner la réponse
+                return response
+                
     else:
            return render(request,"connexion/connexion.html")
     

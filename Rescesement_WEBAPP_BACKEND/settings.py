@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
+import dj_database_url
 
 # Charger les variables d'environnement du fichier .env
 load_dotenv()
@@ -27,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-uc566$v)ragugu0s%pc)b+$4k@7oz)q90000=f=^ehows1n#8g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -98,11 +99,19 @@ WSGI_APPLICATION = 'Rescesement_WEBAPP_BACKEND.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='postgres://rescensement_user:7UdLscXjOzUvtE6NxzHuhnoHnfJSL0Op@dpg-cit5jq98g3n42oishdn0-a.oregon-postgres.render.com/rescensement',
+        conn_max_age=600,
+    )
 }
 '''
 DATABASES = {
