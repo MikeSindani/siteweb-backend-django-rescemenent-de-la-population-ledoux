@@ -63,7 +63,7 @@ class menager (models.Model):
     type_menage = models.CharField(max_length=100,null=True)
     zones = models.ForeignKey("Zones",null=True,on_delete=models.SET_NULL)
     def __str__(self):
-       return "{} {} {}".format(self.commune,self.zones, self.commune)
+       return "{} - Menage N {} ".format(self.zones,self.id)
 class Personnes(models.Model):
     SEXE_CHOICES = (
         ('M', 'Masculin'),

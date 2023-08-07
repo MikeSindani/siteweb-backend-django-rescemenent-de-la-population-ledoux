@@ -432,7 +432,6 @@ header .message .close-msg {
 }
 .container-dashbord main .col-dashbord table {
   width: 100%;
-  border-spacing: 0 20px;
 }
 .container-dashbord main .col-dashbord th, .container-dashbord main .col-dashbord td {
   padding: 15px;
@@ -441,7 +440,7 @@ header .message .close-msg {
   background-color: var(--third-color);
   border-radius: var(--border-raduis);
   position: relative;
-  top: 20px;
+  top: 10px;
   padding: 5px;
 }
 .container-dashbord main .col-dashbord .tr1 {

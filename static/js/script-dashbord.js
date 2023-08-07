@@ -36,13 +36,22 @@ document.getElementById("popup-message_systeme").style.display = "flex";
 // Fonction qui vérifie si la connexion internet est présente
 
 
-
 /* ce code est pour le temps de slash sreen  */
-setTimeout(() => {
- 
-  document.getElementById("slash-screen").style.display = "none";
-  document.getElementById("main_div").style.visibility = "visible";
-  window.addEventListener("offline", (event) => {
+function load_data(){
+  // charge les donnees 
+   ajax__home.ajax_stats_home_section();
+   ajax__home.ajax_stats_home_section();
+   ajax__home.ajax_agents_home_section();
+
+  setTimeout(() => {
+    document.getElementById("slash-screen").style.display = "none";
+    document.getElementById("main_div").style.visibility = "visible";
+   }, time_set_interval);
+}
+
+setInterval(()=>{
+   // verifier la connexion 
+   window.addEventListener("offline", (event) => {
     console.log("La connexion internet est absente.");
     box__message("La connexion internet est absente.","var(--rouge)");
   
@@ -53,9 +62,7 @@ setTimeout(() => {
     box__message("La connexion internet est présente.","var(--bleu)");
   
   }); 
-  
-}, time_set_interval);
-
+},3000)
 /* ####################################################################*/
 /* debut de side bar menu hamberger */
 
@@ -318,18 +325,27 @@ function function_btn_stats_population() {
   }
       
 }*/
-function get__statistique__otherwise__categorie(){
+
+
+async function get__statistique__otherwise__categorie(){
+  on();
   var section_stats_element = document.querySelector("#section_stats_element")
   section_stats_element.getAttribute("data-categorie")
   var commune = document.querySelector("#listes__of__communes").value
   document.querySelector("#commune__name").innerHTML = commune
-  ajax__stats.get__stats__of__commune__population(commune)
-  ajax__stats.get__stats__lists__of__quarter(visible)
+  await ajax__stats.get__stats__of__commune__population(commune)
+  await ajax__stats.get__stats__lists__of__quarter(visible)
+  off();
       
 }
+
+
 document.addEventListener("load", function() { 
   get__statistique__otherwise__categorie()
 });
+
+
+
 // btn population
 function btn_stats_element(element) {
   //.style.fontWeight="normal"
@@ -345,13 +361,13 @@ function btn_stats_element(element) {
   //$("#graph-container").append('<canvas id="Chart-by-stat"></canvas>');
 
   on();
-  setTimeout(() => {
+  //setTimeout(() => {
     function_btn_stats_population();
     ajax__stats.get__lists__of__commune()
     get__statistique__otherwise__categorie()
     
     off();
-  }, time_set_interval);
+  //}, time_set_interval);
 }
 
 /* FIN BOUTON STATISTIQUE POPULATION  */

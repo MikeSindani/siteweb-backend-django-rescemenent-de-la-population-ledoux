@@ -129,5 +129,4 @@ window.onclick = function (event) {
   }
 };
 
-const myCar = new Car("Ford", 2014);
-console.log(myCar.age(2020));
+

@@ -365,6 +365,13 @@ header .message .close-msg {
   padding: 0;
   cursor: pointer;
 }
+.container-dashbord main .col-dashbord .stats-page .stats-box-cat-5 {
+  background-image: url("https://th.bing.com/th/id/R.75508a4ef8c89dbd3ac321056e4e8df0?rik=YddEHI5DqrpiiA&pid=ImgRaw&r=0");
+  background-attachment: fixed;
+  color: white;
+  padding: 0;
+  cursor: pointer;
+}
 .container-dashbord main .col-dashbord .element-stats-page {
   display: flex;
   flex-direction: column;
